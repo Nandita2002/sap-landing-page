@@ -51,7 +51,7 @@ const Pricing = () => {
             onClick={() =>
               window.open("https://wa.me/91XXXXXXXXXX", "_blank")
             }
-            className="mt-8 w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-semibold transition shadow-lg"
+           className="bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:opacity-90 hover:scale-105 transition duration-300"
           >
             Claim Offer Now
           </button>

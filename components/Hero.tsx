@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <section className="bg-[#1e2a47] text-white py-24 px-4 relative overflow-hidden">
+    <section id="home" className="bg-[#1e2a47] text-white py-24 px-4 relative overflow-hidden">
       
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#ffffff_1px,_transparent_1px)] [background-size:20px_20px]" />
@@ -23,11 +23,11 @@ const Hero = () => {
     </p>
 
     <div className="mt-6 flex flex-col sm:flex-row md:justify-start justify-center gap-4">
-      <button className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-full font-semibold">
+      <button className="bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:opacity-90 hover:scale-105 transition duration-300">
         Join Free Demo
       </button>
 
-      <button className="border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-black">
+      <button className="bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:opacity-90 hover:scale-105 transition duration-300">
         View Modules
       </button>
     </div>

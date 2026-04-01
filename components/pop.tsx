@@ -28,7 +28,7 @@ const Popup = () => {
         {/* Close */}
         <button
           onClick={() => setShow(false)}
-          className="absolute top-3 right-3 text-gray-500"
+        className="bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:opacity-90 hover:scale-105 transition duration-300"
         >
           ✕
         </button>
@@ -53,7 +53,7 @@ const Popup = () => {
             className="border p-2 rounded"
           />
 
-          <button className="bg-orange-500 text-white py-2 rounded font-semibold">
+          <button className="bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white px-6 py-3 rounded-full font-semibold shadow-md hover:opacity-90 hover:scale-105 transition duration-300">
             Reserve My Spot
           </button>
         </form>

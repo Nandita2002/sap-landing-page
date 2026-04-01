@@ -15,13 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "SAP Training | Rise Infotech",
-    template: "%s | Rise Infotech",
+export const metadata = {
+  title: "SAP Training | Rise Infotech",
+  description: "SAP training with live demos...",
+  icons: {
+    icon: "/logo.ico",
   },
-  description:
-    "Join SAP training with live demo sessions. Learn SAP MM, FICO, ABAP with real-time projects, certification, and career support.",
 
   keywords: [
     "SAP Training",

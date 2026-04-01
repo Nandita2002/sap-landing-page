@@ -122,9 +122,15 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground cursor-default;
+  }
+
+  button,
+  a {
+    @apply cursor-pointer;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
 }
