@@ -10,6 +10,7 @@ import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
+import FloatingWidget from "@/components/FloatingWidget";
 
 <script
   type="application/ld+json"
@@ -38,9 +39,10 @@ export default function Home() {
   return (
     <>
     <Menu/> 
-      <Popup />
+      {/* <Popup /> */}
       <Hero />
       <DemoSessions />
+      <FloatingWidget />
       <Modules />
       <Curriculum />
       <Instructor />

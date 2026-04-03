@@ -37,7 +37,6 @@ const Curriculum = () => {
   return (
     <section className="py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto text-center">
-        
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl font-bold">
           What You’ll Learn
