@@ -41,9 +41,8 @@ export default function Home() {
     <Menu/> 
       {/* <Popup /> */}
       <Hero />
-      <DemoSessions />
-      <FloatingWidget />
-      <Modules />
+      {/* <DemoSessions /> */}
+      {/* <Modules /> */}
       <Curriculum />
       <Instructor />
       <Testimonials />
