@@ -40,7 +40,7 @@ const Testimonials = () => {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="relative py-24 px-4 bg-[#F5F7FA] overflow-hidden"
+      className="relative py-24 px-4 bg-white overflow-hidden"
     >
       <div className="relative max-w-7xl mx-auto text-center">
 
@@ -131,7 +131,7 @@ const Testimonials = () => {
       {/* Animation */}
       <style jsx>{`
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 5s linear infinite;
         }
 
         .animate-scroll:hover {

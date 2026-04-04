@@ -1,14 +1,11 @@
 import Curriculum from "@/components/Curriculum";
-import DemoSessions from "@/components/DemoSessions";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Hero from "@/components/Hero";
 import Instructor from "@/components/Instructor";
-import Modules from "@/components/Modules";
 import Popup from "@/components/pop";
 import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
-import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import FloatingWidget from "@/components/FloatingWidget";
 
@@ -38,8 +35,6 @@ export const metadata = {
 export default function Home() {
   return (
     <>
-    <Menu/> 
-      {/* <Popup /> */}
       <Hero />
       {/* <DemoSessions /> */}
       {/* <Modules /> */}

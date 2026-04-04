@@ -6,7 +6,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden bg-[#F5F7FA]"
+    className="relative min-h-screen flex items-start overflow-hidden bg-white"
     >
       {/* Subtle Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-blue-100 opacity-40" />
@@ -15,7 +15,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.04)_1px,transparent_1px)] bg-[size:50px_50px]" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 py-24 md:py-32 grid md:grid-cols-2 items-center gap-16">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 pt-12 pb-20 md:pt-20 md:pb-24 grid md:grid-cols-2 items-center gap-16">
 
         {/* LEFT */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
@@ -89,7 +89,6 @@ const Hero = () => {
           <div className="w-[clamp(300px,40vw,420px)]">
 
             <div className="bg-white border border-blue-100 rounded-2xl p-6 shadow-xl">
-
               {/* Header */}
               <div className="flex justify-between items-center mb-5">
                 <div>

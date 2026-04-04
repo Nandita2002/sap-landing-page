@@ -6,91 +6,69 @@ const PHONE = "91XXXXXXXXXX";
 
 const Pricing = () => {
   return (
-    <section
-      id="pricing"
-      className="relative py-28 px-4 bg-[#F5F7FA] overflow-hidden"
-    >
-      {/* Tech Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
-      <div className="absolute top-[-100px] right-[-100px] w-[400px] h-[400px] bg-blue-200/40 rounded-full blur-3xl" />
-      <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] bg-indigo-200/40 rounded-full blur-3xl" />
+<div className="max-w-3xl mx-auto relative z-10">
 
-      <div className="relative max-w-4xl mx-auto text-center">
+  {/* Heading */}
+  <div className="text-center mb-6">
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+      Start Your <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">SAP Journey</span>
+    </h2>
+    <p className="text-gray-600 mt-2 text-sm">
+      Limited seats available. Secure your spot now.
+    </p>
+  </div>
 
-        {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-extrabold text-[#0a1628] leading-tight">
-          Start Your{" "}
-          <span className="bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400 bg-clip-text text-transparent">
-            SAP Journey
-          </span>{" "}
-          Today
-        </h2>
+  {/* Card */}
+  <div className="relative rounded-xl bg-white/70 backdrop-blur-md border border-gray-200 shadow-md px-6 py-6">
 
-        <p className="mt-4 text-gray-600 text-lg">
-          Limited seats available for upcoming batches. Secure your spot now.
-        </p>
+    {/* Badge */}
+    <div className="absolute top-3 right-3 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full">
+      30% OFF
+    </div>
 
-        {/* Card */}
-        <div className="mt-12 relative group">
+    <div className="text-center">
 
-          {/* Glow Border */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-500 blur opacity-20 group-hover:opacity-40 transition duration-500" />
+      <h3 className="text-xl font-semibold text-gray-900">
+        SAP Training Program
+      </h3>
 
-          <div className="relative bg-white/80 backdrop-blur-xl rounded-2xl p-10 shadow-xl border border-white/40">
+      <p className="text-gray-500 text-xs mt-1">
+        Offer valid till end of this month
+      </p>
 
-            {/* Discount Badge */}
-            <div className="absolute top-5 right-5 bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm px-4 py-1 rounded-full font-semibold shadow-md animate-pulse">
-              30% OFF
-            </div>
+      <p className="text-green-600 text-sm font-medium mt-1">
+        Special Offer Available
+      </p>
 
-            {/* Title */}
-            <h3 className="text-2xl font-bold text-[#0a1628]">
-              SAP Training Program
-            </h3>
-
-            <p className="mt-2 text-gray-500">
-              Offer valid till end of this month
-            </p>
-
-            <p className="text-lg font-semibold text-green-600 mt-1">
-              Special Offer Available
-            </p>
-
-            {/* Features */}
-            <div className="mt-8 space-y-3 text-gray-700 text-left max-w-sm mx-auto">
-              {[
-                "Live Interactive Sessions",
-                "Real-Time Projects",
-                "Certification Support",
-                "Career Guidance",
-              ].map((f) => (
-                <p key={f} className="flex items-center gap-2">
-                  <span className="text-blue-600">✔</span> {f}
-                </p>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <button
-              onClick={() => window.open(`https://wa.me/${PHONE}`, "_blank")}
-              className="mt-8 relative px-8 py-3 rounded-full font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-500 shadow-lg hover:shadow-2xl transition duration-300 hover:-translate-y-1"
-            >
-              <span className="relative z-10">Claim Offer Now</span>
-
-              {/* Glow effect */}
-              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-indigo-400 blur opacity-30 group-hover:opacity-60 transition"></span>
-            </button>
-
-            {/* Urgency */}
-            <p className="mt-4 text-sm text-red-500 font-medium animate-pulse">
-              ⚡ Limited seats available for this batch
-            </p>
-
+      {/* Features */}
+      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-sm text-gray-700 text-left max-w-md mx-auto">
+        {[
+          "Live Interactive Sessions",
+          "Real-Time Projects",
+          "Certification Support",
+          "Career Guidance",
+        ].map((item, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="text-blue-600">✓</span>
+            {item}
           </div>
-        </div>
-
+        ))}
       </div>
-    </section>
+
+      {/* CTA */}
+      <div className="mt-6">
+        <button className="px-6 py-2.5 rounded-full text-white text-sm font-semibold bg-gradient-to-r from-blue-600 to-indigo-500 shadow hover:scale-105 transition">
+          Claim Offer Now
+        </button>
+
+        <p className="text-red-500 text-xs mt-2">
+          ⚡ Limited seats available
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
   );
 };
 

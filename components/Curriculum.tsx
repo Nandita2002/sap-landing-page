@@ -546,7 +546,7 @@ const Curriculum = () => {
 
       <section
         id="curriculum"
-        style={{ background:"#F5F7FA]", padding:"96px 24px", fontFamily:"'Plus Jakarta Sans',sans-serif", position:"relative", overflow:"hidden" }}
+        style={{ background:"white", padding:"96px 24px", fontFamily:"'Plus Jakarta Sans',sans-serif", position:"relative", overflow:"hidden" }}
       >
         <div className="curr-grid-bg" />
         <div style={{ position:"absolute", top:-100, right:-80, width:500, height:500, background:"radial-gradient(circle,rgba(219,234,254,0.55) 0%,transparent 70%)", borderRadius:"50%", pointerEvents:"none" }} />

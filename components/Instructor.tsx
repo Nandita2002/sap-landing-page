@@ -7,7 +7,7 @@ const Instructor = () => {
     <section
       id="instructor"
       aria-labelledby="instructor-heading"
-      className="relative py-24 px-4 bg-[#F5F7FA] overflow-hidden"
+      className="relative py-24 px-4 bg-white overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.035)_1px,transparent_1px)] bg-[size:48px_48px]" />
