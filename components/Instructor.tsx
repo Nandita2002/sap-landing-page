@@ -1,6 +1,21 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
+
+/* 🔥 ENQUIRY TRIGGER */
+const handleEnquiry = () => {
+  const event = new CustomEvent("openEnquiry");
+  window.dispatchEvent(event);
+};
+
+/* 🔥 SCROLL FUNCTION */
+const scrollToCurriculum = () => {
+  const el = document.getElementById("curriculum");
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const Instructor = () => {
   return (
@@ -54,7 +69,6 @@ const Instructor = () => {
                   />
                 </div>
 
-                {/* Badge */}
                 <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white border border-blue-200 rounded-lg px-4 py-2 text-xs shadow-md">
                   Certified SAP Professional
                 </div>
@@ -99,16 +113,23 @@ const Instructor = () => {
 
             {/* CTA */}
             <div className="flex gap-3 flex-wrap">
+
+              {/* 🔥 FIXED */}
               <button
-                onClick={() => window.open("https://wa.me/91XXXXXXXXXX")}
+                onClick={handleEnquiry}
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
               >
                 Join Free Demo
               </button>
 
-              <button className="border border-blue-200 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">
+              {/* 🔥 FIXED */}
+              <button
+                onClick={scrollToCurriculum}
+                className="border border-blue-200 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition"
+              >
                 View Curriculum
               </button>
+
             </div>
 
           </div>

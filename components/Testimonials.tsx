@@ -3,6 +3,12 @@
 import React from "react";
 import { Star, Quote } from "lucide-react";
 
+/* 🔥 ENQUIRY TRIGGER */
+const handleEnquiry = () => {
+  const event = new CustomEvent("openEnquiry");
+  window.dispatchEvent(event);
+};
+
 const testimonials = [
   {
     name: "Basayya Ningolli",
@@ -76,9 +82,9 @@ const Testimonials = () => {
             {[...testimonials, ...testimonials].map((item, index) => (
               <article
                 key={index}
-                className="min-w-[300px] md:min-w-[350px] bg-white border border-gray-100 rounded-2xl p-6 text-left shadow-sm hover:shadow-xl transition"
+                className="relative min-w-[300px] md:min-w-[350px] bg-white border border-gray-100 rounded-2xl p-6 text-left shadow-sm hover:shadow-xl transition"
               >
-                {/* Quote */}
+                {/* Quote FIXED */}
                 <div className="absolute top-5 right-5 opacity-10">
                   <Quote className="w-10 h-10 text-blue-400" />
                 </div>
@@ -119,8 +125,18 @@ const Testimonials = () => {
           </div>
         </div>
 
+        {/* 🔥 NEW CTA (SUBTLE) */}
+        <div className="mt-10">
+          <button
+            onClick={handleEnquiry}
+            className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl transition hover:-translate-y-1"
+          >
+            Start Your SAP Journey →
+          </button>
+        </div>
+
         {/* Bottom */}
-        <div className="mt-14 inline-flex items-center gap-3 bg-white border border-gray-100 rounded-full px-6 py-3 shadow-sm">
+        <div className="mt-10 inline-flex items-center gap-3 bg-white border border-gray-100 rounded-full px-6 py-3 shadow-sm">
           <p className="text-gray-600 text-sm">
             Trusted by <span className="font-semibold text-[#0a1628]">500+ students</span>
           </p>
@@ -128,10 +144,10 @@ const Testimonials = () => {
 
       </div>
 
-      {/* Animation */}
+      {/* Animation FIXED */}
       <style jsx>{`
         .animate-scroll {
-          animation: scroll 5s linear infinite;
+          animation: scroll 20s linear infinite;
         }
 
         .animate-scroll:hover {

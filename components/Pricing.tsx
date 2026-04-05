@@ -2,7 +2,11 @@
 
 import React from "react";
 
-const PHONE = "91XXXXXXXXXX";
+/* 🔥 ENQUIRY TRIGGER */
+const handleEnquiry = () => {
+  const event = new CustomEvent("openEnquiry");
+  window.dispatchEvent(event);
+};
 
 const Pricing = () => {
   return (
@@ -23,7 +27,7 @@ const Pricing = () => {
 
     {/* Badge */}
     <div className="absolute top-3 right-3 bg-orange-400 text-white text-xs font-semibold px-3 py-1 rounded-full">
-      30% OFF
+      Limited Seats
     </div>
 
     <div className="text-center">
@@ -33,12 +37,15 @@ const Pricing = () => {
       </h3>
 
       <p className="text-gray-500 text-xs mt-1">
-        Offer valid till end of this month
+        Customized learning path based on your goals
       </p>
 
-      <p className="text-green-600 text-sm font-medium mt-1">
-        Special Offer Available
-      </p>
+      {/* 🔥 VALUE STATEMENT (REPLACES PRICE) */}
+      <div className="mt-4">
+        <p className="text-sm text-gray-700 font-medium">
+          Get a personalized roadmap, demo session, and course details before enrolling.
+        </p>
+      </div>
 
       {/* Features */}
       <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4 text-sm text-gray-700 text-left max-w-md mx-auto">
@@ -55,14 +62,22 @@ const Pricing = () => {
         ))}
       </div>
 
+      {/* 🔥 TRUST + SOCIAL PROOF */}
+      <p className="text-xs text-gray-500 mt-4">
+        120+ students enrolled this month
+      </p>
+
       {/* CTA */}
-      <div className="mt-6">
-        <button className="px-6 py-2.5 rounded-full text-white text-sm font-semibold bg-gradient-to-r from-blue-600 to-indigo-500 shadow hover:scale-105 transition">
-          Claim Offer Now
+      <div className="mt-5">
+        <button
+          onClick={handleEnquiry}
+          className="px-6 py-2.5 rounded-full text-white text-sm font-semibold bg-gradient-to-r from-blue-600 to-indigo-500 shadow hover:scale-105 transition"
+        >
+          Book Free Demo →
         </button>
 
         <p className="text-red-500 text-xs mt-2">
-          ⚡ Limited seats available
+          ⚡ Only few seats left
         </p>
       </div>
 

@@ -2,98 +2,139 @@
 
 import React, { useEffect, useState } from "react";
 
+const inputClass =
+  "w-full border border-slate-200 bg-slate-50 rounded-xl px-3 py-2.5 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white focus:border-blue-500 transition placeholder:text-slate-400";
+
 const Popup = () => {
   const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
-  // Auto open after 3 sec (only once per session)
   useEffect(() => {
     const shown = sessionStorage.getItem("popupShown");
-
     if (!shown) {
       const timer = setTimeout(() => {
         setOpen(true);
         sessionStorage.setItem("popupShown", "true");
       }, 3000);
-
       return () => clearTimeout(timer);
     }
+  }, []);
+
+  useEffect(() => {
+    const openHandler = () => setOpen(true);
+    window.addEventListener("openEnquiry", openHandler);
+    return () => window.removeEventListener("openEnquiry", openHandler);
   }, []);
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-      
-      {/* Card */}
-      <div className="relative w-full max-w-md">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-200">
 
-        {/* Glow Border */}
-        <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] blur opacity-30"></div>
-
-        {/* Main Box */}
-        <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl">
-
-          {/* Close */}
+        {/* Header */}
+        <div className="bg-slate-50 border-b border-slate-200 px-6 py-5 flex justify-between items-start">
+          <div>
+            <p className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-1">
+              Admissions Open · April 2026
+            </p>
+            <h2 className="text-[17px] font-semibold text-slate-900 leading-snug">
+              Get 25% off all SAP courses
+            </h2>
+            <p className="text-sm text-slate-500 mt-0.5">
+              Enroll now — limited seats available
+            </p>
+          </div>
           <button
-            type="button"
             onClick={() => setOpen(false)}
-            aria-label="Close popup"
-            className="absolute top-4 right-4 text-gray-500 hover:text-black"
+            className="ml-4 mt-0.5 text-slate-400 hover:text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-full w-7 h-7 flex items-center justify-center text-xs transition"
           >
             ✕
           </button>
+        </div>
 
-          {/* Badge */}
-          <span className="inline-block text-xs font-semibold bg-blue-100 text-blue-600 px-3 py-1 rounded-full">
-            🚀 Limited Offer
-          </span>
+        {/* Form */}
+        <div className="px-6 py-5 space-y-4">
 
-          {/* Heading */}
-          <h2 className="text-xl font-bold mt-3 text-gray-900">
-            Start Your SAP Journey
-          </h2>
+          {/* Name + Email */}
+          <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">
+                Full name
+              </label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className={inputClass}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">
+                Email ID
+              </label>
+              <input
+                type="email"
+                placeholder="you@email.com"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                className={inputClass}
+              />
+            </div>
+          </div>
 
-          <p className="text-sm text-gray-600 mt-1">
-            Join our live demo & explore real-time SAP training
-          </p>
+          {/* Phone */}
+          <div className="space-y-1.5">
+            <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">
+              Phone no
+            </label>
+            <div className="flex border border-slate-200 rounded-xl overflow-hidden bg-slate-50 focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-blue-500 transition">
+              <span className="px-3 flex items-center text-sm text-slate-500 border-r border-slate-200 bg-slate-100 whitespace-nowrap">
+                🇮🇳 +91
+              </span>
+              <input
+                type="tel"
+                placeholder="9876543210"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                className="flex-1 px-3 py-2.5 text-sm text-slate-900 outline-none bg-transparent placeholder:text-slate-400"
+              />
+            </div>
+          </div>
 
-          {/* Form */}
-          <div className="mt-6 space-y-4">
-
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          {/* Message */}
+          <div className="space-y-1.5">
+            <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wide">
+              How can we help?
+            </label>
+            <textarea
+              rows={3}
+              placeholder="Tell us what you're looking for..."
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              className={inputClass + " resize-none"}
             />
+          </div>
 
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
+          {/* CTA */}
+          <button
+            onClick={() => { console.log(form); setOpen(false); }}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-sm font-semibold transition"
+          >
+            Submit enquiry →
+          </button>
 
-            <input
-              type="email"
-              placeholder="Email (Optional)"
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 bg-white/70 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-            />
-
-            {/* CTA */}
-            <button
-              type="button"
-              onClick={() => {
-                window.open("https://wa.me/91XXXXXXXXXX", "_blank");
-              }}
-              className="w-full mt-2 bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white py-3 rounded-lg font-semibold shadow-md hover:scale-105 hover:shadow-lg transition duration-300"
-            >
-              Book Free Demo
-            </button>
-
-            {/* Trust */}
-            <p className="text-xs text-gray-500 text-center">
-              ✔ No spam • ✔ Free demo • ✔ Instant response
-            </p>
-
+          {/* Trust */}
+          <div className="flex justify-center gap-5 pt-1">
+            <span className="text-xs text-slate-400">🔒 No spam</span>
+            <span className="text-xs text-slate-400">⚡ Instant response</span>
+            <span className="text-xs text-slate-400">🎓 Free demo</span>
           </div>
 
         </div>
