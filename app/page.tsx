@@ -9,6 +9,7 @@ import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import TopBanner from "@/components/TopBanner";
 import Navbar from "@/components/navbar";
+import StickyEnquiry from "@/components/StickyEnquiry";
 
 export const metadata = {
   title: "SAP Training in India | SAP MM, FICO, ABAP Course",
@@ -40,6 +41,7 @@ export default function Home() {
 <Popup />
 <Navbar />
 <TopBanner />
+<StickyEnquiry />
       <Hero />
       <Curriculum />
       <Instructor />
