@@ -35,8 +35,7 @@ const Hero = () => {
 
           {/* Description */}
           <p className="mt-5 text-base md:text-lg text-gray-600 max-w-md leading-relaxed">
-            Get trained in SAP MM, FICO, ABAP & more with real-time projects,
-            expert mentors, and placement support.
+            Master SAP S/4HANA MM & become a job-ready consultant — No coding required, only real-time skills that get you hired faster.
           </p>
 
           {/* CTA Buttons */}
@@ -86,7 +85,7 @@ const Hero = () => {
 
         {/* RIGHT → CONVERSION FORM */}
         <div className="flex justify-center md:justify-end">
-          <div className="w-[clamp(300px,40vw,420px)]">
+          <div className="w-full max-w-[420px]">
 
             <div className="bg-white/80 backdrop-blur-xl border border-blue-100 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
 

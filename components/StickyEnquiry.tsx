@@ -84,7 +84,7 @@ const StickyEnquiry: React.FC = () => {
             </div>
 
             <div className="p-3 flex flex-col gap-2.5">
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:grid-cols-2">
                 <div>
                   <Label>Name</Label>
                   <input type="text" name="name" value={form.name} onChange={handleChange}

@@ -57,7 +57,7 @@ const Instructor = () => {
           <div className="flex justify-center">
             <div className="relative w-full max-w-sm">
 
-              <div className="absolute top-5 left-5 right-[-20px] bottom-[-20px] bg-blue-50 border border-blue-200 rounded-2xl" />
+              <div className="absolute top-5 left-5 right-[-12px] bottom-[-12px] sm:right-[-20px] sm:bottom-[-20px] bg-blue-50 border border-blue-200 rounded-2xl" />
 
               <div className="relative rounded-2xl overflow-hidden border border-blue-100 shadow-xl">
                 <div className="relative w-full aspect-[4/5] bg-blue-50">

@@ -1,166 +1,163 @@
 "use client";
 
 import React from "react";
-import { Star, Quote } from "lucide-react";
+import { Star } from "lucide-react";
 
-/* 🔥 ENQUIRY TRIGGER */
+/* 🔥 CTA */
 const handleEnquiry = () => {
   const event = new CustomEvent("openEnquiry");
   window.dispatchEvent(event);
 };
 
-const testimonials = [
+/* ✅ TYPE */
+type Testimonial = {
+  name: string;
+  role: string;
+  review: string;
+};
+
+/* ✅ DATA (FULL + CLEAN) */
+const testimonials: Testimonial[] = [
   {
     name: "Basayya Ningolli",
     role: "Google Review",
     review:
-      "Rise Infotech is one of the best SAP training institutes in Bangalore. The trainers focus on concept clarity and provide high-quality study materials. The project classes are excellent and very practical.",
+      "Rise Infotech is the best SAP training institute in Bangalore. Trainers focus on concept clarity and provide high-quality study materials.",
   },
   {
     name: "Vadiraj Kulkarni",
     role: "Google Review",
     review:
-      "My experience has been extremely positive. The trainers explain concepts with real-time industry examples, making it easy even for beginners.",
+      "Highly experienced trainers with real-time industry examples. Concepts are explained very clearly.",
   },
   {
     name: "Darshan Garjur",
     role: "Google Review",
     review:
-      "Great learning experience. The trainers are knowledgeable and focus on practical examples, not just theory.",
+      "Great learning experience. Strong focus on practical skills along with theory.",
   },
   {
     name: "Rahul Patil",
     role: "Google Review",
     review:
-      "SAP MM training was excellent. Concepts were covered from basic to advanced with real-time scenarios.",
+      "Trainer explained all SAP MM concepts clearly from basic to advanced.",
+  },
+  {
+    name: "Soumya K",
+    role: "Google Review",
+    review:
+      "They don't just teach SAP, they teach you how to think like a consultant.",
   },
   {
     name: "Teja Dommaraju",
     role: "Google Review",
     review:
-      "Very practical and industry-oriented training. Real-time examples and hands-on sessions helped a lot.",
+      "Training is practical and industry-oriented with real-time examples.",
   },
 ];
 
-const Testimonials = () => {
+/* ✅ CARD */
+const Card = ({ item }: { item: Testimonial }) => (
+  <div className="bg-white border rounded-xl p-5 shadow-sm hover:shadow-md transition">
+    {/* Stars */}
+    <div className="flex mb-2">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star
+          key={i}
+          size={14}
+          className="text-yellow-400"
+          fill="currentColor"
+        />
+      ))}
+    </div>
+
+    {/* Review */}
+    <p className="text-sm text-gray-600 leading-relaxed">
+      &quot;{item.review}&quot;
+    </p>
+
+    {/* User */}
+    <div className="mt-4 flex items-center gap-2">
+      <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold">
+        {item.name
+          .split(" ")
+          .map((n) => n[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase()}
+      </div>
+      <div>
+        <p className="text-sm font-semibold text-[#0a1628]">
+          {item.name}
+        </p>
+        <p className="text-xs text-blue-500">{item.role}</p>
+      </div>
+    </div>
+  </div>
+);
+
+/* ✅ MAIN COMPONENT */
+export default function Testimonials() {
   return (
-    <section
-      aria-labelledby="testimonials-heading"
-      className="relative py-24 px-4 bg-white overflow-hidden"
-    >
-      <div className="relative max-w-7xl mx-auto text-center">
-
-        {/* Heading */}
-        <span className="inline-block text-xs font-semibold tracking-widest uppercase text-blue-600 bg-blue-50 border border-blue-200 px-4 py-1.5 rounded-full mb-4">
-          Student Reviews
-        </span>
-
-        <h2
-          id="testimonials-heading"
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628]"
-        >
-          What Our{" "}
-          <span className="bg-gradient-to-r from-blue-700 to-blue-400 bg-clip-text text-transparent">
-            Students Say
-          </span>
+    <section className="py-16 bg-[#f8faff]">
+      
+      {/* 🔥 HEADER */}
+      <div className="text-center max-w-3xl mx-auto px-4">
+        <h2 className="text-2xl md:text-4xl font-bold text-[#0a1628]">
+          Trusted by <span className="text-blue-600">500+ Students</span>
         </h2>
 
-        {/* Rating */}
-        <div className="mt-4 flex justify-center items-center gap-2 text-sm text-gray-600">
-          <span className="text-yellow-500">★★★★★</span>
-          <span>4.8 rating from Google Reviews</span>
+        <div className="mt-3 flex justify-center items-center gap-2 text-gray-600">
+          <span className="text-yellow-400 text-lg">★★★★★</span>
+          <span className="font-semibold">4.8/5 Google Rating</span>
         </div>
 
-        <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-          Hear from learners who transformed their careers with our SAP training.
+        <p className="mt-3 text-gray-500 text-sm">
+          Real reviews from students who successfully transitioned into SAP careers.
         </p>
-
-        {/* Slider */}
-        <div className="mt-14 overflow-hidden">
-          <div className="flex gap-6 animate-scroll">
-
-            {[...testimonials, ...testimonials].map((item, index) => (
-              <article
-                key={index}
-                className="relative min-w-[300px] md:min-w-[350px] bg-white border border-gray-100 rounded-2xl p-6 text-left shadow-sm hover:shadow-xl transition"
-              >
-                {/* Quote FIXED */}
-                <div className="absolute top-5 right-5 opacity-10">
-                  <Quote className="w-10 h-10 text-blue-400" />
-                </div>
-
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={15} className="text-yellow-400" fill="currentColor" />
-                  ))}
-                </div>
-
-                {/* Review */}
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  “{item.review}”
-                </p>
-
-                <div className="my-5 border-t border-gray-100" />
-
-                {/* User */}
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white font-bold text-sm">
-                    {item.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .slice(0, 2)
-                      .join("")
-                      .toUpperCase()}
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-semibold text-[#0a1628]">{item.name}</p>
-                    <p className="text-xs text-blue-600">{item.role}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
-
-          </div>
-        </div>
-
-        {/* 🔥 NEW CTA (SUBTLE) */}
-        <div className="mt-10">
-          <button
-            onClick={handleEnquiry}
-            className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl transition hover:-translate-y-1"
-          >
-            Start Your SAP Journey →
-          </button>
-        </div>
-
-        {/* Bottom */}
-        <div className="mt-10 inline-flex items-center gap-3 bg-white border border-gray-100 rounded-full px-6 py-3 shadow-sm">
-          <p className="text-gray-600 text-sm">
-            Trusted by <span className="font-semibold text-[#0a1628]">500+ students</span>
-          </p>
-        </div>
-
       </div>
 
-      {/* Animation FIXED */}
-      <style jsx>{`
-        .animate-scroll {
-          animation: scroll 20s linear infinite;
-        }
+      {/* 🔥 LOGOS / SOCIAL PROOF */}
+      <div className="mt-10 flex justify-center flex-wrap gap-6 opacity-70 px-4">
+        <span className="text-sm font-semibold text-gray-500">Google</span>
+        <span className="text-sm font-semibold text-gray-500">LinkedIn</span>
+        <span className="text-sm font-semibold text-gray-500">Indeed</span>
+        <span className="text-sm font-semibold text-gray-500">Glassdoor</span>
+      </div>
 
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
+      {/* 🔥 TESTIMONIAL GRID */}
+      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+        {testimonials.map((item, i) => (
+          <Card key={i} item={item} />
+        ))}
+      </div>
 
-        @keyframes scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
+      {/* 🔥 TRUST BADGES */}
+      <div className="mt-12 flex justify-center flex-wrap gap-4 px-4">
+        <div className="bg-white border px-4 py-2 rounded-full text-sm shadow-sm">
+          ✔ 100% Practical Training
+        </div>
+        <div className="bg-white border px-4 py-2 rounded-full text-sm shadow-sm">
+          ✔ Real-time Projects
+        </div>
+        <div className="bg-white border px-4 py-2 rounded-full text-sm shadow-sm">
+          ✔ Placement Assistance
+        </div>
+      </div>
+
+      {/* 🔥 CTA */}
+      <div className="mt-12 text-center px-4">
+        <button
+          onClick={handleEnquiry}
+          className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl transition hover:-translate-y-1"
+        >
+          Book Free Demo Class →
+        </button>
+
+        <p className="text-xs text-gray-500 mt-2">
+          Limited slots available this week
+        </p>
+      </div>
     </section>
   );
-};
-
-export default Testimonials;
+}

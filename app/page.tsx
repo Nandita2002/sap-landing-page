@@ -38,18 +38,25 @@ export default function Home() {
         }}
       />
 
-<Popup />
-<Navbar />
-<TopBanner />
-<StickyEnquiry />
-      <Hero />
-      <Curriculum />
-      <Instructor />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      {/* <FinalCTA /> */}
-      <Footer />
+      <Popup />
+
+      {/* ✅ FIXED NAVBAR */}
+      <Navbar />
+
+      {/* ✅ CONTENT WRAPPER (IMPORTANT) */}
+      <main className="pt-16">
+        <TopBanner />
+        <Hero />
+        <Curriculum />
+        <Instructor />
+        <Testimonials />
+        {/* <Pricing /> */}
+        <FAQ />
+        {/* <FinalCTA /> */}
+        <Footer />
+      </main>
+
+      <StickyEnquiry />
       <Popup />
     </>
   );
