@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-        import Link from "next/link";
-import Image from "next/image";
 
 /* 🔥 ENQUIRY TRIGGER */
 const handleEnquiry = () => {
@@ -17,6 +15,7 @@ const scrollToSection = (id: string) => {
 };
 
 const navLinks = [
+  { label: "Home", id: "home" },
   { label: "Curriculum", id: "curriculum" },
   { label: "Instructor", id: "instructor" },
   { label: "Program", id: "pricing" },
@@ -32,25 +31,19 @@ const Navbar = () => {
   };
 
   return (
- <header className="fixed top-0 left-0 w-full h-16 z-50 bg-white shadow-sm">
+    <header className="left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Logo */}
-       
-
-
-<div className="flex items-center gap-2">
-  <Link href="/#home" className="flex items-center">
-    <Image
-      src="/logor.jpeg"
-      alt="Rise Infotech Logo"
-      width={120}
-      height={40}
-      className="h-8 w-auto object-contain"
-    />
-  </Link>
-</div>
-       
+        <div className="flex items-center gap-2">
+          <img
+            src="/logo.png"
+            alt="Rise Infotech Logo"
+            className="h-8 w-auto object-contain"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+          />
+          <span className="text-lg font-bold text-[#0a1628]">Rise Infotech</span>
+        </div>
 
         {/* Nav Links — desktop */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">

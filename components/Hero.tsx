@@ -1,8 +1,25 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { useSheetSubmit } from "@/lib/useSheetSubmit";
 
 const Hero = () => {
+  const { state, submit } = useSheetSubmit();
+  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await submit({
+      source: "Hero Form",
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+    });
+  };
+
+  const isLoading = state === "loading";
+  const isSuccess = state === "success";
+
   return (
     <section
       id="home"
@@ -43,7 +60,6 @@ const Hero = () => {
             <button className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-700 to-blue-500 text-white font-semibold shadow-md hover:shadow-xl transition hover:-translate-y-1">
               Book Free Demo
             </button>
-
             <button className="px-6 py-3 rounded-lg border border-blue-200 text-blue-700 font-semibold hover:bg-blue-50 transition hover:-translate-y-1">
               Explore Courses
             </button>
@@ -70,14 +86,9 @@ const Hero = () => {
               { val: "12+", label: "SAP Modules" },
               { val: "90%", label: "Placement Support" },
             ].map((s) => (
-              <div
-                key={s.label}
-                className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center"
-              >
+              <div key={s.label} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 text-center">
                 <div className="text-lg font-bold text-blue-600">{s.val}</div>
-                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">
-                  {s.label}
-                </div>
+                <div className="text-xs text-gray-500 mt-1 uppercase tracking-wide">{s.label}</div>
               </div>
             ))}
           </div>
@@ -86,59 +97,67 @@ const Hero = () => {
         {/* RIGHT → CONVERSION FORM */}
         <div className="flex justify-center md:justify-end">
           <div className="w-full max-w-[420px]">
-
             <div className="bg-white/80 backdrop-blur-xl border border-blue-100 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
 
               {/* Glow Effect */}
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-400/20 blur-3xl" />
 
-              {/* Header */}
-              <div className="mb-5">
-                <h4 className="font-bold text-gray-900 text-lg">
-                  Book Your Free Demo
-                </h4>
-                <p className="text-xs text-gray-500">
-                  Limited seats available
-                </p>
-              </div>
-
-              {/* Form */}
-              <form className="flex flex-col gap-3">
-
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none transition"
-                />
-
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none transition"
-                />
-
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none transition"
-                />
-
-                <button className="mt-2 bg-gradient-to-r from-blue-700 to-blue-500 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition hover:-translate-y-1">
-                  Reserve My Seat →
-                </button>
-              </form>
-
-              {/* Trust Line */}
-              <p className="text-[11px] text-gray-500 mt-3 text-center">
-                🔒 No spam. We’ll contact you within 24 hrs.
-              </p>
-
               {/* Urgency Tag */}
               <div className="absolute top-4 right-4 text-[10px] bg-red-100 text-red-600 px-2 py-1 rounded-full font-semibold animate-pulse">
                 12 seats left
               </div>
-            </div>
 
+              {/* Header */}
+              <div className="mb-5">
+                <h4 className="font-bold text-gray-900 text-lg">Book Your Free Demo</h4>
+                <p className="text-xs text-gray-500">Limited seats available</p>
+              </div>
+
+              {isSuccess ? (
+                <div className="py-8 text-center flex flex-col items-center gap-3">
+                  <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-2xl">✓</div>
+                  <p className="font-semibold text-gray-800">You're registered!</p>
+                  <p className="text-xs text-gray-500">We'll reach out within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                  <input
+                    required
+                    type="text"
+                    placeholder="Your Name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none transition text-sm"
+                  />
+                  <input
+                    required
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none transition text-sm"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Address (optional)"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 p-3 rounded-lg outline-none transition text-sm"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="mt-2 bg-gradient-to-r from-blue-700 to-blue-500 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition hover:-translate-y-1 disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+                  >
+                    {isLoading ? "Submitting…" : "Reserve My Seat →"}
+                  </button>
+                </form>
+              )}
+
+              <p className="text-[11px] text-gray-500 mt-3 text-center">
+                🔒 No spam. We'll contact you within 24 hrs.
+              </p>
+            </div>
           </div>
         </div>
       </div>
