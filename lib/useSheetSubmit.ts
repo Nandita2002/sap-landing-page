@@ -6,7 +6,7 @@
 import { useState } from "react";
 
 // ✅ REPLACE THIS with your deployed Google Apps Script Web App URL
-export const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyIPBPl9pvd1JUStQQ-GJK75TS1-ODx2yDFI5-1rpnUwj8Ah4QjAYSJvSlvycqMUpvxuQ/exec";
+export const APPS_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
 
 export type FormSource = "Hero Form" | "Popup Form" | "Sticky Enquiry" | "Floating Widget";
 
