@@ -1,22 +1,18 @@
 import Curriculum from "@/components/Curriculum";
 import FAQ from "@/components/FAQ";
-import FinalCTA from "@/components/FinalCTA";
 import Hero from "@/components/Hero";
 import Instructor from "@/components/Instructor";
 import Popup from "@/components/pop";
-import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import TopBanner from "@/components/TopBanner";
 import Navbar from "@/components/navbar";
 import StickyEnquiry from "@/components/StickyEnquiry";
-
 export const metadata = {
   title: "SAP Training in India | SAP MM, FICO, ABAP Course",
   description:
     "Join SAP training with live demo sessions. Learn SAP MM, FICO, ABAP with real-time projects, certification, and placement support.",
 };
-
 export default function Home() {
   return (
     <>
@@ -50,12 +46,9 @@ export default function Home() {
         <Curriculum />
         <Instructor />
         <Testimonials />
-        {/* <Pricing /> */}
         <FAQ />
-        {/* <FinalCTA /> */}
         <Footer />
       </main>
-
       <StickyEnquiry />
       <Popup />
     </>

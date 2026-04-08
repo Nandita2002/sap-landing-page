@@ -41,11 +41,42 @@ const StickyEnquiry: React.FC = () => {
     setForm((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
-  const handleSubmit = () => {
-    console.log("Form Data:", form);
-    alert("Submitted! Connect your backend.");
-    setOpen(false);
-  };
+ const handleSubmit = async () => {
+  try {
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbwwEmBx_JIisguX5XsfNHRzEEbbBRIBH4AvhqiLy7UFBNWZ0eaSOjD_HXGy48TCuiF1Ng/exec",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          ...form,
+          source: "sticky" // optional but useful
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      alert("🚀 Your first milestone is unlocked! You’re already halfway to becoming a SAP professional. Our team will guide you through the next steps.");
+
+
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+      setOpen(false);
+    } else {
+      alert("Error submitting form");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong");
+  }
+};
 
   return (
     <>
