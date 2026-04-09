@@ -127,23 +127,25 @@ const Instructor = () => {
             </div>
 
             {/* CTA */}
-            <div className="flex gap-3 flex-wrap">
+           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
 
-              <button
-                onClick={handleEnquiry}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-              >
-                Get Free Career Consultation
-              </button>
+  {/* Primary CTA */}
+  <button
+    onClick={handleEnquiry}
+    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm shadow-md hover:bg-blue-700 transition text-center"
+  >
+    Get Free Career Consultation
+  </button>
 
-              <button
-                onClick={scrollToCurriculum}
-                className="border border-blue-200 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition"
-              >
-                View Curriculum
-              </button>
+  {/* Secondary CTA */}
+  <button
+    onClick={scrollToCurriculum}
+    className="w-full sm:w-auto px-6 py-3 rounded-xl border border-blue-200 text-blue-600 font-semibold text-sm hover:bg-blue-50 transition text-center"
+  >
+    View Curriculum
+  </button>
 
-            </div>
+</div>
 
             {/* Closing Line */}
             <p className="text-sm font-semibold text-blue-600">
