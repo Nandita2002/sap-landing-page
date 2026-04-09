@@ -46,7 +46,7 @@ const Instructor = () => {
           </h2>
 
           <p className="mt-4 text-gray-600 max-w-md mx-auto">
-            Get mentored by a certified SAP consultant with real-world enterprise experience.
+            Get mentored by a certified SAP S/4HANA MM expert with real-world enterprise experience.
           </p>
         </div>
 
@@ -63,14 +63,14 @@ const Instructor = () => {
                 <div className="relative w-full aspect-[4/5] bg-blue-50">
                   <Image
                     src="/instructor.png"
-                    alt="SAP Instructor"
+                    alt="Kumaresh Bidari - SAP Instructor"
                     fill
                     className="object-cover"
                   />
                 </div>
 
                 <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white border border-blue-200 rounded-lg px-4 py-2 text-xs shadow-md">
-                  Certified SAP Professional
+                  SAP S/4HANA MM Specialist
                 </div>
               </div>
 
@@ -82,24 +82,26 @@ const Instructor = () => {
 
             <div>
               <h3 className="text-2xl font-bold text-[#0a1628]">
-                Rahul Sharma
+                Kumaresh Bidari
               </h3>
               <p className="text-blue-600 font-medium text-sm">
-                SAP Consultant · 8+ Years Experience
+                Founder & CEO, Rise Infotech · SAP S/4HANA MM Consultant
               </p>
             </div>
 
             <p className="text-gray-600 leading-relaxed text-sm">
-              Certified SAP professional specializing in MM, FICO, and ABAP with real-world project experience and proven placement success.
+              Learn directly from a seasoned SAP consultant with 10+ years of experience,
+              having worked with TCS, IBM, and NTT Data on real-time S/4HANA projects.
+              Gain practical knowledge, project exposure, and career guidance to confidently step into SAP roles.
             </p>
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
               {[
-                { val: "500+", label: "Students" },
-                { val: "8+", label: "Years Exp" },
-                { val: "98%", label: "Placement" },
-                { val: "3", label: "Modules" },
+                { val: "1000+", label: "Students Trained" },
+                { val: "10+", label: "Years Experience" },
+                { val: "4+", label: "Training Experience" },
+                { val: "Top MNCs", label: "Placements" },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -111,18 +113,29 @@ const Instructor = () => {
               ))}
             </div>
 
+            {/* Differentiator */}
+            <div className="text-sm text-gray-600 space-y-2">
+              <p className="font-semibold text-gray-800">
+                Complete Career Transformation Program:
+              </p>
+              <ul className="space-y-1">
+                <li>✔ Real-time project exposure</li>
+                <li>✔ Resume & Naukri profile optimization</li>
+                <li>✔ Daily mock interviews</li>
+                <li>✔ Placement-focused training</li>
+              </ul>
+            </div>
+
             {/* CTA */}
             <div className="flex gap-3 flex-wrap">
 
-              {/* 🔥 FIXED */}
               <button
                 onClick={handleEnquiry}
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
               >
-                Join Free Demo
+                Get Free Career Consultation
               </button>
 
-              {/* 🔥 FIXED */}
               <button
                 onClick={scrollToCurriculum}
                 className="border border-blue-200 text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition"
@@ -131,6 +144,11 @@ const Instructor = () => {
               </button>
 
             </div>
+
+            {/* Closing Line */}
+            <p className="text-sm font-semibold text-blue-600">
+              This is not just training — it’s a complete career transformation.
+            </p>
 
           </div>
         </div>

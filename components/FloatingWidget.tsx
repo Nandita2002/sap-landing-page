@@ -1,55 +1,174 @@
 "use client";
 
-import React, { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
-import EnquiryForm from "./EnquiryForm";
+import { useEffect, useState } from "react";
 
-const FloatingWidget: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
+const FloatingWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  // 🔥 Listen for Hero button click
+  useEffect(() => {
+    const open = () => setIsOpen(true);
+
+    window.addEventListener("openEnquiry", open);
+    return () => window.removeEventListener("openEnquiry", open);
+  }, []);
+
+  // ❌ Prevent background scroll when popup open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+  }, [isOpen]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbwmYxQoo0FTD1sv7831Ul8b5sd7mWiE6rKpd5Ox_0AJweph1B7lA6SSF24s-BvGpndE/exec",
+        {
+          method: "POST",
+          body: JSON.stringify(form),
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.status === "success") {
+        setSuccess(true);
+        setForm({ name: "", email: "", phone: "" });
+
+        // auto close after success
+        setTimeout(() => {
+          setIsOpen(false);
+          setSuccess(false);
+        }, 2000);
+      } else {
+        alert("Error submitting form");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    }
+
+    setLoading(false);
+  };
+
+  if (!isOpen) return null;
 
   return (
-    <>
-      {/* Button */}
-      {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          title="Open chat"
-          aria-label="Open chat"
-          className="fixed bottom-6 right-6 z-50 bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] text-white p-4 rounded-full shadow-lg hover:scale-110 transition"
-        >
-          <MessageCircle size={22} />
-        </button>
-      )}
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
 
-      {/* Panel */}
+      {/* Overlay */}
       <div
-        className={`fixed bottom-6 right-6 w-[90%] max-w-sm z-50 transition-all duration-300 ${
-          open
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10 pointer-events-none"
-        }`}
-      >
-        <div className="relative">
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        onClick={() => setIsOpen(false)}
+      />
 
-          <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-[#1d4ed8] to-[#38bdf8] blur opacity-30"></div>
+      {/* Modal */}
+      <div className="relative w-[90%] max-w-md bg-white rounded-2xl shadow-xl p-6 animate-fadeIn">
 
-          <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-2xl">
+        {/* Close Button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+        >
+          ✕
+        </button>
 
-            <div className="flex justify-between items-center mb-3">
-              <h3 className="font-semibold text-gray-800">Talk to Us</h3>
-              <button
-                onClick={() => setOpen(false)}
-                aria-label="Close"
-              >
-                <X size={20} />
-              </button>
+        {/* Heading */}
+        <h2 className="text-lg font-bold mb-1">
+          Get Free Career Consultation
+        </h2>
+
+        <p className="text-xs text-gray-400 mb-4">
+          Talk to an expert & get your SAP roadmap
+        </p>
+
+        {success ? (
+          <div className="text-center py-6">
+            <h3 className="text-green-600 font-semibold text-lg mb-2">
+              🚀 You&rsquo;re one step closer!
+            </h3>
+            <p className="text-sm text-gray-600">
+              Our team will contact you shortly.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+            {/* Name */}
+            <div>
+              <label className="text-sm font-medium text-gray-700">
+                Full Name
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="Enter your name"
+                value={form.name}
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
+                className="w-full mt-1 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+              />
             </div>
 
-            <EnquiryForm />
-          </div>
-        </div>
+            {/* Email */}
+            <div>
+              <label className="text-sm font-medium text-gray-700">
+                Email Address
+              </label>
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                value={form.email}
+                onChange={(e) =>
+                  setForm({ ...form, email: e.target.value })
+                }
+                className="w-full mt-1 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label className="text-sm font-medium text-gray-700">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                required
+                placeholder="Enter your phone number"
+                value={form.phone}
+                onChange={(e) =>
+                  setForm({ ...form, phone: e.target.value })
+                }
+                className="w-full mt-1 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-60"
+            >
+              {loading ? "Submitting..." : "Get Free Consultation →"}
+            </button>
+
+          </form>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
