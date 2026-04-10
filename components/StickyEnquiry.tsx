@@ -44,7 +44,7 @@ const StickyEnquiry: React.FC = () => {
  const handleSubmit = async () => {
   try {
     const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbwwEmBx_JIisguX5XsfNHRzEEbbBRIBH4AvhqiLy7UFBNWZ0eaSOjD_HXGy48TCuiF1Ng/exec",
+      "https://script.google.com/macros/s/AKfycbwmYxQoo0FTD1sv7831Ul8b5sd7mWiE6rKpd5Ox_0AJweph1B7lA6SSF24s-BvGpndE/exec",
       {
         method: "POST",
         body: JSON.stringify({
