@@ -1,12 +1,40 @@
 "use client";
 
-const handleEnquiry = () => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new Event("openEnquiry"));
-  }
-};
-
 export default function Hero() {
+
+  const scrollToConsultation = () => {
+    if (typeof window === "undefined") return;
+
+    const el = document.getElementById("consultation");
+
+    // 🔴 If form not found → fail safely
+    if (!el) {
+      console.error("Consultation section not found");
+      return;
+    }
+
+    const yOffset = -80; // adjust based on navbar height
+    const y =
+      el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+
+    // Optional: auto-focus first input
+    setTimeout(() => {
+      const input = document.querySelector<HTMLInputElement>(
+        'input[name="name"]'
+      );
+      input?.focus();
+    }, 500);
+  };
+
+  const scrollToCurriculum = () => {
+    const el = document.getElementById("curriculum");
+    if (!el) return;
+
+    el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="relative bg-white overflow-hidden py-20">
 
@@ -29,27 +57,28 @@ export default function Hero() {
 
         {/* Subheading */}
         <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-8">
-          Learn SAP S/4HANA MM with real-time projects, expert mentorship &
+          Learn SAP S/4HANA MM with real-time projects, expert mentorship & 
           placement support — even if you&quot;re starting from scratch.
         </p>
 
         {/* CTA */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4">
 
+          {/* ✅ FIXED BUTTON */}
           <button
-            onClick={handleEnquiry}
-            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-blue-600 text-white font-semibold text-sm shadow-lg hover:bg-blue-700 transition"
+            onClick={scrollToConsultation}
+            aria-label="Go to free consultation form"
+            title="Get Free Career Consultation"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl bg-blue-600 text-white font-semibold text-sm shadow-lg hover:bg-blue-700 active:scale-95 transition"
           >
             Get Free Career Consultation
           </button>
 
           <button
-            onClick={() =>
-              document
-                .getElementById("curriculum")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50 transition"
+            onClick={scrollToCurriculum}
+            aria-label="View curriculum section"
+            title="View Curriculum"
+            className="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-300 text-gray-700 font-semibold text-sm hover:bg-gray-50 active:scale-95 transition"
           >
             View Curriculum
           </button>

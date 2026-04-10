@@ -383,7 +383,11 @@ const Modules = () => {
               </div>
               <button
                 className="enroll-btn"
-                onClick={() => window.open("https://wa.me/91XXXXXXXXXX", "_blank")}
+               onClick={() => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("openEnquiry"));
+    }
+  }}
               >
                 Enroll Now
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

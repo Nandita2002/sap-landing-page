@@ -127,7 +127,7 @@ const Instructor = () => {
             </div>
 
             {/* CTA */}
-           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+<div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
 
   {/* Primary CTA */}
   <button
