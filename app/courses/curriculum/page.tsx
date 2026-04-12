@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/Footer";
 
 type Course = {
   title: string;

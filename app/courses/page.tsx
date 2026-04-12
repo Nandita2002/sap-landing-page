@@ -106,7 +106,7 @@ export default function CoursesPage() {
 
       {/* Explore More (linked to curriculum page) */}
       <div className="text-center mt-14">
-        <Link href="/app/courses/curriculum" className="text-blue-600 hover:underline font-medium text-sm">
+        <Link href="/courses/curriculum" className="text-blue-600 hover:underline font-medium text-sm">
           Explore more courses →
         </Link>
       </div>
