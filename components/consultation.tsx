@@ -6,6 +6,7 @@ type FormData = {
   name: string;
   email: string;
   phone: string;
+  course: string;
   goal: string;
 };
 
@@ -20,6 +21,7 @@ export default function FreeConsultationForm() {
     name: "",
     email: "",
     phone: "",
+    course: "",
     goal: "",
   });
 
@@ -47,7 +49,7 @@ export default function FreeConsultationForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
@@ -74,7 +76,7 @@ export default function FreeConsultationForm() {
       );
 
       setSuccess(true);
-      setForm({ name: "", email: "", phone: "", goal: "" });
+      setForm({ name: "", email: "", phone: "", course: "", goal: "" });
     } catch (err) {
       alert("Submission failed");
     }
@@ -83,95 +85,112 @@ export default function FreeConsultationForm() {
   };
 
   return (
-    <section id="consultation" className="py-20 px-4 bg-gradient-to-b from-white to-blue-50">
-      <div className="max-w-5xl mx-auto">
+    <section id="consultation" className="py-16 px-4 bg-gradient-to-b from-white to-blue-50">
+      <div className="max-w-3xl mx-auto">
 
         {/* HEADER */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             Get Your Free Consultation
           </h2>
-          <p className="text-gray-500 mt-2">
+          <p className="text-gray-500 mt-2 text-base">
             Speak with our experts and get a personalized roadmap
           </p>
         </div>
 
         {/* CARD */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-10 border border-gray-100">
+        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
 
-          {/* SUCCESS */}
           {success && (
-            <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl text-center font-medium">
+            <div className="mb-5 p-3 bg-green-50 text-green-700 rounded-lg text-center text-sm font-medium">
               ✅ Submitted successfully! Our team will contact you shortly.
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-5">
 
             {/* NAME */}
             <div>
-              <label className="text-sm font-medium text-gray-600 mb-1 block">
+              <label htmlFor="name" className="text-sm font-medium text-gray-600 mb-1 block">
                 Full Name
               </label>
               <input
+                id="name"
                 name="name"
                 value={form.name}
                 onChange={handleChange}
                 placeholder="John Doe"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
               />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-              )}
+              {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
             </div>
 
             {/* EMAIL */}
             <div>
-              <label className="text-sm font-medium text-gray-600 mb-1 block">
+              <label htmlFor="email" className="text-sm font-medium text-gray-600 mb-1 block">
                 Email Address
               </label>
               <input
+                id="email"
                 name="email"
                 type="email"
                 value={form.email}
                 onChange={handleChange}
                 placeholder="you@example.com"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
               />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
+              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
             </div>
 
             {/* PHONE */}
             <div>
-              <label className="text-sm font-medium text-gray-600 mb-1 block">
+              <label htmlFor="phone" className="text-sm font-medium text-gray-600 mb-1 block">
                 Phone Number
               </label>
               <input
+                id="phone"
                 name="phone"
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="9876543210"
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
               />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-              )}
+              {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
             </div>
 
-            {/* GOAL */}
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium text-gray-600 mb-1 block">
+            {/* COURSE */}
+            <div>
+              <label htmlFor="course" className="text-sm font-medium text-gray-600 mb-1 block">
+                Course Interested In
+              </label>
+              <select
+                id="course"
+                name="course"
+                value={form.course}
+                onChange={handleChange}
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+              >
+                <option value="">Select Course</option>
+                <option>SAP MM</option>
+                <option>SAP FICO</option>
+                <option>SAP SD</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            {/* 🔥 FIXED TEXTAREA (SEPARATE BLOCK) */}
+            <div className="md:col-span-2 mt-2">
+              <label htmlFor="goal" className="text-sm font-medium text-gray-600 mb-1 block">
                 Your Goal (Optional)
               </label>
               <textarea
+                id="goal"
                 name="goal"
                 value={form.goal}
                 onChange={handleChange}
                 placeholder="Tell us what you want to achieve..."
-                rows={4}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                rows={3}
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
               />
             </div>
 
@@ -180,9 +199,12 @@ export default function FreeConsultationForm() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:bg-blue-700 transition"
+                className="w-full py-3.5 rounded-lg text-white font-semibold text-base shadow-md 
+                bg-gradient-to-r from-blue-600 to-blue-500 
+                hover:from-blue-700 hover:to-blue-600 
+                transition-all duration-200"
               >
-                {loading ? "Submitting..." : "Book Free Consultation"}
+                {loading ? "Submitting..." : "Book Free Demo Class"}
               </button>
             </div>
 

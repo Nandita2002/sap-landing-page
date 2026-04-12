@@ -20,8 +20,11 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "SAP Training | Rise Infotech",
   description: "SAP training with live demos...",
+ 
   icons: {
-    icon: "/logo.ico",
+    icon: "favicon/.ico",
+    shortcut: "/logo.ico",
+    apple: "/logo.ico",
   },
 
   keywords: [

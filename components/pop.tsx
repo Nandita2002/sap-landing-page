@@ -8,8 +8,11 @@ const inputClass =
 const Popup = () => {
   const [open, setOpen] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const hasOpened = useRef(false); // ✅ prevents double opening
+  const closeTimer = useRef<NodeJS.Timeout | null>(null);
+  const autoOpenTimer = useRef<NodeJS.Timeout | null>(null);
+  const openedRef = useRef(false); // ✅ single source of truth
 
   const [form, setForm] = useState({
     name: "",
@@ -18,36 +21,50 @@ const Popup = () => {
     message: "",
   });
 
+  // ✅ OPEN CONTROL (NO DOUBLE TRIGGER)
   useEffect(() => {
-    const openHandler = () => {
-      if (!hasOpened.current) {
-        setOpen(true);
-        hasOpened.current = true;
-      }
+    const openPopup = () => {
+      if (openedRef.current) return; // 🔥 prevents duplicate open
+      openedRef.current = true;
+
+      setSuccess(false);
+      setOpen(true);
     };
 
-    window.addEventListener("openEnquiry", openHandler);
+    window.addEventListener("openEnquiry", openPopup);
 
-    const timer = setTimeout(() => {
-      if (!hasOpened.current) {
-        setOpen(true);
-        hasOpened.current = true;
-      }
+    autoOpenTimer.current = setTimeout(() => {
+      openPopup();
     }, 3000);
 
     return () => {
-      window.removeEventListener("openEnquiry", openHandler);
-      clearTimeout(timer);
+      window.removeEventListener("openEnquiry", openPopup);
+      if (autoOpenTimer.current) clearTimeout(autoOpenTimer.current);
     };
   }, []);
 
+  // ✅ BODY SCROLL LOCK
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [open]);
+
+  // ✅ CLEANUP TIMERS
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
 
   if (!open) return null;
 
+  // ✅ SUBMIT HANDLER (NO DOUBLE CALL)
   const handleSubmit = async () => {
+    if (loading) return; // 🔥 prevents double click
+    setLoading(true);
+
     try {
       const res = await fetch(
         "https://script.google.com/macros/s/AKfycbzUUxx36ndeem-cNIPDF_VnzNWXCY6fn6-fZ0cj4fwljB9FJiN6X5tyuFghJ76DrkA4DA/exec",
@@ -70,16 +87,19 @@ const Popup = () => {
           message: "",
         });
 
-        // ✅ Auto close after 2.5 sec
-        setTimeout(() => {
+        // 🔥 ENSURE ONLY ONE CLOSE TIMER
+        if (closeTimer.current) clearTimeout(closeTimer.current);
+
+        closeTimer.current = setTimeout(() => {
           setOpen(false);
-          setSuccess(false);
         }, 2500);
       } else {
         console.error("Error saving data", data);
       }
     } catch (err) {
       console.error("Submission failed", err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -87,6 +107,7 @@ const Popup = () => {
     <div
       className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4"
       onClick={(e) => {
+        if (success) return; // 🔥 block during success
         if (e.target === e.currentTarget) setOpen(false);
       }}
     >
@@ -174,9 +195,10 @@ const Popup = () => {
 
               <button
                 onClick={handleSubmit}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-sm font-semibold"
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl text-sm font-semibold disabled:opacity-50"
               >
-                Submit enquiry →
+                {loading ? "Submitting..." : "Submit enquiry →"}
               </button>
 
             </div>

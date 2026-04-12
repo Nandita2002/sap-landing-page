@@ -73,29 +73,29 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link href="#home" aria-label="Go to homepage">
+        <Link href="/" aria-label="Go to homepage">
           <Image
-            src="/logor.png"
+            src="/logo.png"
             alt="Company Logo"
-            width={110}
-            height={40}
-            className="h-8 w-auto"
+            width={140}
+            height={60}
+            className="h-9 w-auto"
             priority
           />
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center justify-center flex-1 gap-8">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleNav(link.id)}
               aria-label={`Go to ${link.label}`}
               title={link.label}
-              className={`relative text-sm font-medium transition ${
+              className={`relative text-base font-semibold tracking-wide transition ${
                 active === link.id
                   ? "text-blue-600"
-                  : "text-gray-600 hover:text-blue-600"
+                  : "text-gray-700 hover:text-blue-600"
               }`}
             >
               {link.label}
@@ -107,6 +107,16 @@ export default function Navbar() {
             </button>
           ))}
         </nav>
+
+        {/* CTA BUTTON (DESKTOP) */}
+        <div className="hidden md:block">
+          <button
+            onClick={handleEnquiry}
+            className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md hover:bg-blue-700 transition-all duration-200"
+          >
+            Enquire Now
+          </button>
+        </div>
 
         {/* MENU BUTTON */}
         <button
@@ -147,7 +157,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(false)}
         />
 
-        {/* RIGHT DRAWER */}
+        {/* DRAWER */}
         <div
           className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transform transition-all duration-300 ${
             menuOpen ? "translate-x-0" : "translate-x-full"
@@ -170,15 +180,15 @@ export default function Navbar() {
           </div>
 
           {/* CONTENT */}
-          <div className="p-5 flex flex-col gap-6">
+          <div className="p-6 flex flex-col gap-8">
 
             {/* NAVIGATION */}
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase mb-3">
+              <p className="text-xs font-semibold text-gray-400 uppercase mb-4 tracking-wide">
                 Navigation
               </p>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-3">
                 {navLinks.map((link) => {
                   const Icon = link.icon;
                   return (
@@ -187,13 +197,13 @@ export default function Navbar() {
                       onClick={() => handleNav(link.id)}
                       aria-label={`Go to ${link.label}`}
                       title={link.label}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition ${
+                      className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-semibold transition ${
                         active === link.id
                           ? "bg-blue-50 text-blue-600"
                           : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                       }`}
                     >
-                      <Icon size={18} className="text-gray-500" />
+                      <Icon size={18} />
                       {link.label}
                     </button>
                   );
@@ -203,7 +213,7 @@ export default function Navbar() {
 
             {/* ACTION */}
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase mb-3">
+              <p className="text-xs font-semibold text-gray-400 uppercase mb-4 tracking-wide">
                 Get Started
               </p>
 
@@ -212,8 +222,6 @@ export default function Navbar() {
                   handleEnquiry();
                   setMenuOpen(false);
                 }}
-                aria-label="Open enquiry form"
-                title="Enquire Now"
                 className="w-full bg-blue-600 text-white py-3 rounded-xl text-base font-semibold shadow-md hover:bg-blue-700 transition-all duration-200"
               >
                 Enquire Now

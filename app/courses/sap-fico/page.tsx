@@ -1,0 +1,127 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/Footer";
+
+const SAP = () => (
+  <span className="text-blue-600 font-semibold">SAP</span>
+);
+
+const highlightSAP = (text: string) =>
+  text.split("SAP").map((part, i, arr) => (
+    <span key={i}>
+      {part}
+      {i < arr.length - 1 && <SAP />}
+    </span>
+  ));
+
+export default function SAPFICOPage() {
+  return (
+    <div className="bg-white font-sans">
+
+      <Navbar />
+
+      <div className="max-w-6xl mx-auto px-4 py-12 space-y-14 mt-8 sm:px-6 lg:px-8">
+
+        {/* ABOUT + IMAGE */}
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+
+          <div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-900 mb-4 leading-snug">
+              What is <SAP /> FICO?
+            </h2>
+
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+              <SAP /> Financial Accounting and Controlling (FICO) is a core <SAP /> ERP module designed to manage financial transactions and cost control. 
+              Accounts Payable handles vendor payments, Accounts Receivable manages customer billing, and Controlling (CO) supports budgeting and profitability analysis.
+              <br /><br />
+              <SAP /> FICO integrates with:
+              <br />• FI–MM: Procurement & inventory postings
+              <br />• FI–SD: Revenue & receivables
+              <br />• FI–PP: Production cost tracking
+            </p>
+          </div>
+
+          <img
+            src="https://images.unsplash.com/photo-1554224154-26032ffc0d07"
+            alt="SAP FICO"
+            className="rounded-2xl shadow-lg w-full h-64 md:h-full object-cover"
+          />
+        </div>
+
+        {/* WHO CAN LEARN */}
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            Who Can Learn?
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              "Finance Professionals",
+              "SAP Consultants",
+              "Business Analysts",
+              "Students & Graduates",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-gray-50 border rounded-xl p-4 text-sm text-gray-700 hover:shadow-md transition"
+              >
+                {highlightSAP(item)}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CURRICULUM */}
+        <div>
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            What You Will Learn
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            {[
+              "SAP ERP Overview",
+              "SAP FICO Introduction",
+              "General Ledger (GL)",
+              "Accounts Payable & Receivable",
+              "Asset Accounting",
+              "Cost Center & Profit Center",
+              "CO-PA",
+              "Integration with MM and SD",
+              "SAP S/4 HANA",
+              "Real-Time Projects",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="bg-gray-50 border rounded-xl p-4 text-sm text-gray-700 hover:shadow-md transition"
+              >
+                {highlightSAP(item)}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA */}
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-blue-500 p-8 text-center text-white shadow-xl">
+
+          <h2 className="text-xl md:text-2xl font-semibold tracking-tight mb-3">
+            Build your <SAP /> Finance Career
+          </h2>
+
+          <p className="text-sm md:text-base opacity-90 mb-6">
+            Master financial accounting with real-time projects
+          </p>
+
+          <Button className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-2.5 text-sm font-medium">
+            Enroll Now →
+          </Button>
+        </div>
+
+      </div>
+
+      <Footer />
+
+    </div>
+  );
+}

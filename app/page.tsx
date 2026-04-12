@@ -1,4 +1,4 @@
-import Curriculum from "@/components/Curriculum";
+
 import FAQ from "@/components/FAQ";
 import Hero from "@/components/Hero";
 import Instructor from "@/components/Instructor";
@@ -9,6 +9,7 @@ import TopBanner from "@/components/TopBanner";
 import Navbar from "@/components/navbar";
 import StickyEnquiry from "@/components/StickyEnquiry";
 import Consultation from "@/components/consultation";
+import CoursesPage from "./courses/page";
 export const metadata = {
   title: "SAP Training in India | SAP MM, FICO, ABAP Course",
   description:
@@ -45,14 +46,14 @@ export default function Home() {
         <TopBanner />
         <Hero />
         <Consultation />
-        <Curriculum />
+        <CoursesPage />
         <Instructor />
         <Testimonials />
         <FAQ />
         <Footer />
       </main>
       <StickyEnquiry />
-      <Popup />
+     
     </>
   );
 }
