@@ -6,13 +6,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { X, BookOpen, User, HelpCircle } from "lucide-react";
 
-/* 🔥 ENQUIRY TRIGGER */
-const handleEnquiry = () => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("openEnquiry"));
-  }
-};
-
 /* 🔥 SCROLL FUNCTION */
 const scrollToSection = (id: string) => {
   if (typeof document !== "undefined") {
@@ -27,11 +20,17 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const router = useRouter();
+  const router = useRouter(); // ✅ correct place
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("");
   const [scrolled, setScrolled] = useState(false);
+
+  /* 🔥 FIXED ENQUIRY */
+  const handleEnquiry = () => {
+    router.push("/#consultation");
+    setMenuOpen(false);
+  };
 
   /* Scroll detection */
   useEffect(() => {
@@ -59,7 +58,7 @@ export default function Navbar() {
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
 
-  /* 🔥 FIXED NAVIGATION */
+  /* NAVIGATION */
   const handleNav = (id: string) => {
     if (window.location.pathname !== "/") {
       router.push(`/#${id}`);
@@ -97,6 +96,8 @@ export default function Navbar() {
             <button
               key={link.id}
               onClick={() => handleNav(link.id)}
+              aria-label={`Go to ${link.label}`}
+              title={`Go to ${link.label}`}
               className={`relative text-base font-semibold transition ${
                 active === link.id
                   ? "text-blue-600"
@@ -113,19 +114,23 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA BUTTON */}
+        {/* CTA */}
         <div className="hidden md:block">
           <button
             onClick={handleEnquiry}
-            className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md hover:bg-blue-700 transition"
+            aria-label="Book free consultation"
+            title="Book free consultation"
+            className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md hover:bg-blue-700 transition hover:-translate-y-0.5"
           >
-            Enquire Now
+            Free Consultation
           </button>
         </div>
 
         {/* MENU BUTTON */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+          title="Toggle menu"
           className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 transition"
         >
           <div className="relative w-6 h-5">
@@ -150,7 +155,11 @@ export default function Navbar() {
         >
           <div className="flex justify-between p-5 border-b">
             <span className="font-semibold">Menu</span>
-            <button onClick={() => setMenuOpen(false)}>
+            <button
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              title="Close menu"
+            >
               <X />
             </button>
           </div>
@@ -162,6 +171,8 @@ export default function Navbar() {
                 <button
                   key={link.id}
                   onClick={() => handleNav(link.id)}
+                  aria-label={`Go to ${link.label}`}
+                  title={`Go to ${link.label}`}
                   className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-gray-100"
                 >
                   <Icon size={18} />
@@ -172,9 +183,11 @@ export default function Navbar() {
 
             <button
               onClick={handleEnquiry}
-              className="w-full bg-blue-600 text-white py-3 rounded-xl"
+              aria-label="Book free consultation"
+              title="Book free consultation"
+              className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
             >
-              Enquire Now
+              Free Consultation
             </button>
           </div>
         </div>

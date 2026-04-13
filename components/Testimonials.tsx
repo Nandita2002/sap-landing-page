@@ -188,19 +188,30 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="mt-10 text-center px-5">
-        <button
-          onClick={handleEnquiry}
-          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-medium transition-all hover:-translate-y-0.5"
-        >
-          Book free demo class
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <p className="text-xs text-gray-400 mt-2">Limited slots available this week</p>
-      </div>
+   {/* CTA */}
+<div className="mt-10 text-center px-5">
+  <a
+    href="https://www.google.com/search?sca_esv=81978db0d0913d93&rlz=1C1YTUH_enIN1060IN1060&sxsrf=ANbL-n7os2l-0uk3ejOKgDSBaJQIjKdvw:1776073334264&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZxCFEPkTRWInxxXkfUhG9fyS5WBE_VsfODKz4VXXcICT4ibXqZKceNQWCESWxiBtd8xv-VD0nYopIM2aKHc74-qEyty&q=Rise+Infotech+Reviews&sa=X&ved=2ahUKEwjXhLzhxOqTAxUKU2wGHRMnBvQQ0bkNegQINxAH&biw=1536&bih=730&dpr=1.25"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-medium transition-all hover:-translate-y-0.5"
+  >
+    View more reviews
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+      <path
+        d="M3 8h10M9 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </a>
+
+  <p className="text-xs text-gray-400 mt-2">
+    See what our students are saying
+  </p>
+</div>
 
     </section>
   );

@@ -5,32 +5,36 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is this course beginner friendly?",
+    question: "Is this SAP course suitable for beginners?",
     answer:
-      "Yes, the course is designed for beginners as well as professionals looking to switch careers into SAP.",
+      "Yes, this course is designed for absolute beginners as well as professionals looking to switch into SAP. We start from fundamentals and gradually move to advanced real-time scenarios.",
   },
   {
-    question: "Will I get a certificate?",
+    question: "Which SAP module will I learn in this training?",
     answer:
-      "Yes, you will receive a certificate upon successful completion of the training program.",
+      "This training focuses on SAP S/4HANA MM (Materials Management), covering procurement, inventory management, and real-time business processes used in companies.",
   },
   {
-    question: "Are live sessions recorded?",
+    question: "Will I get hands-on experience on SAP system?",
     answer:
-      "Yes, recordings will be provided so you can revisit sessions anytime.",
+      "Yes, you will get practical exposure through live system access, real-time case studies, and assignments to ensure you gain industry-level experience.",
   },
   {
-    question: "What is the duration of the course?",
+    question: "Is certification included in this SAP course?",
     answer:
-      "The training program typically runs for 45 days with structured live sessions.",
+      "Yes, you will receive a course completion certificate. We also guide you on how to prepare for official SAP certification exams if required.",
   },
   {
-    question: "Will I get placement support?",
+    question: "What are the career opportunities after SAP MM?",
     answer:
-      "Yes, we provide career guidance, resume support, and interview preparation.",
+      "After completing this course, you can apply for roles like SAP MM Consultant, SAP Analyst, Procurement Specialist, and Supply Chain Executive in top MNCs.",
+  },
+  {
+    question: "Will I get placement assistance?",
+    answer:
+      "Yes, we provide end-to-end placement support including resume building, mock interviews, and referrals to hiring partners.",
   },
 ];
-
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 

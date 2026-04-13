@@ -10,8 +10,8 @@ const handleEnquiry = () => {
 };
 
 /* 🔥 SCROLL FUNCTION */
-const scrollToCurriculum = () => {
-  const el = document.getElementById("curriculum");
+const scrollToCourses = () => {
+  const el = document.getElementById("courses");
   if (el) {
     el.scrollIntoView({ behavior: "smooth" });
   }
@@ -35,10 +35,7 @@ const Instructor = () => {
             ● Leadership Spotlight
           </div>
 
-          <h2
-            id="instructor-heading"
-            className="text-3xl md:text-4xl font-extrabold text-[#0a1628]"
-          >
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0a1628]">
             Learn from{" "}
             <span className="bg-gradient-to-r from-blue-700 via-blue-500 to-blue-400 bg-clip-text text-transparent">
               Industry Experts
@@ -89,12 +86,49 @@ const Instructor = () => {
               </p>
             </div>
 
-           <p className="text-gray-600 leading-relaxed text-sm">
-  Kumaresh Bidari is the Founder & CEO of Rise Infotech, bringing over a decade of experience
-  in delivering enterprise-grade SAP S/4HANA solutions across global organizations including
-  TCS, IBM, and NTT Data. He has played a key role in transforming business processes
-  through SAP implementations and has successfully guided professionals into high-growth SAP careers.
-</p>
+            <p className="text-gray-600 leading-relaxed text-sm">
+              Kumaresh Bidari is the Founder & CEO of Rise Infotech, bringing over a decade of experience
+              in delivering enterprise-grade SAP S/4HANA solutions across global organizations including
+              TCS, IBM, and NTT Data. He has played a key role in transforming business processes
+              through SAP implementations and has successfully guided professionals into high-growth SAP careers.
+            </p>
+
+             {/* 🔥 FOUNDER SOCIAL MEDIA */}
+            <div className="mt-4 flex flex-col items-start gap-2">
+              <p className="text-xs text-gray-500 font-medium">
+                Connect with the Founder
+              </p>
+
+              <div className="flex gap-3">
+
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/in/kumaresh-bidari074/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 flex items-center justify-center rounded-md bg-[#0A66C2] hover:scale-110 transition"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect x="2" y="9" width="4" height="12"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                </a>
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/kumaresh.bidari/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 flex items-center justify-center rounded-md bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:scale-110 transition"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                    <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm4.25 5.5A4.75 4.75 0 1 0 16.75 12 4.76 4.76 0 0 0 12 7.5zm0 7.5A2.75 2.75 0 1 1 14.75 12 2.75 2.75 0 0 1 12 15zm5.25-8.75a1 1 0 1 1-1-1 1 1 0 0 1 1 1z"/>
+                  </svg>
+                </a>
+
+              </div>
+            </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
@@ -114,44 +148,42 @@ const Instructor = () => {
               ))}
             </div>
 
-            {/* Differentiator */}
+            {/* Achievements */}
             <div className="text-sm text-gray-600 space-y-2">
-             <p className="font-semibold text-gray-800">
-  Key Achievements & Impact:
-</p>
-<ul className="space-y-1">
-  <li>✔ Led multiple SAP S/4HANA enterprise implementations</li>
-  <li>✔ Worked with top global MNCs across industries</li>
-  <li>✔ Trained 1000+ professionals transitioning into SAP careers</li>
-  <li>✔ Built Rise Infotech as a career-focused SAP training platform</li>
-</ul>
+              <p className="font-semibold text-gray-800">
+                Key Achievements & Impact:
+              </p>
+              <ul className="space-y-1">
+                <li>✔ Led multiple SAP S/4HANA enterprise implementations</li>
+                <li>✔ Worked with top global MNCs across industries</li>
+                <li>✔ Trained 1000+ professionals transitioning into SAP careers</li>
+                <li>✔ Built Rise Infotech as a career-focused SAP training platform</li>
+              </ul>
             </div>
 
             {/* CTA */}
-<div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <button
+                onClick={handleEnquiry}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm shadow-md hover:bg-blue-700 transition text-center"
+              >
+                Get Free Career Consultation
+              </button>
 
-  {/* Primary CTA */}
-  <button
-    onClick={handleEnquiry}
-    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm shadow-md hover:bg-blue-700 transition text-center"
-  >
-    Get Free Career Consultation
-  </button>
-
-  {/* Secondary CTA */}
-  <button
-    onClick={scrollToCurriculum}
-    className="w-full sm:w-auto px-6 py-3 rounded-xl border border-blue-200 text-blue-600 font-semibold text-sm hover:bg-blue-50 transition text-center"
-  >
-    View Curriculum
-  </button>
-
-</div>
+              <button
+                onClick={scrollToCourses}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl border border-blue-200 text-blue-600 font-semibold text-sm hover:bg-blue-50 transition text-center"
+              >
+                View Courses
+              </button>
+            </div>
 
             {/* Closing Line */}
             <p className="text-sm font-semibold text-blue-600">
               This is not just training — it’s a complete career transformation.
             </p>
+
+           
 
           </div>
         </div>

@@ -26,8 +26,8 @@ export default function Hero() {
     }, 500);
   };
 
-  const scrollToCurriculum = () => {
-    const el = document.getElementById("curriculum");
+  const scrollToCourses = () => {
+    const el = document.getElementById("courses");
     if (!el) return;
 
     el.scrollIntoView({ behavior: "smooth" });
@@ -77,10 +77,10 @@ export default function Hero() {
 
           {/* Secondary */}
           <button
-            onClick={scrollToCurriculum}
+            onClick={scrollToCourses}
             className="w-full sm:w-auto px-10 py-4 rounded-xl border border-gray-300 text-gray-700 font-semibold text-base hover:bg-gray-50 active:scale-95 transition"
           >
-            View Curriculum
+            View Courses
           </button>
 
         </div>
