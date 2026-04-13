@@ -38,7 +38,8 @@ export default function CoursesPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen px-4 py-14 bg-gradient-to-b from-white to-slate-50">
+    
+    <div id="courses" className="min-h-screen px-4 py-14 bg-gradient-to-b from-white to-slate-50">
 
       {/* Heading */}
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-3">

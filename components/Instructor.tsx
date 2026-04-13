@@ -32,7 +32,7 @@ const Instructor = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-1 mb-4 text-xs font-semibold text-blue-700 uppercase tracking-wide">
-            ● Meet Your Instructor
+            ● Leadership Spotlight
           </div>
 
           <h2
@@ -46,7 +46,7 @@ const Instructor = () => {
           </h2>
 
           <p className="mt-4 text-gray-600 max-w-md mx-auto">
-            Get mentored by a certified SAP S/4HANA MM expert with real-world enterprise experience.
+            A visionary leader driving SAP innovation and career transformation.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ const Instructor = () => {
                 </div>
 
                 <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white border border-blue-200 rounded-lg px-4 py-2 text-xs shadow-md">
-                  SAP S/4HANA MM Specialist
+                  SAP S/4HANA MM Expert
                 </div>
               </div>
 
@@ -89,11 +89,12 @@ const Instructor = () => {
               </p>
             </div>
 
-            <p className="text-gray-600 leading-relaxed text-sm">
-              Learn directly from a seasoned SAP consultant with 10+ years of experience,
-              having worked with TCS, IBM, and NTT Data on real-time S/4HANA projects.
-              Gain practical knowledge, project exposure, and career guidance to confidently step into SAP roles.
-            </p>
+           <p className="text-gray-600 leading-relaxed text-sm">
+  Kumaresh Bidari is the Founder & CEO of Rise Infotech, bringing over a decade of experience
+  in delivering enterprise-grade SAP S/4HANA solutions across global organizations including
+  TCS, IBM, and NTT Data. He has played a key role in transforming business processes
+  through SAP implementations and has successfully guided professionals into high-growth SAP careers.
+</p>
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
@@ -115,15 +116,15 @@ const Instructor = () => {
 
             {/* Differentiator */}
             <div className="text-sm text-gray-600 space-y-2">
-              <p className="font-semibold text-gray-800">
-                Complete Career Transformation Program:
-              </p>
-              <ul className="space-y-1">
-                <li>✔ Real-time project exposure</li>
-                <li>✔ Resume & Naukri profile optimization</li>
-                <li>✔ Daily mock interviews</li>
-                <li>✔ Placement-focused training</li>
-              </ul>
+             <p className="font-semibold text-gray-800">
+  Key Achievements & Impact:
+</p>
+<ul className="space-y-1">
+  <li>✔ Led multiple SAP S/4HANA enterprise implementations</li>
+  <li>✔ Worked with top global MNCs across industries</li>
+  <li>✔ Trained 1000+ professionals transitioning into SAP careers</li>
+  <li>✔ Built Rise Infotech as a career-focused SAP training platform</li>
+</ul>
             </div>
 
             {/* CTA */}

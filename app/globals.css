@@ -148,3 +148,11 @@
   -webkit-animation: marquee 20s linear infinite;
   animation: marquee 20s linear infinite;
 }
+/* Hide scrollbar properly */
+.scrollbar-hide {
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

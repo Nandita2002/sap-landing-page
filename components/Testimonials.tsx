@@ -1,163 +1,207 @@
 "use client";
 
-import React from "react";
-import { Star } from "lucide-react";
+import React, { useRef, useState, useEffect } from "react";
 
-/* 🔥 CTA */
 const handleEnquiry = () => {
   const event = new CustomEvent("openEnquiry");
   window.dispatchEvent(event);
 };
 
-/* ✅ TYPE */
 type Testimonial = {
   name: string;
   role: string;
   review: string;
 };
 
-/* ✅ DATA (FULL + CLEAN) */
 const testimonials: Testimonial[] = [
-  {
-    name: "Basayya Ningolli",
-    role: "Google Review",
-    review:
-      "Rise Infotech is the best SAP training institute in Bangalore. Trainers focus on concept clarity and provide high-quality study materials.",
-  },
-  {
-    name: "Vadiraj Kulkarni",
-    role: "Google Review",
-    review:
-      "Highly experienced trainers with real-time industry examples. Concepts are explained very clearly.",
-  },
-  {
-    name: "Darshan Garjur",
-    role: "Google Review",
-    review:
-      "Great learning experience. Strong focus on practical skills along with theory.",
-  },
-  {
-    name: "Rahul Patil",
-    role: "Google Review",
-    review:
-      "Trainer explained all SAP MM concepts clearly from basic to advanced.",
-  },
-  {
-    name: "Soumya K",
-    role: "Google Review",
-    review:
-      "They don't just teach SAP, they teach you how to think like a consultant.",
-  },
-  {
-    name: "Teja Dommaraju",
-    role: "Google Review",
-    review:
-      "Training is practical and industry-oriented with real-time examples.",
-  },
+  { name: "Teja Dommaraju", role: "Google Review", review: "Training is very practical and industry-oriented with real-time examples and hands-on experience." },
+  { name: "Purnima", role: "Google Review", review: "Concepts are explained clearly using real-time scenarios and system demonstrations." },
+  { name: "Snehal Pargaonkar", role: "Google Review", review: "Helped me transition into SAP consulting with structured learning and clear guidance." },
+  { name: "Shilpa Basari", role: "Google Review", review: "Very informative training. Concepts were explained clearly and worth the experience." },
+  { name: "Soumya K", role: "Google Review", review: "They don't just teach SAP—they teach you how to think like a consultant." },
+  { name: "Hareesha RH", role: "Google Review", review: "Excellent institute with knowledgeable trainers and strong practical exposure." },
+  { name: "Preethi Gowda", role: "Google Review", review: "Supportive trainers and clear explanations from basics to project-level learning." },
+  { name: "Manjunath Goudar", role: "Google Review", review: "Covered fundamentals to mock interviews with great clarity and support." },
+  { name: "Vadiraj Kulkarni", role: "Google Review", review: "Highly experienced trainers with real-time industry examples." },
 ];
 
-/* ✅ CARD */
-const Card = ({ item }: { item: Testimonial }) => (
-  <div className="bg-white border rounded-xl p-5 shadow-sm hover:shadow-md transition">
-    {/* Stars */}
-    <div className="flex mb-2">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          size={14}
-          className="text-yellow-400"
-          fill="currentColor"
-        />
-      ))}
-    </div>
-
-    {/* Review */}
-    <p className="text-sm text-gray-600 leading-relaxed">
-      &quot;{item.review}&quot;
-    </p>
-
-    {/* User */}
-    <div className="mt-4 flex items-center gap-2">
-      <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-bold">
-        {item.name
-          .split(" ")
-          .map((n) => n[0])
-          .slice(0, 2)
-          .join("")
-          .toUpperCase()}
-      </div>
-      <div>
-        <p className="text-sm font-semibold text-[#0a1628]">
-          {item.name}
-        </p>
-        <p className="text-xs text-blue-500">{item.role}</p>
-      </div>
-    </div>
-  </div>
-);
-
-/* ✅ MAIN COMPONENT */
 export default function Testimonials() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const allTestimonials = [...testimonials, ...testimonials];
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const interval = setInterval(() => {
+      if (!isPaused) {
+        slider.scrollLeft += 1;
+
+        const center = slider.scrollLeft + slider.offsetWidth / 2;
+        const cards = slider.querySelectorAll<HTMLElement>(".t-card");
+        let closest = 0;
+        let minDist = Infinity;
+        cards.forEach((card, i) => {
+          const cx = card.offsetLeft + card.offsetWidth / 2;
+          const dist = Math.abs(center - cx);
+          if (dist < minDist) {
+            minDist = dist;
+            closest = i;
+          }
+        });
+        setActiveIndex(closest);
+
+        if (slider.scrollLeft >= slider.scrollWidth / 2) {
+          slider.scrollLeft = 0;
+        }
+      }
+    }, 16);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDown(true);
+    setIsPaused(true);
+    if (!sliderRef.current) return;
+    setStartX(e.pageX - sliderRef.current.offsetLeft);
+    setScrollLeft(sliderRef.current.scrollLeft);
+  };
+
+  const handleMouseUp = () => {
+    setIsDown(false);
+    setIsPaused(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDown(false);
+    setIsPaused(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown || !sliderRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - sliderRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    sliderRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const getInitials = (name: string) =>
+    name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase();
+
   return (
-    <section className="py-16 bg-[#f8faff]">
-      
-      {/* 🔥 HEADER */}
-      <div className="text-center max-w-3xl mx-auto px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-[#0a1628]">
-          Trusted by <span className="text-blue-600">500+ Students</span>
+    <section className="bg-white py-14 overflow-hidden">
+
+      {/* HEADER */}
+      <div className="text-center max-w-2xl mx-auto px-5">
+        <h2 className="text-[clamp(22px,4vw,36px)] font-medium text-[#0a1628] leading-tight">
+          Trusted by <span className="text-blue-600">1000+ students</span>
         </h2>
 
-        <div className="mt-3 flex justify-center items-center gap-2 text-gray-600">
-          <span className="text-yellow-400 text-lg">★★★★★</span>
-          <span className="font-semibold">4.8/5 Google Rating</span>
+        <div className="mt-4 inline-flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 bg-white">
+          <img
+            src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
+            alt="Google"
+            className="w-4 h-4"
+          />
+          <span className="text-amber-400 text-sm tracking-wide">★★★★★</span>
+          <span className="text-sm font-medium text-[#0a1628]">4.9 / 5 Google rating</span>
         </div>
 
-        <p className="mt-3 text-gray-500 text-sm">
-          Real reviews from students who successfully transitioned into SAP careers.
+        <p className="mt-3 text-sm text-gray-500">
+          Real reviews from professionals who transitioned into SAP careers.
         </p>
       </div>
 
-      {/* 🔥 LOGOS / SOCIAL PROOF */}
-      <div className="mt-10 flex justify-center flex-wrap gap-6 opacity-70 px-4">
-        <span className="text-sm font-semibold text-gray-500">Google</span>
-        <span className="text-sm font-semibold text-gray-500">LinkedIn</span>
-        <span className="text-sm font-semibold text-gray-500">Indeed</span>
-        <span className="text-sm font-semibold text-gray-500">Glassdoor</span>
+      {/* SLIDER */}
+      <div className="relative mt-10">
+
+        {/* Fade overlays */}
+        <div className="absolute left-0 top-0 h-full w-16 sm:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-16 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+        <div
+          ref={sliderRef}
+          className="flex gap-5 overflow-x-auto px-16 sm:px-20 pb-6 pt-4 cursor-grab active:cursor-grabbing select-none"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={handleMouseLeave}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+        >
+          {allTestimonials.map((item, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <div
+                key={i}
+                className={`t-card flex-shrink-0 transition-all duration-300 ${
+                  isActive ? "scale-[1.03] opacity-100" : "scale-[0.94] opacity-60"
+                }`}
+              >
+                <div
+                  className={`bg-white rounded-2xl p-6 flex flex-col gap-4 w-[260px] sm:w-[300px] md:w-[320px] h-[240px] transition-all duration-300 ${
+                    isActive
+                      ? "border border-blue-200 shadow-[0_4px_20px_rgba(37,99,235,0.08)]"
+                      : "border border-gray-100"
+                  }`}
+                >
+                  {/* Stars */}
+                <div className="flex gap-1">
+  {Array.from({ length: 5 }).map((_, j) => (
+    <svg
+      key={j}
+      className="w-5 h-5 text-amber-400 drop-shadow-sm"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.959a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.959c.3.921-.755 1.688-1.538 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.783.57-1.838-.197-1.538-1.118l1.287-3.959a1 1 0 00-.364-1.118L2.025 9.386c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.959z" />
+    </svg>
+  ))}
+</div>
+
+                  {/* Review */}
+                  <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-4">
+                    &quot;{item.review}&quot;
+                  </p>
+
+                  {/* Reviewer */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-gray-100 mt-auto">
+                    <div className="w-9 h-9 rounded-full bg-blue-50 text-blue-600 text-xs font-medium flex items-center justify-center flex-shrink-0">
+                      {getInitials(item.name)}
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-[#0a1628]">{item.name}</p>
+                      <p className="text-xs text-blue-500 mt-0.5">{item.role}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* 🔥 TESTIMONIAL GRID */}
-      <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
-        {testimonials.map((item, i) => (
-          <Card key={i} item={item} />
-        ))}
-      </div>
-
-      {/* 🔥 TRUST BADGES */}
-      <div className="mt-12 flex justify-center flex-wrap gap-4 px-4">
-        <div className="bg-white border px-4 py-2 rounded-full text-sm shadow-sm">
-          ✔ 100% Practical Training
-        </div>
-        <div className="bg-white border px-4 py-2 rounded-full text-sm shadow-sm">
-          ✔ Real-time Projects
-        </div>
-        <div className="bg-white border px-4 py-2 rounded-full text-sm shadow-sm">
-          ✔ Placement Assistance
-        </div>
-      </div>
-
-      {/* 🔥 CTA */}
-      <div className="mt-12 text-center px-4">
+      {/* CTA */}
+      <div className="mt-10 text-center px-5">
         <button
           onClick={handleEnquiry}
-          className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-8 py-3 rounded-lg font-semibold shadow-md hover:shadow-xl transition hover:-translate-y-1"
+          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-medium transition-all hover:-translate-y-0.5"
         >
-          Book Free Demo Class →
+          Book free demo class
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </button>
-
-        <p className="text-xs text-gray-500 mt-2">
-          Limited slots available this week
-        </p>
+        <p className="text-xs text-gray-400 mt-2">Limited slots available this week</p>
       </div>
+
     </section>
   );
 }
