@@ -63,14 +63,16 @@ export default function BrandLoader() {
     >
       <div className="flex flex-col items-center px-6">
         <div className="mb-5">
-          <Image
-            src="/logo.png"
-            alt="Rise Infotech"
-            width={240}
-            height={46}
-            priority
-            className="h-auto w-[128px] sm:w-[140px] object-contain"
-          />
+          <div className="relative h-16 w-16 sm:h-20 sm:w-20 overflow-hidden">
+            <Image
+              src="/logo.png"
+              alt="Rise Infotech"
+              fill
+              priority
+              className="object-cover scale-[2.05]"
+              sizes="80px"
+            />
+          </div>
         </div>
         <p className="mt-1 text-slate-500 text-sm">Loading your experience...</p>
         <div className="mt-5 h-1.5 w-44 overflow-hidden rounded-full bg-slate-200/80">

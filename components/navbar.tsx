@@ -80,14 +80,16 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
-          <Image
-            src="/logo.png"
-            alt="Rise Infotech"
-            width={188}
-            height={36}
-            className="h-8 md:h-10 w-auto object-contain"
-            priority
-          />
+          <div className="relative h-8 w-[126px] sm:w-[140px] md:h-10 md:w-[172px] overflow-hidden">
+            <Image
+              src="/logo.png"
+              alt="Rise Infotech"
+              fill
+              className="object-contain scale-[2.1] origin-left"
+              sizes="(max-width: 640px) 140px, 172px"
+              priority
+            />
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center justify-center flex-1 gap-7">
