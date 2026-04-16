@@ -55,6 +55,9 @@ export default function Navbar() {
   /* Lock scroll */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   /* NAVIGATION */
@@ -144,16 +147,22 @@ export default function Navbar() {
         </button>
       </div>
 
-      <div className={`fixed inset-0 z-40 md:hidden ${menuOpen ? "visible" : "invisible"}`}>
+      <div
+        className={`fixed inset-0 z-[11000] md:hidden transition ${
+          menuOpen ? "visible" : "invisible"
+        }`}
+      >
         <div
-          className="absolute inset-0 bg-black/50"
+          className={`absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] transition-opacity duration-300 ${
+            menuOpen ? "opacity-100" : "opacity-0"
+          }`}
           onClick={() => setMenuOpen(false)}
         />
 
         <div
-          className={`absolute top-0 right-0 h-full w-[88%] max-w-[320px] bg-white shadow-2xl transform ${
+          className={`absolute top-0 right-0 h-dvh w-full max-w-[360px] bg-white shadow-2xl border-l border-slate-200 transform transition-transform duration-300 ease-out ${
             menuOpen ? "translate-x-0" : "translate-x-full"
-          } transition`}
+          }`}
         >
           <div className="flex justify-between p-5 border-b bg-slate-50">
             <span className="font-semibold text-slate-800">Menu</span>
@@ -166,7 +175,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="p-6 space-y-4">
+          <div className="p-6 space-y-4 bg-white h-[calc(100dvh-73px)] overflow-y-auto">
             {navLinks.map((link) => {
               const Icon = link.icon;
               return (

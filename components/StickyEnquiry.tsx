@@ -41,6 +41,16 @@ const StickyEnquiry: React.FC = () => {
     return () => window.removeEventListener("openEnquiry", handler);
   }, []);
 
+  useEffect(() => {
+    const hideOnMobileMenuOpen = () => {
+      if (window.innerWidth < 768) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("mobileMenuToggle", hideOnMobileMenuOpen);
+    return () => window.removeEventListener("mobileMenuToggle", hideOnMobileMenuOpen);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = e.target.name as FieldName;
     setForm((prev) => ({ ...prev, [name]: e.target.value }));
