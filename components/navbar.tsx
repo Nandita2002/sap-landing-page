@@ -82,7 +82,7 @@ export default function Navbar() {
         <Link href="/" aria-label="Go to homepage">
           <div className="flex items-center gap-2.5">
             <Image
-              src="/logo.svg"
+              src="/logo.png"
               alt="Rise Infotech Logo"
               width={36}
               height={36}

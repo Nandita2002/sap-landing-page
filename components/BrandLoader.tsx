@@ -63,7 +63,7 @@ export default function BrandLoader() {
         <div className="brand-loader__logo-shell">
           <span className="brand-loader__ring" />
           <Image
-            src="/logo.svg"
+            src="/logo.png"
             alt="Rise Infotech"
             width={68}
             height={68}
