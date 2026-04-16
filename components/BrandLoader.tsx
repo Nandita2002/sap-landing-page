@@ -70,14 +70,14 @@ export default function BrandLoader() {
       }`}
     >
       <div className="flex flex-col items-center px-6">
-        <div className="mb-5">
+        <div className="mb-5 relative h-12 w-[210px] sm:h-14 sm:w-[246px] overflow-hidden">
           <Image
             src="/logo.png"
             alt="Rise Infotech"
-            width={236}
-            height={46}
+            fill
             priority
-            className="h-auto w-[192px] sm:w-[236px] object-contain"
+            className="object-cover"
+            sizes="(max-width: 640px) 210px, 246px"
           />
         </div>
         <p className="max-w-xs text-center text-slate-700 text-sm sm:text-base font-medium leading-relaxed">
