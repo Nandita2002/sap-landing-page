@@ -71,16 +71,14 @@ export default function BrandLoader() {
     >
       <div className="flex flex-col items-center px-6">
         <div className="mb-5">
-          <div className="relative h-16 w-16 sm:h-20 sm:w-20 overflow-hidden">
-            <Image
-              src="/logo.png"
-              alt="Rise Infotech"
-              fill
-              priority
-              className="object-cover scale-[2.05]"
-              sizes="80px"
-            />
-          </div>
+          <Image
+            src="/logo-cropped.png"
+            alt="Rise Infotech"
+            width={236}
+            height={46}
+            priority
+            className="h-auto w-[192px] sm:w-[236px] object-contain"
+          />
         </div>
         <p className="max-w-xs text-center text-slate-700 text-sm sm:text-base font-medium leading-relaxed">
           &quot;{SAP_QUOTES[quoteIndex]}&quot;
