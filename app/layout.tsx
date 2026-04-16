@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   title: "SAP Training | Rise Infotech",
   description: "SAP training with live demos...",
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.ico",
+    shortcut: "/logo.ico",
+    apple: "/logo.ico",
   },
 
   keywords: [
@@ -66,6 +66,9 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  verification: {
+    google: "h_wMlj2sGLGXcaBLGLlsHqCMa2C--zLd30kJMTOAHPA",
   },
 };
 

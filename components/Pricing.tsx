@@ -33,7 +33,7 @@ const FloatingWidget = () => {
 
     try {
       const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbwmYxQoo0FTD1sv7831Ul8b5sd7mWiE6rKpd5Ox_0AJweph1B7lA6SSF24s-BvGpndE/exec",
+        "https://script.google.com/macros/s/AKfycbwJVHAGRMFPfVpLC2rZiErn8dFcRY7E_1yqlKniUKe3aO5LiAADO_XEDS1EBpTuNpzxUA/exec",
         {
           method: "POST",
           body: JSON.stringify(form),

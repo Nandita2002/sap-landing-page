@@ -144,6 +144,9 @@
   }
 }
 
+body.loader-active {
+  overflow: hidden;
+}
 /* Desktop-only premium cursor visuals */
 @media (hover: hover) and (pointer: fine) {
   body.cursor-premium-enabled {

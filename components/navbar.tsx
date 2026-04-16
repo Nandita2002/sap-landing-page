@@ -80,29 +80,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
-          <div className="flex items-center gap-2.5 md:gap-3">
+          <div className="relative h-8 w-[132px] sm:h-9 sm:w-[148px] md:h-10 md:w-[172px] overflow-hidden">
             <Image
-              src="/logor.png"
+              src="/logo.png"
               alt="Rise Infotech"
-              width={168}
-              height={32}
-              className="h-5 min-[390px]:h-6 w-auto md:hidden"
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 148px, 172px"
               priority
             />
-            <div className="hidden md:flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                alt="Rise Infotech Logo"
-                width={44}
-                height={44}
-                className="h-11 w-11 rounded-xl"
-                priority
-              />
-              <div className="leading-tight">
-                <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
-                <p className="text-[12px] text-slate-500">SAP Career Academy</p>
-              </div>
-            </div>
           </div>
         </Link>
 
@@ -145,7 +131,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           title="Toggle menu"
-          className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-100/90 shadow-[0_8px_20px_rgba(15,23,42,0.12)] hover:shadow-[0_10px_24px_rgba(15,23,42,0.16)] transition"
+          className="md:hidden relative w-11 h-11 flex items-center justify-center p-0 m-0 bg-transparent border-0 shadow-none rounded-none appearance-none focus:outline-none transition"
         >
           <div className="relative w-5 h-4.5">
             <span
