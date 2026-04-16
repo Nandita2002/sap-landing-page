@@ -12,12 +12,19 @@ type CursorState = {
 export default function PremiumCursor() {
   const [enabled] = useState(() => {
     if (typeof window === "undefined") return false;
+    const hasFinePointer =
+      window.matchMedia("(any-pointer: fine)").matches ||
+      window.matchMedia("(pointer: fine)").matches;
+    const hasHover =
+      window.matchMedia("(any-hover: hover)").matches ||
+      window.matchMedia("(hover: hover)").matches;
     return (
-      window.matchMedia("(pointer:fine)").matches &&
-      window.matchMedia("(hover:hover)").matches &&
+      hasFinePointer &&
+      hasHover &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches
     );
   });
+  const [visible, setVisible] = useState(false);
   const [cursor, setCursor] = useState<CursorState>({
     x: 0,
     y: 0,
@@ -26,17 +33,18 @@ export default function PremiumCursor() {
   });
 
   useEffect(() => {
-    document.body.classList.toggle("cursor-premium-enabled", enabled);
+    document.body.classList.toggle("cursor-premium-enabled", enabled && visible);
 
     return () => {
       document.body.classList.remove("cursor-premium-enabled");
     };
-  }, [enabled]);
+  }, [enabled, visible]);
 
   useEffect(() => {
     if (!enabled) return;
 
     const onPointerMove = (event: PointerEvent) => {
+      if (!visible) setVisible(true);
       const target = event.target as HTMLElement | null;
       const interactive = Boolean(
         target?.closest(
@@ -69,17 +77,17 @@ export default function PremiumCursor() {
       window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointerup", onPointerUp);
     };
-  }, [enabled]);
+  }, [enabled, visible]);
 
-  if (!enabled) return null;
+  if (!enabled || !visible) return null;
 
   const ringScale = cursor.interactive ? 1.35 : cursor.pressed ? 0.92 : 1;
-  const dotScale = cursor.pressed ? 0.7 : 1;
+  const dotScale = cursor.pressed ? 0.78 : 1;
 
   return (
     <>
       <div
-        className="pointer-events-none fixed z-[99999] h-10 w-10 rounded-full border border-blue-500/40 bg-blue-200/10 backdrop-blur-[1px] transition-transform duration-150 ease-out"
+        className={`premium-cursor-ring ${cursor.interactive ? "is-hover" : ""}`}
         style={{
           left: cursor.x,
           top: cursor.y,
@@ -87,7 +95,7 @@ export default function PremiumCursor() {
         }}
       />
       <div
-        className="pointer-events-none fixed z-[99999] h-2.5 w-2.5 rounded-full bg-gradient-to-r from-blue-700 to-indigo-500 shadow-[0_0_20px_rgba(59,130,246,0.55)] transition-transform duration-150 ease-out"
+        className={`premium-cursor ${cursor.interactive ? "is-hover" : ""} ${cursor.pressed ? "is-down" : ""}`}
         style={{
           left: cursor.x,
           top: cursor.y,

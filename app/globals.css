@@ -146,17 +146,17 @@
 
 /* Desktop-only premium cursor visuals */
 @media (hover: hover) and (pointer: fine) {
-  body {
+  body.cursor-premium-enabled {
     cursor: none;
   }
 
-  a,
-  button,
-  [role="button"],
-  input,
-  select,
-  textarea,
-  label {
+  body.cursor-premium-enabled a,
+  body.cursor-premium-enabled button,
+  body.cursor-premium-enabled [role="button"],
+  body.cursor-premium-enabled input,
+  body.cursor-premium-enabled select,
+  body.cursor-premium-enabled textarea,
+  body.cursor-premium-enabled label {
     cursor: none !important;
   }
 }
@@ -210,11 +210,14 @@
   left: 0;
   top: 0;
   transform: translate(-50%, -50%);
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 9999px;
   background: linear-gradient(135deg, #1d4ed8, #6366f1);
-  box-shadow: 0 0 0 1px rgb(255 255 255 / 70%), 0 8px 20px rgb(37 99 235 / 35%);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 80%),
+    0 8px 20px rgb(37 99 235 / 35%),
+    0 0 24px rgb(99 102 241 / 45%);
   pointer-events: none;
   z-index: 99999;
   transition: width 0.16s ease, height 0.16s ease, opacity 0.16s ease, transform 0.1s ease;
@@ -236,8 +239,8 @@
   left: 0;
   top: 0;
   transform: translate(-50%, -50%);
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: 9999px;
   border: 1px solid rgb(37 99 235 / 35%);
   background: rgb(191 219 254 / 10%);
