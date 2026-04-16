@@ -72,7 +72,7 @@ export default function BrandLoader() {
       <div className="flex flex-col items-center px-6">
         <div className="mb-5">
           <Image
-            src="/logo-cropped.png"
+            src="/logor.png"
             alt="Rise Infotech"
             width={236}
             height={46}

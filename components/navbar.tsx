@@ -81,11 +81,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
           <Image
-            src="/logo-cropped.png"
+            src="/logor.png"
             alt="Rise Infotech"
-            width={172}
-            height={33}
-            className="h-8 sm:h-9 md:h-10 w-auto"
+            width={320}
+            height={62}
+            className="h-8 sm:h-9 md:h-10 w-auto object-contain"
             sizes="(max-width: 640px) 140px, 172px"
             priority
           />
