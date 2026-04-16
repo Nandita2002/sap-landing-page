@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
     try {
       response = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
+        redirect: "follow",
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,10 +58,18 @@ export async function POST(req: NextRequest) {
     try {
       data = JSON.parse(text);
     } catch {
-      data = { status: "success", raw: text };
+      data = {
+        status: "error",
+        message:
+          "Apps Script did not return JSON. Verify deployment access and /exec URL.",
+        raw: text.slice(0, 400),
+      };
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(
+      data,
+      { status: data?.status === "success" ? 200 : 500 }
+    );
 
   } catch (err: unknown) {
     console.error("Proxy error:", err);
