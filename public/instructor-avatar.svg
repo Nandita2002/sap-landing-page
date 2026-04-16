@@ -1,0 +1,21 @@
+<svg width="640" height="800" viewBox="0 0 640 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Instructor portrait placeholder</title>
+  <desc id="desc">Abstract portrait illustration for instructor section</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#4338CA" />
+    </linearGradient>
+    <linearGradient id="shape" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DBEAFE" />
+      <stop offset="100%" stop-color="#BFDBFE" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="800" fill="url(#bg)" />
+  <circle cx="320" cy="280" r="118" fill="url(#shape)" />
+  <rect x="160" y="420" width="320" height="260" rx="36" fill="#EFF6FF" />
+  <rect x="226" y="510" width="188" height="20" rx="10" fill="#93C5FD" />
+  <rect x="202" y="548" width="236" height="16" rx="8" fill="#BFDBFE" />
+  <rect x="240" y="584" width="160" height="16" rx="8" fill="#BFDBFE" />
+  <text x="320" y="738" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600" fill="#DBEAFE">Instructor</text>
+</svg>

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const SAP = () => (
   <span className="text-blue-600 font-semibold">SAP</span>
@@ -43,11 +44,15 @@ export default function SAPFICOPage() {
             </p>
           </div>
 
-          <img
-            src="https://images.unsplash.com/photo-1554224154-26032ffc0d07"
-            alt="SAP FICO"
-            className="rounded-2xl shadow-lg w-full h-64 md:h-full object-cover"
-          />
+          <div className="rounded-2xl shadow-lg w-full h-64 md:h-full relative overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1554224154-26032ffc0d07"
+              alt="SAP FICO"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
         </div>
 
         {/* WHO CAN LEARN */}

@@ -1,7 +1,6 @@
 "use client";
 
 export default function Hero() {
-
   const scrollToConsultation = () => {
     if (typeof window === "undefined") return;
 
@@ -34,75 +33,66 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative bg-white overflow-hidden pt-14 pb-20 md:pt-16 md:pb-24">
+    <section className="relative overflow-hidden pt-16 pb-20 md:pt-20 md:pb-24">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-200/40 blur-3xl" />
+        <div className="absolute -bottom-16 right-0 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl" />
+      </div>
 
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white pointer-events-none" />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-5 text-center">
-
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-sm font-semibold px-5 py-2 rounded-full mb-5">
-          <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
-          Limited Seats • April Batch Filling Fast
+      <div className="relative z-10 max-w-5xl mx-auto px-5 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-5 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-6">
+          <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+          Premium SAP Training · April 2026 Cohort
         </div>
 
-        {/* 🔥 FIXED HEADING (2 lines only) */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6 max-w-3xl mx-auto">
-          Become a <span className="text-blue-600">SAP</span> MM Consultant in{" "}
-          <span className="text-blue-600">3 Months</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-6 max-w-4xl mx-auto">
+          Build a High-Value{" "}
+          <span className="bg-gradient-to-r from-blue-700 to-indigo-500 bg-clip-text text-transparent">
+            SAP Career
+          </span>{" "}
+          with Real Project Experience
         </h1>
 
-        {/* Subheading */}
-        <p className="text-gray-600 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl mx-auto">
-          Learn{" "}
-          <span className="text-blue-600 font-semibold">SAP</span>{" "}
-          S/4HANA MM with real-time projects, expert mentorship & 
-          placement support — even if you&rsquo;re starting from scratch.
+        <p className="text-slate-600 text-lg sm:text-xl leading-relaxed mb-10 max-w-3xl mx-auto">
+          Master SAP S/4HANA MM with expert-led sessions, live implementation
+          scenarios, and interview-focused mentorship designed for beginners and
+          working professionals.
         </p>
 
-        {/* CTA */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-5">
-
-          {/* Gradient CTA */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <button
             onClick={scrollToConsultation}
-            className="w-full sm:w-auto px-10 py-4 rounded-xl text-white font-semibold text-base shadow-lg 
-            bg-gradient-to-r from-blue-600 to-blue-500 
-            hover:from-blue-700 hover:to-blue-600 
-            active:scale-95 transition-all duration-200"
+            className="w-full sm:w-auto px-10 py-4 rounded-xl text-white font-semibold text-base shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
           >
-            Book Free Demo Class →
+            Book Free Demo Class
           </button>
 
-          {/* Secondary */}
           <button
             onClick={scrollToCourses}
-            className="w-full sm:w-auto px-10 py-4 rounded-xl border border-gray-300 text-gray-700 font-semibold text-base hover:bg-gray-50 active:scale-95 transition"
+            className="w-full sm:w-auto px-10 py-4 rounded-xl border border-slate-300 bg-white/90 text-slate-700 font-semibold text-base hover:bg-white active:scale-95 transition"
           >
             View Courses
           </button>
-
         </div>
 
-        {/* Micro Trust */}
-        <p className="text-sm text-gray-400 mb-8">
-          Limited slots available this week
+        <p className="text-sm text-slate-500 mb-8">
+          Limited slots available this month
         </p>
 
-        {/* Trust Pills */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <div className="bg-gray-50 border px-5 py-2.5 rounded-lg text-sm text-gray-600">
-            ⭐ 1000+ Students
-          </div>
-          <div className="bg-gray-50 border px-5 py-2.5 rounded-lg text-sm text-gray-600">
-            💼 Placement Support
-          </div>
-          <div className="bg-gray-50 border px-5 py-2.5 rounded-lg text-sm text-gray-600">
-            🧑‍🏫 Industry Experts
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
+          {[
+            "1000+ Students Trained",
+            "Placement & Interview Support",
+            "Mentors from Top MNCs",
+          ].map((item) => (
+            <div
+              key={item}
+              className="rounded-xl border border-slate-200 bg-white/90 px-4 py-3 text-sm font-medium text-slate-700 shadow-sm backdrop-blur"
+            >
+              {item}
+            </div>
+          ))}
         </div>
-
       </div>
     </section>
   );

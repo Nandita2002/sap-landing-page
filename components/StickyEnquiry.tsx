@@ -19,6 +19,10 @@ const StickyEnquiry: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<FormType>({ name: "", email: "", phone: "", message: "" });
+  const [toast, setToast] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     const check = () => {
@@ -37,11 +41,6 @@ const StickyEnquiry: React.FC = () => {
     return () => window.removeEventListener("openEnquiry", handler);
   }, []);
 
-  const [toast, setToast] = useState<{
-  type: "success" | "error";
-  message: string;
-} | null>(null);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = e.target.name as FieldName;
     setForm((prev) => ({ ...prev, [name]: e.target.value }));
@@ -57,27 +56,33 @@ const StickyEnquiry: React.FC = () => {
         body: JSON.stringify({ ...form, source: "sticky_form" }),
       });
       const data = await res.json();
-     if (data.status === "success") {
-  setToast({
-    type: "success",
-    message:
-      "You're all set! Our team will contact you shortly to guide you further.",
-  });
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to submit enquiry");
+      }
+      if (data.status === "success") {
+        setToast({
+          type: "success",
+          message:
+            "You're all set! Our team will contact you shortly to guide you further.",
+        });
 
-  setForm({ name: "", email: "", phone: "", message: "" });
-  setOpen(false);
-} else {
-  setToast({
-    type: "error",
-    message: data.message || "Something went wrong. Please try again.",
-  });
-}
+        setForm({ name: "", email: "", phone: "", message: "" });
+        setOpen(false);
+      } else {
+        setToast({
+          type: "error",
+          message: data.message || "Something went wrong. Please try again.",
+        });
+      }
 
-// Auto hide
-setTimeout(() => setToast(null), 3000);
+      setTimeout(() => setToast(null), 3000);
     } catch (error) {
       console.error(error);
-      alert("Something went wrong. Please try again.");
+      setToast({
+        type: "error",
+        message: "Something went wrong. Please try again.",
+      });
+      setTimeout(() => setToast(null), 3000);
     } finally {
       setLoading(false);
     }
@@ -91,22 +96,20 @@ setTimeout(() => setToast(null), 3000);
 
 
       {toast && (
-  <div className="fixed top-5 right-5 z-[99999] animate-[fadeIn_.3s_ease]">
-    <div
-      className={`px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2
+        <div className="fixed top-5 right-5 z-[99999] animate-[fadeIn_.3s_ease]">
+          <div
+            className={`px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2
         ${
           toast.type === "success"
             ? "bg-green-100 text-green-700 border border-green-200"
             : "bg-red-100 text-red-700 border border-red-200"
         }`}
-    >
-      <span>
-        {toast.type === "success" ? "✔" : "⚠"}
-      </span>
-      {toast.message}
-    </div>
-  </div>
-)}
+          >
+            <span>{toast.type === "success" ? "✔" : "⚠"}</span>
+            {toast.message}
+          </div>
+        </div>
+      )}
 
       <div className="fixed bottom-6 right-4 sm:right-6 z-[9999] flex flex-col items-end gap-3">
         {open && (

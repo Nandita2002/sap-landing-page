@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const courses = [
   {
@@ -38,80 +39,77 @@ export default function CoursesPage() {
   const router = useRouter();
 
   return (
-    
-    <div id="courses" className="min-h-screen px-4 py-14 bg-gradient-to-b from-white to-slate-50">
+    <section
+      id="courses"
+      className="relative min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-10 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
+        <div className="absolute bottom-8 right-0 h-60 w-60 rounded-full bg-indigo-200/40 blur-3xl" />
+      </div>
 
-      {/* Heading */}
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-3">
-        SAP ERP Courses
-      </h1>
+      <div className="relative max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wide text-blue-700 uppercase mb-4">
+            Specialized SAP Modules
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
+            Premium SAP ERP Courses
+          </h2>
+          <p className="text-center text-slate-600 max-w-2xl mx-auto">
+            Choose the right SAP module based on your career path and learn
+            through hands-on implementation projects.
+          </p>
+        </div>
 
-      <p className="text-center text-gray-500 mb-12">
-        Choose the right SAP module based on your career path
-      </p>
-
-      {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
-        {courses.map((course, index) => (
-          <div
-            key={index}
-            onClick={() => router.push(course.path)}
-            className="group cursor-pointer rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
-          >
-            {/* Image */}
-            <div className="overflow-hidden">
-              <img
-                src={course.image}
-                alt={course.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-grow">
-
-              <h2 className="text-lg font-semibold text-gray-900">
-                {course.title}
-              </h2>
-
-              <p className="text-sm text-gray-500 mb-2">
-                {course.subtitle}
-              </p>
-
-              {/* Info */}
-              <div className="text-xs text-gray-500 mb-3">
-                ⏱ {course.duration} • 🎯 {course.level}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {courses.map((course, index) => (
+            <div
+              key={index}
+              onClick={() => router.push(course.path)}
+              className="group cursor-pointer rounded-3xl overflow-hidden border border-slate-200 bg-white/90 shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:shadow-[0_18px_40px_rgba(37,99,235,0.15)] transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
+            >
+              <div className="overflow-hidden relative h-48">
+                <Image
+                  src={course.image}
+                  alt={course.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition duration-300"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
               </div>
 
-              {/* Description */}
-              <p className="text-sm text-gray-600 mb-6 min-h-[48px]">
-                {course.desc}
-              </p>
-
-              {/* ✅ Gradient Button */}
-              <Button
-                variant="gradient"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  router.push(course.path);
-                }}
-                className="mt-auto w-full px-6 py-2.5 text-sm"
-              >
-                Know More →
-              </Button>
-
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-slate-900">{course.title}</h3>
+                <p className="text-sm text-slate-500 mb-2">{course.subtitle}</p>
+                <div className="text-xs text-slate-500 mb-3">
+                  ⏱ {course.duration} • 🎯 {course.level}
+                </div>
+                <p className="text-sm text-slate-600 mb-6 min-h-[48px]">{course.desc}</p>
+                <Button
+                  variant="gradient"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(course.path);
+                  }}
+                  className="mt-auto w-full px-6 py-2.5 text-sm"
+                >
+                  View Full Syllabus
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* Explore More (linked to curriculum page) */}
-      <div className="text-center mt-14">
-        <Link href="/courses/curriculum" className="text-blue-600 hover:underline font-medium text-sm">
-          Explore more courses →
-        </Link>
+        <div className="text-center mt-14">
+          <Link
+            href="/courses/curriculum"
+            className="text-blue-700 hover:text-blue-800 hover:underline font-semibold text-sm"
+          >
+            Explore complete course curriculum →
+          </Link>
+        </div>
       </div>
-
-    </div>
+    </section>
   );
 }

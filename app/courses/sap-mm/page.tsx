@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const SAP = () => <span className="text-blue-600 font-semibold">SAP</span>;
 
@@ -51,11 +52,13 @@ export default function SAPMMPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-md">
-            <img
+          <div className="rounded-2xl overflow-hidden aspect-[4/3] shadow-md relative">
+            <Image
               src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80"
-              className="w-full h-full object-cover"
               alt="SAP MM"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
 
