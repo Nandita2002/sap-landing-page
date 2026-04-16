@@ -64,12 +64,12 @@ export default function BrandLoader() {
       <div className="flex flex-col items-center px-6">
         <div className="mb-5">
           <Image
-            src="/logor.png"
+            src="/logo.png"
             alt="Rise Infotech"
             width={240}
             height={46}
             priority
-            className="h-auto w-[220px] sm:w-[240px] object-contain"
+            className="h-auto w-[128px] sm:w-[140px] object-contain"
           />
         </div>
         <p className="mt-1 text-slate-500 text-sm">Loading your experience...</p>
