@@ -82,20 +82,20 @@ export default function Navbar() {
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
           <div className="flex items-center gap-2.5 md:gap-3">
             <Image
-              src="/logor.png"
-              alt="Rise Infotech"
-              width={168}
-              height={32}
-              className="h-5 min-[390px]:h-6 w-auto md:hidden"
+              src="/logo.png"
+              alt="Rise Infotech Logo"
+              width={56}
+              height={56}
+              className="h-11 w-11 min-[390px]:h-12 min-[390px]:w-12 rounded-xl border border-slate-200/80 bg-white shadow-sm md:hidden"
               priority
             />
-            <div className="hidden md:flex items-center gap-3">
+            <div className="md:flex items-center gap-3">
               <Image
                 src="/logo.png"
                 alt="Rise Infotech Logo"
                 width={44}
                 height={44}
-                className="h-11 w-11 rounded-xl"
+                className="hidden md:block h-11 w-11 rounded-xl"
                 priority
               />
               <div className="leading-tight">
