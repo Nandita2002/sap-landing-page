@@ -10,6 +10,7 @@ import Navbar from "@/components/navbar";
 import StickyEnquiry from "@/components/StickyEnquiry";
 import Consultation from "@/components/consultation";
 import CoursesPage from "./courses/page";
+import PremiumCursor from "@/components/PremiumCursor";
 export const metadata = {
   title: "SAP Training in India | SAP MM, FICO, ABAP Course",
   description:
@@ -37,6 +38,7 @@ export default function Home() {
       />
 
       <Popup />
+      <PremiumCursor />
 
       {/* ✅ FIXED NAVBAR */}
       <Navbar />

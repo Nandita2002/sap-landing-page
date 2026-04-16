@@ -111,9 +111,15 @@ const StickyEnquiry: React.FC = () => {
         </div>
       )}
 
-      <div className="fixed bottom-6 right-4 sm:right-6 z-[9999] flex flex-col items-end gap-3">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end gap-3 max-w-[calc(100vw-1rem)]">
         {open && (
-          <div className={`bg-white border border-slate-200 overflow-hidden shadow-xl ${isMobile ? "fixed bottom-0 left-0 right-0 w-full rounded-t-2xl rounded-b-none" : "w-[300px] rounded-2xl"}`}>
+          <div
+            className={`bg-white border border-slate-200 overflow-hidden shadow-xl ${
+              isMobile
+                ? "fixed bottom-0 left-0 right-0 w-full rounded-t-2xl rounded-b-none"
+                : "w-[300px] rounded-2xl"
+            }`}
+          >
             <div className="bg-blue-600 px-4 py-3 flex justify-between items-center">
               <div>
                 <p className="text-[10px] font-semibold text-blue-200 uppercase tracking-widest mb-0.5">Free demo · April batch</p>
@@ -121,8 +127,8 @@ const StickyEnquiry: React.FC = () => {
               </div>
               <button onClick={() => setOpen(false)} className="bg-white/15 hover:bg-white/25 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition">✕</button>
             </div>
-            <div className="p-3 flex flex-col gap-2.5">
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:grid-cols-2">
+            <div className={`p-3 flex flex-col gap-2.5 ${isMobile ? "max-h-[78vh] overflow-y-auto pb-24" : ""}`}>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <div>
                   <Label>Name</Label>
                   <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="John Doe" className={inputBase} />
@@ -155,7 +161,11 @@ const StickyEnquiry: React.FC = () => {
           </div>
         )}
         {!open && (
-          <button  suppressHydrationWarning  onClick={() => setOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg transition flex items-center gap-2">
+          <button
+            suppressHydrationWarning
+            onClick={() => setOpen(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg transition flex items-center gap-2"
+          >
             ✎ Enquire now
           </button>
         )}

@@ -83,7 +83,7 @@ const FAQ = () => {
                 <div
                   className={`px-5 transition-all duration-300 ease-in-out ${
                     isOpen
-                      ? "max-h-40 pb-5 opacity-100"
+                      ? "max-h-72 pb-5 opacity-100"
                       : "max-h-0 opacity-0"
                   } overflow-hidden`}
                 >

@@ -41,7 +41,7 @@ export default function CoursesPage() {
   return (
     <section
       id="courses"
-      className="relative min-h-screen px-4 py-16 md:py-20 bg-gradient-to-b from-white to-slate-50"
+      className="relative min-h-screen px-4 py-14 md:py-20 bg-gradient-to-b from-white to-slate-50"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
@@ -49,11 +49,11 @@ export default function CoursesPage() {
       </div>
 
       <div className="relative max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wide text-blue-700 uppercase mb-4">
+        <div className="text-center mb-10 md:mb-12">
+          <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] sm:text-xs font-semibold tracking-wide text-blue-700 uppercase mb-4">
             Specialized SAP Modules
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
             Premium SAP ERP Courses
           </h2>
           <p className="text-center text-slate-600 max-w-2xl mx-auto">
@@ -62,14 +62,14 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 items-stretch">
           {courses.map((course, index) => (
             <div
               key={index}
               onClick={() => router.push(course.path)}
-              className="group cursor-pointer rounded-3xl overflow-hidden border border-slate-200 bg-white/90 shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:shadow-[0_18px_40px_rgba(37,99,235,0.15)] transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
+              className="group cursor-pointer rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 bg-white/90 shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:shadow-[0_18px_40px_rgba(37,99,235,0.15)] transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
             >
-              <div className="overflow-hidden relative h-48">
+              <div className="overflow-hidden relative h-44 sm:h-48">
                 <Image
                   src={course.image}
                   alt={course.title}
@@ -79,13 +79,13 @@ export default function CoursesPage() {
                 />
               </div>
 
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-slate-900">{course.title}</h3>
+              <div className="p-5 sm:p-6 flex flex-col flex-grow">
+                <h3 className="text-lg sm:text-xl font-bold text-slate-900">{course.title}</h3>
                 <p className="text-sm text-slate-500 mb-2">{course.subtitle}</p>
                 <div className="text-xs text-slate-500 mb-3">
                   ⏱ {course.duration} • 🎯 {course.level}
                 </div>
-                <p className="text-sm text-slate-600 mb-6 min-h-[48px]">{course.desc}</p>
+                <p className="text-sm text-slate-600 mb-5 min-h-[44px]">{course.desc}</p>
                 <Button
                   variant="gradient"
                   onClick={(e) => {

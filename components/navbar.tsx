@@ -75,7 +75,7 @@ export default function Navbar() {
           : "bg-white/35 backdrop-blur-xl"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-6">
+      <div className="max-w-7xl mx-auto px-4 h-14 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage">
           <div className="flex items-center gap-2.5">
             <Image
@@ -88,7 +88,9 @@ export default function Navbar() {
             />
             <div className="leading-tight">
               <p className="text-sm font-semibold text-slate-900">Rise Infotech</p>
-              <p className="text-[11px] text-slate-500">SAP Career Academy</p>
+              <p className="hidden min-[360px]:block text-[11px] text-slate-500">
+                SAP Career Academy
+              </p>
             </div>
           </div>
         </Link>
@@ -132,7 +134,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           title="Toggle menu"
-          className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-slate-200 bg-white/80 hover:bg-white transition"
+          className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl border border-slate-200 bg-white/85 hover:bg-white transition"
         >
           <div className="relative w-6 h-5">
             <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "rotate-45 top-2" : "top-0"}`} />
@@ -149,7 +151,7 @@ export default function Navbar() {
         />
 
         <div
-          className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transform ${
+          className={`absolute top-0 right-0 h-full w-[88%] max-w-[320px] bg-white shadow-2xl transform ${
             menuOpen ? "translate-x-0" : "translate-x-full"
           } transition`}
         >

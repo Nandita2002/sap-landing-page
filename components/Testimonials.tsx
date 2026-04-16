@@ -115,12 +115,12 @@ export default function Testimonials() {
       </div>
 
       <div className="relative mt-10">
-        <div className="absolute left-0 top-0 h-full w-16 sm:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 h-full w-16 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-8 sm:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-8 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
         <div
           ref={sliderRef}
-          className="flex gap-5 overflow-x-auto px-16 sm:px-20 pb-6 pt-4 cursor-grab active:cursor-grabbing select-none"
+          className="flex gap-4 sm:gap-5 overflow-x-auto px-5 sm:px-20 pb-6 pt-4 cursor-grab active:cursor-grabbing select-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={handleMouseLeave}
@@ -134,11 +134,11 @@ export default function Testimonials() {
               <div
                 key={i}
                 className={`t-card flex-shrink-0 transition-all duration-300 ${
-                  isActive ? "scale-[1.03] opacity-100" : "scale-[0.94] opacity-60"
+                  isActive ? "sm:scale-[1.03] opacity-100" : "sm:scale-[0.94] opacity-75"
                 }`}
               >
                 <div
-                  className={`bg-white rounded-2xl p-6 flex flex-col gap-4 w-[260px] sm:w-[300px] md:w-[320px] h-[240px] transition-all duration-300 ${
+                  className={`bg-white rounded-2xl p-5 sm:p-6 flex flex-col gap-4 w-[85vw] max-w-[320px] sm:w-[300px] md:w-[320px] min-h-[240px] transition-all duration-300 ${
                     isActive
                       ? "border border-blue-200 shadow-[0_10px_28px_rgba(37,99,235,0.14)]"
                       : "border border-gray-100 shadow-sm"
