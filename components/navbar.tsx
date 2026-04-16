@@ -130,7 +130,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           title="Toggle menu"
-          className="md:hidden relative w-11 h-11 flex items-center justify-center transition"
+          className="md:hidden relative w-11 h-11 flex items-center justify-center p-0 m-0 bg-transparent border-0 shadow-none rounded-none appearance-none focus:outline-none transition"
         >
           <div className="relative w-5 h-4.5">
             <span
