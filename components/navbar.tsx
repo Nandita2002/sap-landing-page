@@ -80,33 +80,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
-          <div className="flex items-center gap-2.5 md:gap-3">
-            <div className="relative h-11 w-11 min-[390px]:h-12 min-[390px]:w-12 rounded-xl border border-slate-200/80 bg-white shadow-sm overflow-hidden md:hidden">
-              <Image
-                src="/logo.png"
-                alt="Rise Infotech Logo"
-                fill
-                className="object-contain scale-[1.8]"
-                sizes="48px"
-                priority
-              />
-            </div>
-            <div className="md:flex items-center gap-3">
-              <div className="relative hidden md:block h-11 w-11 rounded-xl overflow-hidden border border-slate-200/80 bg-white">
-                <Image
-                  src="/logo.png"
-                  alt="Rise Infotech Logo"
-                  fill
-                  className="object-contain scale-[1.75]"
-                  sizes="44px"
-                  priority
-                />
-              </div>
-              <div className="leading-tight">
-                <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
-                <p className="text-[12px] text-slate-500">SAP Career Academy</p>
-              </div>
-            </div>
+          <div className="rounded-xl border border-slate-200/80 bg-white/95 px-2 py-1 shadow-sm">
+            <Image
+              src="/logor.png"
+              alt="Rise Infotech"
+              width={188}
+              height={36}
+              className="h-6 min-[390px]:h-7 md:h-8 w-auto"
+              priority
+            />
           </div>
         </Link>
 
