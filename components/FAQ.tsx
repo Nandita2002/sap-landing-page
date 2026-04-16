@@ -43,65 +43,58 @@ const FAQ = () => {
   };
 
   return (
-    <section  id="faq" className="py-20 px-4 bg-gray-50">
+    <section id="faq" className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white">
       <div className="max-w-3xl mx-auto">
-        
-        {/* Heading */}
         <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">
+          <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wide text-blue-700 uppercase mb-4">
+            Frequently Asked Questions
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
             Frequently Asked Questions
           </h2>
 
-          <p className="mt-3 text-gray-600">
+          <p className="mt-3 text-slate-600">
             Everything you need to know before getting started.
           </p>
         </div>
 
-        {/* FAQ List */}
         <div className="mt-10 space-y-4">
-          
           {faqs.map((faq, index) => {
             const isOpen = activeIndex === index;
 
             return (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden transition"
+                className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden transition hover:shadow-md"
               >
-                
-                {/* Question */}
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full flex items-center justify-between p-5 text-left font-semibold"
+                  className="w-full flex items-center justify-between p-5 text-left font-semibold text-slate-800"
                 >
                   {faq.question}
 
                   <ChevronDown
-                    className={`transition-transform ${
+                    className={`transition-transform text-blue-600 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                   />
                 </button>
 
-                {/* Answer */}
                 <div
                   className={`px-5 transition-all duration-300 ease-in-out ${
                     isOpen
-                      ? "max-h-40 pb-5 opacity-100"
+                      ? "max-h-72 pb-5 opacity-100"
                       : "max-h-0 opacity-0"
                   } overflow-hidden`}
                 >
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-slate-600 text-sm leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
-
               </div>
             );
           })}
-
         </div>
-
       </div>
     </section>
   );

@@ -41,6 +41,9 @@ export default function FreeConsultationForm() {
         body: JSON.stringify({ ...form, source: "consultation" }),
       });
       const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to submit form");
+      }
       if (data.status === "success") {
         setSuccess(true);
         setForm({ name: "", email: "", phone: "", course: "", goal: "" });
@@ -55,13 +58,20 @@ export default function FreeConsultationForm() {
   };
 
   return (
-    <section id="consultation" className="py-14 md:py-20 px-4 bg-gradient-to-b from-white to-blue-50">
+    <section id="consultation" className="py-14 md:py-20 px-4 bg-gradient-to-b from-white to-blue-50/70 scroll-mt-24">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-6 md:mb-10 px-2">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">Get Your Free Consultation</h2>
-          <p className="text-gray-500 mt-2 text-sm md:text-base">Talk to SAP experts & get a clear career roadmap</p>
+          <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wide text-blue-700 uppercase mb-4">
+            Career Guidance Session
+          </span>
+          <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            Get Your Free Consultation
+          </h2>
+          <p className="text-slate-600 mt-2 text-sm md:text-base">
+            Talk to SAP experts and get a clear roadmap tailored to your goals.
+          </p>
         </div>
-        <div className="bg-white rounded-2xl shadow-xl p-5 md:p-8 border border-gray-100">
+        <div className="bg-white/95 rounded-3xl shadow-[0_16px_40px_rgba(15,23,42,0.08)] p-5 md:p-8 border border-blue-100 backdrop-blur">
           {success && (
             <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-center text-sm font-medium">
               ✅ Submitted successfully! Our team will contact you shortly.
@@ -70,17 +80,17 @@ export default function FreeConsultationForm() {
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             <div>
               <label htmlFor="name" className="text-sm font-medium text-gray-600 mb-1 block">Full Name</label>
-              <input id="name" name="name" value={form.name} onChange={handleChange} placeholder="Enter your name" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input id="name" name="name" value={form.name} onChange={handleChange} placeholder="Enter your name" required className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
               {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
             </div>
             <div>
               <label htmlFor="email" className="text-sm font-medium text-gray-600 mb-1 block">Email Address</label>
-              <input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="Enter your email" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input id="email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="Enter your email" required className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div>
               <label htmlFor="phone" className="text-sm font-medium text-gray-600 mb-1 block">Phone Number</label>
-              <input id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder="Enter your phone" className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input id="phone" name="phone" type="tel" maxLength={10} value={form.phone} onChange={handleChange} placeholder="Enter your phone" required className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
             <div>

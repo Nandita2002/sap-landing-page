@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/navbar"; 
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const SAP = () => (
   <span className="text-blue-600 font-semibold">SAP</span>
@@ -38,12 +39,15 @@ export default function SAPSDPage() {
             </p>
           </div>
 
-          {/* ✅ FIXED IMAGE */}
-          <img
-            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d"
-            alt="SAP SD"
-            className="rounded-2xl shadow-lg w-full h-64 md:h-full object-cover"
-          />
+          <div className="rounded-2xl shadow-lg w-full h-64 md:h-full relative overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d"
+              alt="SAP SD"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
         </div>
 
         {/* WHO CAN LEARN */}

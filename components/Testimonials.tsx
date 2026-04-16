@@ -1,11 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-
-const handleEnquiry = () => {
-  const event = new CustomEvent("openEnquiry");
-  window.dispatchEvent(event);
-};
+import Image from "next/image";
 
 type Testimonial = {
   name: string;
@@ -96,19 +92,18 @@ export default function Testimonials() {
     name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase();
 
   return (
-    <section className="bg-white py-14 overflow-hidden">
-
-      {/* HEADER */}
+    <section className="bg-gradient-to-b from-white to-slate-50 py-16 overflow-hidden">
       <div className="text-center max-w-2xl mx-auto px-5">
-        <h2 className="text-[clamp(22px,4vw,36px)] font-medium text-[#0a1628] leading-tight">
+        <h2 className="text-[clamp(24px,4vw,38px)] font-semibold text-[#0a1628] leading-tight">
           Trusted by <span className="text-blue-600">1000+ students</span>
         </h2>
 
-        <div className="mt-4 inline-flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 bg-white">
-          <img
+        <div className="mt-4 inline-flex items-center gap-2 border border-blue-100 rounded-full px-4 py-2 bg-white shadow-sm">
+          <Image
             src="https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
             alt="Google"
-            className="w-4 h-4"
+            width={16}
+            height={16}
           />
           <span className="text-amber-400 text-sm tracking-wide">★★★★★</span>
           <span className="text-sm font-medium text-[#0a1628]">4.9 / 5 Google rating</span>
@@ -119,16 +114,13 @@ export default function Testimonials() {
         </p>
       </div>
 
-      {/* SLIDER */}
       <div className="relative mt-10">
-
-        {/* Fade overlays */}
-        <div className="absolute left-0 top-0 h-full w-16 sm:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 h-full w-16 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 h-full w-8 sm:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 h-full w-8 sm:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
         <div
           ref={sliderRef}
-          className="flex gap-5 overflow-x-auto px-16 sm:px-20 pb-6 pt-4 cursor-grab active:cursor-grabbing select-none"
+          className="flex gap-4 sm:gap-5 overflow-x-auto px-5 sm:px-20 pb-6 pt-4 cursor-grab active:cursor-grabbing select-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={handleMouseLeave}
@@ -142,17 +134,16 @@ export default function Testimonials() {
               <div
                 key={i}
                 className={`t-card flex-shrink-0 transition-all duration-300 ${
-                  isActive ? "scale-[1.03] opacity-100" : "scale-[0.94] opacity-60"
+                  isActive ? "sm:scale-[1.03] opacity-100" : "sm:scale-[0.94] opacity-75"
                 }`}
               >
                 <div
-                  className={`bg-white rounded-2xl p-6 flex flex-col gap-4 w-[260px] sm:w-[300px] md:w-[320px] h-[240px] transition-all duration-300 ${
+                  className={`bg-white rounded-2xl p-5 sm:p-6 flex flex-col gap-4 w-[85vw] max-w-[320px] sm:w-[300px] md:w-[320px] min-h-[240px] transition-all duration-300 ${
                     isActive
-                      ? "border border-blue-200 shadow-[0_4px_20px_rgba(37,99,235,0.08)]"
-                      : "border border-gray-100"
+                      ? "border border-blue-200 shadow-[0_10px_28px_rgba(37,99,235,0.14)]"
+                      : "border border-gray-100 shadow-sm"
                   }`}
                 >
-                  {/* Stars */}
                 <div className="flex gap-1">
   {Array.from({ length: 5 }).map((_, j) => (
     <svg
@@ -166,12 +157,10 @@ export default function Testimonials() {
   ))}
 </div>
 
-                  {/* Review */}
                   <p className="text-sm text-gray-500 leading-relaxed flex-1 line-clamp-4">
                     &quot;{item.review}&quot;
                   </p>
 
-                  {/* Reviewer */}
                   <div className="flex items-center gap-3 pt-3 border-t border-gray-100 mt-auto">
                     <div className="w-9 h-9 rounded-full bg-blue-50 text-blue-600 text-xs font-medium flex items-center justify-center flex-shrink-0">
                       {getInitials(item.name)}
@@ -188,30 +177,29 @@ export default function Testimonials() {
         </div>
       </div>
 
-   {/* CTA */}
-<div className="mt-10 text-center px-5">
-  <a
-    href="https://www.google.com/search?sca_esv=81978db0d0913d93&rlz=1C1YTUH_enIN1060IN1060&sxsrf=ANbL-n7os2l-0uk3ejOKgDSBaJQIjKdvw:1776073334264&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZxCFEPkTRWInxxXkfUhG9fyS5WBE_VsfODKz4VXXcICT4ibXqZKceNQWCESWxiBtd8xv-VD0nYopIM2aKHc74-qEyty&q=Rise+Infotech+Reviews&sa=X&ved=2ahUKEwjXhLzhxOqTAxUKU2wGHRMnBvQQ0bkNegQINxAH&biw=1536&bih=730&dpr=1.25"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-medium transition-all hover:-translate-y-0.5"
-  >
-    View more reviews
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-      <path
-        d="M3 8h10M9 4l4 4-4 4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </a>
+      <div className="mt-10 text-center px-5">
+        <a
+          href="https://www.google.com/search?sca_esv=81978db0d0913d93&rlz=1C1YTUH_enIN1060IN1060&sxsrf=ANbL-n7os2l-0uk3ejOKgDSBaJQIjKdvw:1776073334264&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZxCFEPkTRWInxxXkfUhG9fyS5WBE_VsfODKz4VXXcICT4ibXqZKceNQWCESWxiBtd8xv-VD0nYopIM2aKHc74-qEyty&q=Rise+Infotech+Reviews&sa=X&ved=2ahUKEwjXhLzhxOqTAxUKU2wGHRMnBvQQ0bkNegQINxAH&biw=1536&bih=730&dpr=1.25"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 text-white px-7 py-3 rounded-xl text-sm font-medium transition-all hover:-translate-y-0.5 shadow-[0_10px_24px_rgba(37,99,235,0.2)]"
+        >
+          View more reviews
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
 
-  <p className="text-xs text-gray-400 mt-2">
-    See what our students are saying
-  </p>
-</div>
+        <p className="text-xs text-gray-400 mt-2">
+          See what our students are saying
+        </p>
+      </div>
 
     </section>
   );

@@ -49,24 +49,24 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.99 0.005 250);
+  --foreground: oklch(0.2 0.02 250);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.2 0.02 250);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.5 0.2 262);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.96 0.01 256);
+  --secondary-foreground: oklch(0.24 0.02 256);
+  --muted: oklch(0.96 0.01 256);
+  --muted-foreground: oklch(0.48 0.02 256);
+  --accent: oklch(0.95 0.02 257);
+  --accent-foreground: oklch(0.24 0.02 257);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.9 0.015 252);
+  --input: oklch(0.9 0.015 252);
+  --ring: oklch(0.68 0.13 255);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -122,7 +122,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground cursor-default;
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 10% 0%, rgb(219 234 254 / 50%), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgb(224 231 255 / 45%), transparent 35%);
+    min-height: 100vh;
   }
 
   button,
@@ -132,6 +136,28 @@
   html {
     @apply font-sans;
     scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: rgb(59 130 246 / 25%);
+    color: rgb(15 23 42);
+  }
+}
+
+/* Desktop-only premium cursor visuals */
+@media (hover: hover) and (pointer: fine) {
+  body.cursor-premium-enabled {
+    cursor: none;
+  }
+
+  body.cursor-premium-enabled a,
+  body.cursor-premium-enabled button,
+  body.cursor-premium-enabled [role="button"],
+  body.cursor-premium-enabled input,
+  body.cursor-premium-enabled select,
+  body.cursor-premium-enabled textarea,
+  body.cursor-premium-enabled label {
+    cursor: none !important;
   }
 }
 
@@ -166,4 +192,109 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+@keyframes cursorPulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.25);
+    opacity: 0.05;
+  }
+}
+
+.premium-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #1d4ed8, #6366f1);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 80%),
+    0 8px 20px rgb(37 99 235 / 35%),
+    0 0 24px rgb(99 102 241 / 45%);
+  pointer-events: none;
+  z-index: 99999;
+  transition: width 0.16s ease, height 0.16s ease, opacity 0.16s ease, transform 0.1s ease;
+}
+
+.premium-cursor.is-hover {
+  width: 22px;
+  height: 22px;
+  opacity: 0.9;
+}
+
+.premium-cursor.is-down {
+  width: 10px;
+  height: 10px;
+}
+
+.premium-cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid rgb(37 99 235 / 35%);
+  background: rgb(191 219 254 / 10%);
+  pointer-events: none;
+  z-index: 99998;
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  animation: cursorPulse 1.2s ease-in-out infinite alternate;
+}
+
+.premium-cursor-ring.is-hover {
+  width: 52px;
+  height: 52px;
+  border-color: rgb(79 70 229 / 40%);
+  background: rgb(165 180 252 / 14%);
+}
+
+@keyframes loaderGlowPulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0.1;
+  }
+}
+
+@keyframes loaderLogoFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
+@keyframes loaderTrack {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.brand-loader-glow {
+  animation: loaderGlowPulse 1s ease-in-out infinite alternate;
+}
+
+.brand-loader-logo {
+  animation: loaderLogoFloat 1.2s ease-in-out infinite;
+}
+
+.brand-loader-progress {
+  animation: loaderTrack 1.2s ease-out forwards;
 }

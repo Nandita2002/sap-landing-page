@@ -70,6 +70,9 @@ const Popup = () => {
         body: JSON.stringify({ ...form, source: "popup" }),
       });
       const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to submit enquiry");
+      }
       if (data.status === "success") {
         setSuccess(true);
         setForm({ name: "", email: "", phone: "", message: "" });
@@ -100,7 +103,7 @@ const Popup = () => {
           {success ? (
             <div className="text-center py-6">
               <h3 className="text-lg font-bold text-green-600 mb-2">🚀 First step done!</h3>
-              <p className="text-sm text-gray-600">We&quot;ll contact you shortly.</p>
+              <p className="text-sm text-gray-600">We&apos;ll contact you shortly.</p>
             </div>
           ) : (
             <div className="space-y-4">

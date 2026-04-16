@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import FloatingWidget from "@/components/FloatingWidget";
-import TopBanner from "@/components/TopBanner";
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+import PremiumCursor from "@/components/PremiumCursor";
+import BrandLoader from "@/components/BrandLoader";
+ 
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,14 +17,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL("https://riseinfotech.in"),
   title: "SAP Training | Rise Infotech",
   description: "SAP training with live demos...",
- 
   icons: {
-    icon: "favicon/.ico",
-    shortcut: "/logo.ico",
-    apple: "/logo.ico",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 
   keywords: [
@@ -46,7 +46,7 @@ export const metadata = {
     siteName: "Rise Infotech",
     images: [
       {
-        url: "/og-image.png", // add later
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
       },
@@ -60,7 +60,7 @@ export const metadata = {
     title: "SAP Training | Rise Infotech",
     description:
       "Join SAP training with live demos and real-time projects.",
-    images: ["/og-image.png"],
+    images: ["/og-image.svg"],
   },
 
   robots: {
@@ -77,10 +77,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
-    ><body className="min-h-full flex flex-col">
-  {children}
-</body>
+      className={cn(
+        "h-full",
+        "antialiased",
+        geistSans.variable,
+        geistMono.variable,
+        "font-sans",
+        inter.variable
+      )}
+    >
+      <body className="min-h-full flex flex-col">
+        <BrandLoader />
+        <PremiumCursor />
+        {children}
+      </body>
     </html>
   );
 }

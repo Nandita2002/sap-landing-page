@@ -57,7 +57,7 @@ const Instructor = () => {
               <div className="absolute top-5 left-5 right-[-12px] bottom-[-12px] sm:right-[-20px] sm:bottom-[-20px] bg-blue-50 border border-blue-200 rounded-2xl" />
 
               <div className="relative rounded-2xl overflow-hidden border border-blue-100 shadow-xl">
-                <div className="relative w-full aspect-[4/5] bg-blue-50">
+                <div className="relative w-full aspect-[4/5] bg-gradient-to-br from-blue-50 to-indigo-50">
                   <Image
                     src="/instructor.png"
                     alt="Kumaresh Bidari - SAP Instructor"

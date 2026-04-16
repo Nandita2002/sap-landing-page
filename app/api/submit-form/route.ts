@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL!; // 🔥 move to env
+const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL;
 
 export async function POST(req: NextRequest) {
   try {
+    if (!APPS_SCRIPT_URL) {
+      return NextResponse.json(
+        { status: "error", message: "APPS_SCRIPT_URL is not configured" },
+        { status: 500 }
+      );
+    }
+
     const body = await req.json();
 
-    // 🔥 Basic validation (important)
     if (!body.name || !body.phone) {
       return NextResponse.json(
         { status: "error", message: "Missing required fields" },
@@ -14,7 +20,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 🔥 Timeout controller (prevents hanging)
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
 
@@ -32,7 +37,6 @@ export async function POST(req: NextRequest) {
       clearTimeout(timeout);
     }
 
-    // 🔥 Handle HTTP errors
     if (!response.ok) {
       return NextResponse.json(
         {
@@ -45,7 +49,6 @@ export async function POST(req: NextRequest) {
 
     const text = await response.text();
 
-    // 🔥 Safe JSON parsing
     let data;
     try {
       data = JSON.parse(text);
@@ -55,21 +58,21 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(data);
 
- } catch (err: unknown) {
-  console.error("Proxy error:", err);
+  } catch (err: unknown) {
+    console.error("Proxy error:", err);
 
-  let message = "Unknown error";
+    let message = "Unknown error";
 
-  if (err instanceof Error) {
-    message = err.message;
+    if (err instanceof Error) {
+      message = err.message;
+    }
+
+    return NextResponse.json(
+      {
+        status: "error",
+        message,
+      },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json(
-    {
-      status: "error",
-      message,
-    },
-    { status: 500 }
-  );
-}
 }

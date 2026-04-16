@@ -19,6 +19,10 @@ const StickyEnquiry: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState<FormType>({ name: "", email: "", phone: "", message: "" });
+  const [toast, setToast] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     const check = () => {
@@ -37,10 +41,15 @@ const StickyEnquiry: React.FC = () => {
     return () => window.removeEventListener("openEnquiry", handler);
   }, []);
 
-  const [toast, setToast] = useState<{
-  type: "success" | "error";
-  message: string;
-} | null>(null);
+  useEffect(() => {
+    const hideOnMobileMenuOpen = () => {
+      if (window.innerWidth < 768) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("mobileMenuToggle", hideOnMobileMenuOpen);
+    return () => window.removeEventListener("mobileMenuToggle", hideOnMobileMenuOpen);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = e.target.name as FieldName;
@@ -57,27 +66,33 @@ const StickyEnquiry: React.FC = () => {
         body: JSON.stringify({ ...form, source: "sticky_form" }),
       });
       const data = await res.json();
-     if (data.status === "success") {
-  setToast({
-    type: "success",
-    message:
-      "You're all set! Our team will contact you shortly to guide you further.",
-  });
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to submit enquiry");
+      }
+      if (data.status === "success") {
+        setToast({
+          type: "success",
+          message:
+            "You're all set! Our team will contact you shortly to guide you further.",
+        });
 
-  setForm({ name: "", email: "", phone: "", message: "" });
-  setOpen(false);
-} else {
-  setToast({
-    type: "error",
-    message: data.message || "Something went wrong. Please try again.",
-  });
-}
+        setForm({ name: "", email: "", phone: "", message: "" });
+        setOpen(false);
+      } else {
+        setToast({
+          type: "error",
+          message: data.message || "Something went wrong. Please try again.",
+        });
+      }
 
-// Auto hide
-setTimeout(() => setToast(null), 3000);
+      setTimeout(() => setToast(null), 3000);
     } catch (error) {
       console.error(error);
-      alert("Something went wrong. Please try again.");
+      setToast({
+        type: "error",
+        message: "Something went wrong. Please try again.",
+      });
+      setTimeout(() => setToast(null), 3000);
     } finally {
       setLoading(false);
     }
@@ -91,26 +106,30 @@ setTimeout(() => setToast(null), 3000);
 
 
       {toast && (
-  <div className="fixed top-5 right-5 z-[99999] animate-[fadeIn_.3s_ease]">
-    <div
-      className={`px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2
+        <div className="fixed top-5 right-5 z-[99999] animate-[fadeIn_.3s_ease]">
+          <div
+            className={`px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2
         ${
           toast.type === "success"
             ? "bg-green-100 text-green-700 border border-green-200"
             : "bg-red-100 text-red-700 border border-red-200"
         }`}
-    >
-      <span>
-        {toast.type === "success" ? "✔" : "⚠"}
-      </span>
-      {toast.message}
-    </div>
-  </div>
-)}
+          >
+            <span>{toast.type === "success" ? "✔" : "⚠"}</span>
+            {toast.message}
+          </div>
+        </div>
+      )}
 
-      <div className="fixed bottom-6 right-4 sm:right-6 z-[9999] flex flex-col items-end gap-3">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9999] flex flex-col items-end gap-3 max-w-[calc(100vw-1rem)]">
         {open && (
-          <div className={`bg-white border border-slate-200 overflow-hidden shadow-xl ${isMobile ? "fixed bottom-0 left-0 right-0 w-full rounded-t-2xl rounded-b-none" : "w-[300px] rounded-2xl"}`}>
+          <div
+            className={`bg-white border border-slate-200 overflow-hidden shadow-xl ${
+              isMobile
+                ? "fixed bottom-0 left-0 right-0 w-full rounded-t-2xl rounded-b-none"
+                : "w-[300px] rounded-2xl"
+            }`}
+          >
             <div className="bg-blue-600 px-4 py-3 flex justify-between items-center">
               <div>
                 <p className="text-[10px] font-semibold text-blue-200 uppercase tracking-widest mb-0.5">Free demo · April batch</p>
@@ -118,8 +137,8 @@ setTimeout(() => setToast(null), 3000);
               </div>
               <button onClick={() => setOpen(false)} className="bg-white/15 hover:bg-white/25 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition">✕</button>
             </div>
-            <div className="p-3 flex flex-col gap-2.5">
-              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:grid-cols-2">
+            <div className={`p-3 flex flex-col gap-2.5 ${isMobile ? "max-h-[78vh] overflow-y-auto pb-24" : ""}`}>
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <div>
                   <Label>Name</Label>
                   <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="John Doe" className={inputBase} />
@@ -152,7 +171,11 @@ setTimeout(() => setToast(null), 3000);
           </div>
         )}
         {!open && (
-          <button  suppressHydrationWarning  onClick={() => setOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg transition flex items-center gap-2">
+          <button
+            suppressHydrationWarning
+            onClick={() => setOpen(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg transition flex items-center gap-2"
+          >
             ✎ Enquire now
           </button>
         )}

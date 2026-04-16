@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { X, BookOpen, User, HelpCircle } from "lucide-react";
+import { X, BookOpen, User, HelpCircle, Sparkles } from "lucide-react";
 
 /* 🔥 SCROLL FUNCTION */
 const scrollToSection = (id: string) => {
@@ -20,13 +20,12 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const router = useRouter(); // ✅ correct place
+  const router = useRouter();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("");
   const [scrolled, setScrolled] = useState(false);
 
-  /* 🔥 FIXED ENQUIRY */
   const handleEnquiry = () => {
     router.push("/#consultation");
     setMenuOpen(false);
@@ -56,6 +55,9 @@ export default function Navbar() {
   /* Lock scroll */
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   /* NAVIGATION */
@@ -72,33 +74,46 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 backdrop-blur-xl shadow-md border-b border-gray-100"
-          : "bg-transparent"
+          ? "bg-white/80 backdrop-blur-2xl shadow-[0_10px_32px_rgba(15,23,42,0.08)] border-b border-white/70"
+          : "bg-white/35 backdrop-blur-xl"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-
-        {/* LOGO */}
-        <Link href="/" aria-label="Go to homepage">
-          <Image
-            src="/logor.png"
-            alt="Company Logo"
-            width={140}
-            height={60}
-            className="h-9 w-auto"
-            priority
-          />
+      <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
+        <Link href="/" aria-label="Go to homepage" className="shrink-0">
+          <div className="flex items-center gap-2.5 md:gap-3">
+            <Image
+              src="/logor.png"
+              alt="Rise Infotech"
+              width={168}
+              height={32}
+              className="h-5 min-[390px]:h-6 w-auto md:hidden"
+              priority
+            />
+            <div className="hidden md:flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="Rise Infotech Logo"
+                width={44}
+                height={44}
+                className="h-11 w-11 rounded-xl"
+                priority
+              />
+              <div className="leading-tight">
+                <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
+                <p className="text-[12px] text-slate-500">SAP Career Academy</p>
+              </div>
+            </div>
+          </div>
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center justify-center flex-1 gap-8">
+        <nav className="hidden md:flex items-center justify-center flex-1 gap-7">
           {navLinks.map((link) => (
             <button
               key={link.id}
               onClick={() => handleNav(link.id)}
               aria-label={`Go to ${link.label}`}
               title={`Go to ${link.label}`}
-              className={`relative text-base font-semibold transition ${
+              className={`relative text-[15px] font-semibold transition ${
                 active === link.id
                   ? "text-blue-600"
                   : "text-gray-700 hover:text-blue-600"
@@ -114,57 +129,74 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA */}
         <div className="hidden md:block">
           <button
             onClick={handleEnquiry}
             aria-label="Book free consultation"
             title="Book free consultation"
-            className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-md hover:bg-blue-700 transition hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-700 to-blue-500 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow-[0_12px_24px_rgba(37,99,235,0.25)] hover:shadow-[0_16px_30px_rgba(37,99,235,0.35)] transition hover:-translate-y-0.5"
           >
+            <Sparkles size={14} />
             Free Consultation
           </button>
         </div>
 
-        {/* MENU BUTTON */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           title="Toggle menu"
-          className="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 transition"
+          className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-100/90 shadow-[0_8px_20px_rgba(15,23,42,0.12)] hover:shadow-[0_10px_24px_rgba(15,23,42,0.16)] transition"
         >
-          <div className="relative w-6 h-5">
-            <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "rotate-45 top-2" : "top-0"}`} />
-            <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "opacity-0" : "top-2"}`} />
-            <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "-rotate-45 top-2" : "top-4"}`} />
+          <div className="relative w-5 h-4.5">
+            <span
+              className={`absolute left-0 h-[2px] w-5 rounded-full bg-slate-800 transition-all duration-300 ${
+                menuOpen ? "top-[7px] rotate-45" : "top-0"
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[7px] h-[2px] w-4 rounded-full bg-slate-700 transition-all duration-300 ${
+                menuOpen ? "opacity-0 scale-75" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-[2px] w-5 rounded-full bg-slate-800 transition-all duration-300 ${
+                menuOpen ? "top-[7px] -rotate-45" : "top-[14px]"
+              }`}
+            />
           </div>
         </button>
       </div>
 
-      {/* MOBILE MENU */}
-      <div className={`fixed inset-0 z-40 md:hidden ${menuOpen ? "visible" : "invisible"}`}>
+      <div
+        className={`fixed inset-0 z-[11000] md:hidden transition ${
+          menuOpen ? "visible" : "invisible"
+        }`}
+      >
         <div
-          className="absolute inset-0 bg-black/50"
+          className={`absolute inset-0 bg-slate-950/45 backdrop-blur-[1px] transition-opacity duration-300 ${
+            menuOpen ? "opacity-100" : "opacity-0"
+          }`}
           onClick={() => setMenuOpen(false)}
         />
 
         <div
-          className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transform ${
+          className={`absolute top-0 right-0 h-dvh w-full max-w-[360px] bg-white shadow-2xl border-l border-slate-200 transform transition-transform duration-300 ease-out ${
             menuOpen ? "translate-x-0" : "translate-x-full"
-          } transition`}
+          }`}
         >
-          <div className="flex justify-between p-5 border-b">
-            <span className="font-semibold">Menu</span>
+          <div className="flex justify-between p-5 border-b bg-slate-50">
+            <span className="font-semibold text-slate-800">Menu</span>
             <button
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
               title="Close menu"
+              className="rounded-full p-1.5 hover:bg-slate-200/70 transition"
             >
               <X />
             </button>
           </div>
 
-          <div className="p-6 space-y-4">
+          <div className="p-6 space-y-4 bg-white h-[calc(100dvh-73px)] overflow-y-auto">
             {navLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -173,7 +205,7 @@ export default function Navbar() {
                   onClick={() => handleNav(link.id)}
                   aria-label={`Go to ${link.label}`}
                   title={`Go to ${link.label}`}
-                  className="flex items-center gap-3 w-full px-4 py-3 rounded-xl hover:bg-gray-100"
+                  className="flex items-center gap-3 w-full px-4 py-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-slate-50"
                 >
                   <Icon size={18} />
                   {link.label}
@@ -185,7 +217,7 @@ export default function Navbar() {
               onClick={handleEnquiry}
               aria-label="Book free consultation"
               title="Book free consultation"
-              className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+              className="w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-3 rounded-xl font-semibold hover:from-blue-800 hover:to-blue-600 transition"
             >
               Free Consultation
             </button>
