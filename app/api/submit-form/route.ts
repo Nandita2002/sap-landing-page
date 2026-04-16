@@ -31,13 +31,31 @@ export async function POST(req: NextRequest) {
     try {
       response = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
-        redirect: "follow",
+        redirect: "manual",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
         signal: controller.signal,
       });
+
+      if (
+        response.status >= 300 &&
+        response.status < 400 &&
+        response.headers.get("location")
+      ) {
+        // Apps Script often issues a 302 to script.googleusercontent.
+        // We must preserve POST to avoid falling back to doGet.
+        const redirectedUrl = response.headers.get("location")!;
+        response = await fetch(redirectedUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+          signal: controller.signal,
+        });
+      }
     } finally {
       clearTimeout(timeout);
     }
