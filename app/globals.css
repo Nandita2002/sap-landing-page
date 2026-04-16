@@ -256,3 +256,45 @@
   border-color: rgb(79 70 229 / 40%);
   background: rgb(165 180 252 / 14%);
 }
+
+@keyframes loaderGlowPulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0.1;
+  }
+}
+
+@keyframes loaderLogoFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
+@keyframes loaderTrack {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.brand-loader-glow {
+  animation: loaderGlowPulse 1s ease-in-out infinite alternate;
+}
+
+.brand-loader-logo {
+  animation: loaderLogoFloat 1.2s ease-in-out infinite;
+}
+
+.brand-loader-progress {
+  animation: loaderTrack 1.2s ease-out forwards;
+}
