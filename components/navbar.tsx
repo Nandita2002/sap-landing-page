@@ -81,23 +81,27 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
           <div className="flex items-center gap-2.5 md:gap-3">
-            <Image
-              src="/logo.png"
-              alt="Rise Infotech Logo"
-              width={56}
-              height={56}
-              className="h-11 w-11 min-[390px]:h-12 min-[390px]:w-12 rounded-xl border border-slate-200/80 bg-white shadow-sm md:hidden"
-              priority
-            />
-            <div className="md:flex items-center gap-3">
+            <div className="relative h-11 w-11 min-[390px]:h-12 min-[390px]:w-12 rounded-xl border border-slate-200/80 bg-white shadow-sm overflow-hidden md:hidden">
               <Image
                 src="/logo.png"
                 alt="Rise Infotech Logo"
-                width={44}
-                height={44}
-                className="hidden md:block h-11 w-11 rounded-xl"
+                fill
+                className="object-contain scale-[1.8]"
+                sizes="48px"
                 priority
               />
+            </div>
+            <div className="md:flex items-center gap-3">
+              <div className="relative hidden md:block h-11 w-11 rounded-xl overflow-hidden border border-slate-200/80 bg-white">
+                <Image
+                  src="/logo.png"
+                  alt="Rise Infotech Logo"
+                  fill
+                  className="object-contain scale-[1.75]"
+                  sizes="44px"
+                  priority
+                />
+              </div>
               <div className="leading-tight">
                 <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
                 <p className="text-[12px] text-slate-500">SAP Career Academy</p>
