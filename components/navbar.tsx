@@ -81,7 +81,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage" className="shrink-0">
           <Image
-            src="/logor.png"
+            src="/logo.png"
             alt="Rise Infotech"
             width={320}
             height={62}
