@@ -6,9 +6,17 @@ import { useEffect, useRef, useState } from "react";
 const MIN_VISIBLE_MS = 1150;
 const FALLBACK_HIDE_MS = 2400;
 const FADE_OUT_MS = 320;
+const SAP_QUOTES = [
+  "SAP turns business processes into career opportunities.",
+  "Learn SAP today, lead enterprise transformation tomorrow.",
+  "Strong SAP skills build strong global careers.",
+  "Every SAP module you master opens a new role.",
+  "SAP knowledge is where business and technology meet.",
+];
 
 export default function BrandLoader() {
   const [phase, setPhase] = useState<"loading" | "fading" | "done">("loading");
+  const [quoteIndex] = useState(() => Math.floor(Math.random() * SAP_QUOTES.length));
   const startTimeRef = useRef<number>(0);
 
   useEffect(() => {
@@ -74,6 +82,9 @@ export default function BrandLoader() {
             />
           </div>
         </div>
+        <p className="max-w-xs text-center text-slate-700 text-sm sm:text-base font-medium leading-relaxed">
+          &quot;{SAP_QUOTES[quoteIndex]}&quot;
+        </p>
         <p className="mt-1 text-slate-500 text-sm">Loading your experience...</p>
         <div className="mt-5 h-1.5 w-44 overflow-hidden rounded-full bg-slate-200/80">
           <span className="brand-loader-progress block h-full rounded-full bg-gradient-to-r from-blue-700 to-indigo-500" />
