@@ -62,18 +62,15 @@ export default function BrandLoader() {
       }`}
     >
       <div className="flex flex-col items-center px-6">
-        <div className="relative mb-5">
-          <span className="brand-loader-glow absolute inset-0 rounded-2xl bg-blue-400/25 blur-xl" />
-          <div className="relative brand-loader-logo h-[74px] w-[240px] rounded-2xl border border-blue-200/80 bg-white/95 shadow-[0_20px_45px_rgba(37,99,235,0.2)] flex items-center justify-center px-5">
-            <Image
-              src="/logor.png"
-              alt="Rise Infotech"
-              width={196}
-              height={38}
-              priority
-              className="h-auto w-full object-contain"
-            />
-          </div>
+        <div className="mb-5">
+          <Image
+            src="/logor.png"
+            alt="Rise Infotech"
+            width={240}
+            height={46}
+            priority
+            className="h-auto w-[220px] sm:w-[240px] object-contain"
+          />
         </div>
         <p className="mt-1 text-slate-500 text-sm">Loading your experience...</p>
         <div className="mt-5 h-1.5 w-44 overflow-hidden rounded-full bg-slate-200/80">
