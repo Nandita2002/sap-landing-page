@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   title: "SAP Training | Rise Infotech",
   description: "SAP training with live demos...",
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.ico",
+    shortcut: "/logo.ico",
+    apple: "/logo.ico",
   },
 
   keywords: [
