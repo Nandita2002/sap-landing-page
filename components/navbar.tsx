@@ -78,22 +78,30 @@ export default function Navbar() {
           : "bg-white/35 backdrop-blur-xl"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 h-15 md:h-16 flex items-center justify-between gap-3 md:gap-6">
-        <Link href="/" aria-label="Go to homepage">
+      <div className="max-w-7xl mx-auto px-4 h-16 md:h-16 flex items-center justify-between gap-3 md:gap-6">
+        <Link href="/" aria-label="Go to homepage" className="shrink-0">
           <div className="flex items-center gap-2.5 md:gap-3">
             <Image
-              src="/logo.png"
-              alt="Rise Infotech Logo"
-              width={44}
-              height={44}
-              className="h-10 w-10 min-[390px]:h-11 min-[390px]:w-11 rounded-lg"
+              src="/logor.png"
+              alt="Rise Infotech"
+              width={168}
+              height={32}
+              className="h-5 min-[390px]:h-6 w-auto md:hidden"
               priority
             />
-            <div className="leading-tight">
-              <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
-              <p className="hidden min-[360px]:block text-[12px] text-slate-500">
-                SAP Career Academy
-              </p>
+            <div className="hidden md:flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                alt="Rise Infotech Logo"
+                width={44}
+                height={44}
+                className="h-11 w-11 rounded-xl"
+                priority
+              />
+              <div className="leading-tight">
+                <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
+                <p className="text-[12px] text-slate-500">SAP Career Academy</p>
+              </div>
             </div>
           </div>
         </Link>
@@ -137,7 +145,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           title="Toggle menu"
-          className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-slate-200/90 bg-white/90 shadow-[0_6px_16px_rgba(15,23,42,0.08)] hover:bg-white transition"
+          className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-slate-200/90 bg-gradient-to-b from-white to-slate-100/90 shadow-[0_8px_20px_rgba(15,23,42,0.12)] hover:shadow-[0_10px_24px_rgba(15,23,42,0.16)] transition"
         >
           <div className="relative w-5 h-4.5">
             <span
@@ -146,7 +154,7 @@ export default function Navbar() {
               }`}
             />
             <span
-              className={`absolute left-0 top-[7px] h-[2px] w-5 rounded-full bg-slate-700 transition-all duration-300 ${
+              className={`absolute left-0 top-[7px] h-[2px] w-4 rounded-full bg-slate-700 transition-all duration-300 ${
                 menuOpen ? "opacity-0 scale-75" : "opacity-100"
               }`}
             />
