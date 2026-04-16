@@ -63,25 +63,20 @@ export default function BrandLoader() {
     >
       <div className="flex flex-col items-center px-6">
         <div className="relative mb-5">
-          <span className="brand-loader-glow absolute inset-0 rounded-[26px] bg-blue-400/25 blur-xl" />
-          <div className="relative h-[92px] w-[92px] rounded-[26px] border border-blue-200/80 bg-white/95 shadow-[0_20px_45px_rgba(37,99,235,0.2)] flex items-center justify-center overflow-hidden">
-            <div className="brand-loader-logo">
-              <Image
-                src="/logo.png"
-                alt="Rise Infotech"
-                width={78}
-                height={78}
-                priority
-                className="scale-[1.8] object-contain"
-              />
-            </div>
+          <span className="brand-loader-glow absolute inset-0 rounded-2xl bg-blue-400/25 blur-xl" />
+          <div className="relative brand-loader-logo h-[74px] w-[240px] rounded-2xl border border-blue-200/80 bg-white/95 shadow-[0_20px_45px_rgba(37,99,235,0.2)] flex items-center justify-center px-5">
+            <Image
+              src="/logor.png"
+              alt="Rise Infotech"
+              width={196}
+              height={38}
+              priority
+              className="h-auto w-full object-contain"
+            />
           </div>
         </div>
-        <p className="text-slate-900 text-xl font-semibold tracking-tight">
-          Rise Infotech
-        </p>
-        <p className="mt-1 text-slate-500 text-sm">SAP Career Academy</p>
-        <div className="mt-5 h-1.5 w-40 overflow-hidden rounded-full bg-slate-200/80">
+        <p className="mt-1 text-slate-500 text-sm">Loading your experience...</p>
+        <div className="mt-5 h-1.5 w-44 overflow-hidden rounded-full bg-slate-200/80">
           <span className="brand-loader-progress block h-full rounded-full bg-gradient-to-r from-blue-700 to-indigo-500" />
         </div>
       </div>
