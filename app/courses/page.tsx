@@ -54,7 +54,7 @@ export default function CoursesPage() {
             Specialized SAP Modules
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
-            Premium SAP ERP Courses
+            SAP ERP Courses
           </h2>
           <p className="text-center text-slate-600 max-w-2xl mx-auto">
             Choose the right SAP module based on your career path and learn

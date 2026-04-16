@@ -42,7 +42,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-5 text-center">
         <div className="inline-flex flex-wrap justify-center items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-5 sm:mb-6">
           <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
-          Premium SAP Training · April 2026 Cohort
+          SAP Training · April 2026 Cohort
         </div>
 
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight mb-5 sm:mb-6 max-w-4xl mx-auto">

@@ -78,20 +78,20 @@ export default function Navbar() {
           : "bg-white/35 backdrop-blur-xl"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 h-14 md:h-16 flex items-center justify-between gap-3 md:gap-6">
+      <div className="max-w-7xl mx-auto px-4 h-15 md:h-16 flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" aria-label="Go to homepage">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 md:gap-3">
             <Image
               src="/logo.png"
               alt="Rise Infotech Logo"
-              width={36}
-              height={36}
-              className="h-9 w-9"
+              width={44}
+              height={44}
+              className="h-10 w-10 min-[390px]:h-11 min-[390px]:w-11 rounded-lg"
               priority
             />
             <div className="leading-tight">
-              <p className="text-sm font-semibold text-slate-900">Rise Infotech</p>
-              <p className="hidden min-[360px]:block text-[11px] text-slate-500">
+              <p className="text-[16px] font-semibold text-slate-900">Rise Infotech</p>
+              <p className="hidden min-[360px]:block text-[12px] text-slate-500">
                 SAP Career Academy
               </p>
             </div>
@@ -137,12 +137,24 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
           title="Toggle menu"
-          className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl border border-slate-200 bg-white/85 hover:bg-white transition"
+          className="md:hidden relative w-11 h-11 flex items-center justify-center rounded-2xl border border-slate-200/90 bg-white/90 shadow-[0_6px_16px_rgba(15,23,42,0.08)] hover:bg-white transition"
         >
-          <div className="relative w-6 h-5">
-            <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "rotate-45 top-2" : "top-0"}`} />
-            <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "opacity-0" : "top-2"}`} />
-            <span className={`absolute w-6 h-0.5 bg-black ${menuOpen ? "-rotate-45 top-2" : "top-4"}`} />
+          <div className="relative w-5 h-4.5">
+            <span
+              className={`absolute left-0 h-[2px] w-5 rounded-full bg-slate-800 transition-all duration-300 ${
+                menuOpen ? "top-[7px] rotate-45" : "top-0"
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-[7px] h-[2px] w-5 rounded-full bg-slate-700 transition-all duration-300 ${
+                menuOpen ? "opacity-0 scale-75" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute left-0 h-[2px] w-5 rounded-full bg-slate-800 transition-all duration-300 ${
+                menuOpen ? "top-[7px] -rotate-45" : "top-[14px]"
+              }`}
+            />
           </div>
         </button>
       </div>
@@ -170,6 +182,7 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
               title="Close menu"
+              className="rounded-full p-1.5 hover:bg-slate-200/70 transition"
             >
               <X />
             </button>
