@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const FALLBACK_APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwmYxQoo0FTD1sv7831Ul8b5sd7mWiE6rKpd5Ox_0AJweph1B7lA6SSF24s-BvGpndE/exec";
+  "https://script.google.com/macros/s/AKfycbwJVHAGRMFPfVpLC2rZiErn8dFcRY7E_1yqlKniUKe3aO5LiAADO_XEDS1EBpTuNpzxUA/exec";
 
 const APPS_SCRIPT_URL =
   process.env.APPS_SCRIPT_URL?.trim() || FALLBACK_APPS_SCRIPT_URL;
