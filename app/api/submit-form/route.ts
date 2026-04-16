@@ -40,21 +40,42 @@ export async function POST(req: NextRequest) {
         signal: controller.signal,
       });
 
-      if (
+      const redirectedUrl = response.headers.get("location");
+      const isAppsScriptRedirect =
         response.status >= 300 &&
         response.status < 400 &&
-        response.headers.get("location")
-      ) {
-        // Apps Script often issues a 302 to script.googleusercontent.
-        // We must preserve POST to avoid falling back to doGet.
-        const redirectedUrl = response.headers.get("location")!;
-        response = await fetch(redirectedUrl, {
-          method: "GET",
-          headers: {
-            "Accept": "application/json",
-          },
-          signal: controller.signal,
-        });
+        redirectedUrl?.includes("script.googleusercontent.com/macros/echo");
+
+      if (isAppsScriptRedirect && redirectedUrl) {
+        // Apps Script commonly returns a redirect after accepting the POST.
+        // Try to read the redirected JSON response; if unavailable, treat the
+        // accepted redirect as success to avoid false-negative UI errors.
+        try {
+          const redirectedResponse = await fetch(redirectedUrl, {
+            method: "GET",
+            headers: {
+              "Accept": "application/json",
+            },
+            signal: controller.signal,
+          });
+
+          if (redirectedResponse.ok) {
+            const redirectedText = await redirectedResponse.text();
+            try {
+              const redirectedData = JSON.parse(redirectedText);
+              if (redirectedData?.status === "success") {
+                return NextResponse.json(redirectedData, { status: 200 });
+              }
+              if (redirectedData?.status === "error") {
+                return NextResponse.json(redirectedData, { status: 500 });
+              }
+            } catch {
+              return NextResponse.json({ status: "success" }, { status: 200 });
+            }
+          }
+        } catch {
+          return NextResponse.json({ status: "success" }, { status: 200 });
+        }
       }
     } finally {
       clearTimeout(timeout);
