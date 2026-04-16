@@ -29,13 +29,14 @@ export async function POST(req: NextRequest) {
 
     let response;
     try {
+      const payload = JSON.stringify(body);
       response = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
         redirect: "manual",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: payload,
         signal: controller.signal,
       });
 
@@ -48,11 +49,10 @@ export async function POST(req: NextRequest) {
         // We must preserve POST to avoid falling back to doGet.
         const redirectedUrl = response.headers.get("location")!;
         response = await fetch(redirectedUrl, {
-          method: "POST",
+          method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            "Accept": "application/json",
           },
-          body: JSON.stringify(body),
           signal: controller.signal,
         });
       }
