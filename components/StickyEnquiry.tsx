@@ -18,6 +18,7 @@ const StickyEnquiry: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [countryCode, setCountryCode] = useState("+91");
   const [form, setForm] = useState<FormType>({ name: "", email: "", phone: "", message: "" });
   const [toast, setToast] = useState<{
     type: "success" | "error";
@@ -63,7 +64,7 @@ const StickyEnquiry: React.FC = () => {
       const res = await fetch("/api/submit-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, source: "sticky_form" }),
+        body: JSON.stringify({ ...form, phone: `${countryCode}${form.phone}`, source: "sticky_form" }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -77,6 +78,7 @@ const StickyEnquiry: React.FC = () => {
         });
 
         setForm({ name: "", email: "", phone: "", message: "" });
+        setCountryCode("+91");
         setOpen(false);
       } else {
         setToast({
@@ -140,8 +142,8 @@ const StickyEnquiry: React.FC = () => {
             <div className={`p-3 flex flex-col gap-2.5 ${isMobile ? "max-h-[78vh] overflow-y-auto pb-24" : ""}`}>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <div>
-                  <Label>Name</Label>
-                  <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="John Doe" className={inputBase} />
+                  <Label>Full Name</Label>
+                  <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Enter your full name" className={inputBase} />
                 </div>
                 <div>
                   <Label>Email</Label>
@@ -151,8 +153,18 @@ const StickyEnquiry: React.FC = () => {
               <div>
                 <Label>Phone</Label>
                 <div className="flex border border-slate-200 rounded-lg overflow-hidden bg-slate-50 focus-within:ring-2 focus-within:ring-blue-500 transition">
-                  <span className="px-2.5 flex items-center text-xs text-slate-500 border-r border-slate-200 bg-slate-100 whitespace-nowrap">+91</span>
-                  <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="9876543210" className="flex-1 px-2.5 py-1.5 text-xs text-slate-900 outline-none bg-transparent placeholder:text-slate-400" />
+                  <select
+                    value={countryCode}
+                    onChange={(e) => setCountryCode(e.target.value)}
+                    className="px-2 text-xs text-slate-700 border-r border-slate-200 bg-slate-100 outline-none"
+                  >
+                    <option value="+91">+91</option>
+                    <option value="+1">+1</option>
+                    <option value="+44">+44</option>
+                    <option value="+61">+61</option>
+                    <option value="+971">+971</option>
+                  </select>
+                  <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="Enter your phone number" className="flex-1 px-2.5 py-1.5 text-xs text-slate-900 outline-none bg-transparent placeholder:text-slate-400" />
                 </div>
               </div>
               <div>

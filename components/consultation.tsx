@@ -6,6 +6,7 @@ type FormData = { name: string; email: string; phone: string; course: string; go
 type Errors = { name?: string; email?: string; phone?: string; };
 
 export default function FreeConsultationForm() {
+  const [countryCode, setCountryCode] = useState("+91");
   const [form, setForm] = useState<FormData>({ name: "", email: "", phone: "", course: "", goal: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ export default function FreeConsultationForm() {
 
   const validate = () => {
     const newErrors: Errors = {};
-    if (!form.name.trim()) newErrors.name = "Name is required";
+    if (!form.name.trim()) newErrors.name = "Full Name is required";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!form.email) newErrors.email = "Email is required";
     else if (!emailRegex.test(form.email)) newErrors.email = "Enter a valid email";
@@ -38,7 +39,11 @@ export default function FreeConsultationForm() {
       const res = await fetch("/api/submit-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, source: "consultation" }),
+        body: JSON.stringify({
+          ...form,
+          phone: `${countryCode}${form.phone}`,
+          source: "consultation",
+        }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -80,7 +85,7 @@ export default function FreeConsultationForm() {
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
             <div>
               <label htmlFor="name" className="text-sm font-medium text-gray-600 mb-1 block">Full Name</label>
-              <input id="name" name="name" value={form.name} onChange={handleChange} placeholder="Enter your name" required className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
+              <input id="name" name="name" value={form.name} onChange={handleChange} placeholder="Enter your full name" required className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
               {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
             </div>
             <div>
@@ -90,7 +95,22 @@ export default function FreeConsultationForm() {
             </div>
             <div>
               <label htmlFor="phone" className="text-sm font-medium text-gray-600 mb-1 block">Phone Number</label>
-              <input id="phone" name="phone" type="tel" maxLength={10} value={form.phone} onChange={handleChange} placeholder="Enter your phone" required className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm md:text-base focus:ring-2 focus:ring-blue-500 outline-none" />
+              <div className="flex border border-gray-200 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
+                <select
+                  aria-label="Country code"
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
+                  className="bg-gray-50 border-r border-gray-200 px-2 py-3 text-sm outline-none"
+                >
+                  <option value="+91">+91</option>
+                  <option value="+1">+1</option>
+                  <option value="+44">+44</option>
+                  <option value="+61">+61</option>
+                  <option value="+65">+65</option>
+                  <option value="+971">+971</option>
+                </select>
+                <input id="phone" name="phone" type="tel" maxLength={10} value={form.phone} onChange={handleChange} placeholder="Enter your phone number" required className="w-full px-4 py-3 text-sm md:text-base outline-none" />
+              </div>
               {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
             </div>
             <div>

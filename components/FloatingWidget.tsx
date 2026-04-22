@@ -8,6 +8,7 @@ const FloatingWidget = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
+    countryCode: "+91",
     phone: "",
   });
 
@@ -44,7 +45,7 @@ const FloatingWidget = () => {
 
       if (data.status === "success") {
         setSuccess(true);
-        setForm({ name: "", email: "", phone: "" });
+        setForm({ name: "", email: "", countryCode: "+91", phone: "" });
 
         // auto close after success
         setTimeout(() => {
@@ -105,7 +106,7 @@ const FloatingWidget = () => {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* Name */}
+            {/* Full Name */}
             <div>
               <label className="text-sm font-medium text-gray-700">
                 Full Name
@@ -113,7 +114,7 @@ const FloatingWidget = () => {
               <input
                 type="text"
                 required
-                placeholder="Enter your name"
+                placeholder="Enter your full name"
                 value={form.name}
                 onChange={(e) =>
                   setForm({ ...form, name: e.target.value })
@@ -144,16 +145,31 @@ const FloatingWidget = () => {
               <label className="text-sm font-medium text-gray-700">
                 Phone Number
               </label>
-              <input
-                type="tel"
-                required
-                placeholder="Enter your phone number"
-                value={form.phone}
-                onChange={(e) =>
-                  setForm({ ...form, phone: e.target.value })
-                }
-                className="w-full mt-1 border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-              />
+              <div className="mt-1 flex border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
+                <select
+                  value={form.countryCode}
+                  onChange={(e) =>
+                    setForm({ ...form, countryCode: e.target.value })
+                  }
+                  className="px-3 py-2 text-sm text-gray-700 bg-gray-100 border-r outline-none"
+                >
+                  <option value="+91">+91</option>
+                  <option value="+1">+1</option>
+                  <option value="+44">+44</option>
+                  <option value="+61">+61</option>
+                  <option value="+971">+971</option>
+                </select>
+                <input
+                  type="tel"
+                  required
+                  placeholder="Enter your phone number"
+                  value={form.phone}
+                  onChange={(e) =>
+                    setForm({ ...form, phone: e.target.value })
+                  }
+                  className="flex-1 px-3 py-2 text-sm outline-none"
+                />
+              </div>
             </div>
 
             {/* Submit */}

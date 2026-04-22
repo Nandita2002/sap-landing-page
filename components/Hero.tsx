@@ -5,6 +5,7 @@ import { useState } from "react";
 type FormData = {
   name: string;
   email: string;
+  countryCode: string;
   phone: string;
   course: string;
 };
@@ -18,6 +19,7 @@ type FormErrors = {
 const EMPTY_FORM: FormData = {
   name: "",
   email: "",
+  countryCode: "+91",
   phone: "",
   course: "",
 };
@@ -36,7 +38,7 @@ export default function Hero() {
 
   const validate = (data: FormData) => {
     const newErrors: FormErrors = {};
-    if (!data.name.trim()) newErrors.name = "Name is required";
+    if (!data.name.trim()) newErrors.name = "Full Name is required";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!data.email) newErrors.email = "Email is required";
@@ -78,6 +80,7 @@ export default function Hero() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...consultationForm,
+          phone: `${consultationForm.countryCode} ${consultationForm.phone}`,
           goal: "Consultation requested via hero form",
           source: "consultation",
         }),
@@ -114,6 +117,7 @@ export default function Hero() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...brochureForm,
+          phone: `${brochureForm.countryCode} ${brochureForm.phone}`,
           goal: "Brochure download requested via hero popup",
           source: "popup",
         }),
@@ -243,7 +247,7 @@ export default function Hero() {
                   name="name"
                   value={consultationForm.name}
                   onChange={handleConsultationChange}
-                  placeholder="Enter your name"
+                  placeholder="Enter your full name"
                   required
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                 />
@@ -271,17 +275,32 @@ export default function Hero() {
                 <label htmlFor="hero-phone" className="text-sm font-medium text-gray-600 mb-1 block">
                   Phone Number
                 </label>
-                <input
-                  id="hero-phone"
-                  name="phone"
-                  type="tel"
-                  maxLength={10}
-                  value={consultationForm.phone}
-                  onChange={handleConsultationChange}
-                  placeholder="Enter your phone"
-                  required
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                />
+                <div className="flex gap-2">
+                  <select
+                    name="countryCode"
+                    value={consultationForm.countryCode}
+                    onChange={handleConsultationChange}
+                    className="w-[34%] border border-gray-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                  >
+                    <option value="+91">+91 (IN)</option>
+                    <option value="+1">+1 (US)</option>
+                    <option value="+44">+44 (UK)</option>
+                    <option value="+61">+61 (AU)</option>
+                    <option value="+65">+65 (SG)</option>
+                    <option value="+971">+971 (UAE)</option>
+                  </select>
+                  <input
+                    id="hero-phone"
+                    name="phone"
+                    type="tel"
+                    maxLength={10}
+                    value={consultationForm.phone}
+                    onChange={handleConsultationChange}
+                    placeholder="Enter phone number"
+                    required
+                    className="w-[66%] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
                 {consultationErrors.phone && <p className="text-red-500 text-xs mt-1">{consultationErrors.phone}</p>}
               </div>
 
@@ -362,7 +381,7 @@ export default function Hero() {
                     name="name"
                     value={brochureForm.name}
                     onChange={handleBrochureChange}
-                    placeholder="Enter your name"
+                    placeholder="Enter your full name"
                     required
                     className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                   />
@@ -390,17 +409,32 @@ export default function Hero() {
                   <label htmlFor="brochure-phone" className="text-sm font-medium text-gray-600 mb-1 block">
                     Phone Number
                   </label>
-                  <input
-                    id="brochure-phone"
-                    name="phone"
-                    type="tel"
-                    maxLength={10}
-                    value={brochureForm.phone}
-                    onChange={handleBrochureChange}
-                    placeholder="Enter your phone"
-                    required
-                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                  />
+                  <div className="flex gap-2">
+                    <select
+                      name="countryCode"
+                      value={brochureForm.countryCode}
+                      onChange={handleBrochureChange}
+                      className="w-[34%] border border-gray-200 rounded-xl px-3 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                    >
+                      <option value="+91">+91 (IN)</option>
+                      <option value="+1">+1 (US)</option>
+                      <option value="+44">+44 (UK)</option>
+                      <option value="+61">+61 (AU)</option>
+                      <option value="+65">+65 (SG)</option>
+                      <option value="+971">+971 (UAE)</option>
+                    </select>
+                    <input
+                      id="brochure-phone"
+                      name="phone"
+                      type="tel"
+                      maxLength={10}
+                      value={brochureForm.phone}
+                      onChange={handleBrochureChange}
+                      placeholder="Enter phone number"
+                      required
+                      className="w-[66%] border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
+                  </div>
                   {brochureErrors.phone && <p className="text-red-500 text-xs mt-1">{brochureErrors.phone}</p>}
                 </div>
 

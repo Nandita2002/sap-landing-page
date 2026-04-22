@@ -32,7 +32,7 @@ const Popup = () => {
   const closeTimer = useRef<NodeJS.Timeout | null>(null);
   const autoOpenTimer = useRef<NodeJS.Timeout | null>(null);
   const openedRef = useRef(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", countryCode: "+91", message: "" });
 
   useEffect(() => {
     const openPopup = () => {
@@ -75,7 +75,7 @@ const Popup = () => {
       }
       if (data.status === "success") {
         setSuccess(true);
-        setForm({ name: "", email: "", phone: "", message: "" });
+        setForm({ name: "", email: "", phone: "", countryCode: "+91", message: "" });
         if (closeTimer.current) clearTimeout(closeTimer.current);
         closeTimer.current = setTimeout(() => setOpen(false), 2500);
       } else {
@@ -107,9 +107,27 @@ const Popup = () => {
             </div>
           ) : (
             <div className="space-y-4">
-              <input placeholder="Full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
+              <input placeholder="Enter your full name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
               <input placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
-              <input placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />
+              <div className="flex border border-slate-200 rounded-xl overflow-hidden bg-slate-50 focus-within:ring-2 focus-within:ring-blue-500">
+                <select
+                  value={form.countryCode}
+                  onChange={(e) => setForm({ ...form, countryCode: e.target.value })}
+                  className="px-2.5 py-2.5 text-sm text-slate-700 border-r border-slate-200 bg-slate-100 outline-none"
+                >
+                  <option value="+91">+91</option>
+                  <option value="+1">+1</option>
+                  <option value="+44">+44</option>
+                  <option value="+61">+61</option>
+                  <option value="+971">+971</option>
+                </select>
+                <input
+                  placeholder="Enter your phone"
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  className="flex-1 px-3 py-2.5 text-sm text-slate-900 outline-none bg-transparent placeholder:text-slate-400"
+                />
+              </div>
               <textarea rows={3} placeholder="Message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={inputClass} />
               <button onClick={handleSubmit} disabled={loading} className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-3 rounded-xl font-semibold transition">
                 {loading ? "Submitting..." : "Submit enquiry →"}
