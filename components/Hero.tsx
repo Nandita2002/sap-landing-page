@@ -161,7 +161,7 @@ export default function Hero() {
         <div className="absolute -bottom-16 right-0 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-5">
+      <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8 items-start">
           <div className="text-center lg:text-left">
             <div className="inline-flex flex-wrap justify-center lg:justify-start items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-4 sm:mb-5">
@@ -183,17 +183,17 @@ export default function Hero() {
               for beginners and working professionals.
             </p>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-[560px] mx-auto lg:mx-0 mb-6 sm:mb-7">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-[520px] mx-auto lg:mx-0 mb-6 sm:mb-7">
               <button
                 onClick={() => setBrochureOpen(true)}
-                className="w-full px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl text-white font-semibold text-sm sm:text-base shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl text-white font-semibold text-sm shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
               >
                 Download Brochure
               </button>
 
               <button
                 onClick={scrollToCourses}
-                className="w-full px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl border-2 border-blue-600 bg-white text-blue-700 font-semibold text-sm sm:text-base hover:bg-blue-50 active:scale-95 transition"
+                className="w-full px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border-2 border-blue-600 bg-white text-blue-700 font-semibold text-sm hover:bg-blue-50 active:scale-95 transition"
               >
                 View Courses
               </button>
