@@ -183,17 +183,17 @@ export default function Hero() {
               for beginners and working professionals.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-7">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-[560px] mx-auto lg:mx-0 mb-6 sm:mb-7">
               <button
                 onClick={() => setBrochureOpen(true)}
-                className="w-full sm:w-auto px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl text-white font-semibold text-sm sm:text-base shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
+                className="w-full px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl text-white font-semibold text-sm sm:text-base shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
               >
                 Download Brochure
               </button>
 
               <button
                 onClick={scrollToCourses}
-                className="w-full sm:w-auto px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl border border-slate-300 bg-white/90 text-slate-700 font-semibold text-sm sm:text-base hover:bg-white active:scale-95 transition"
+                className="w-full px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl border-2 border-blue-600 bg-white text-blue-700 font-semibold text-sm sm:text-base hover:bg-blue-50 active:scale-95 transition"
               >
                 View Courses
               </button>
