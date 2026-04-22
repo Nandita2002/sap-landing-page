@@ -2,66 +2,83 @@
 
 import { useState } from "react";
 
-type HeroFormData = {
+type FormData = {
   name: string;
   email: string;
   phone: string;
   course: string;
 };
 
-type HeroFormErrors = {
+type FormErrors = {
   name?: string;
   email?: string;
   phone?: string;
 };
 
-export default function Hero() {
-  const [form, setForm] = useState<HeroFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    course: "",
-  });
-  const [errors, setErrors] = useState<HeroFormErrors>({});
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+const EMPTY_FORM: FormData = {
+  name: "",
+  email: "",
+  phone: "",
+  course: "",
+};
 
-  const validate = () => {
-    const newErrors: HeroFormErrors = {};
-    if (!form.name.trim()) newErrors.name = "Name is required";
+export default function Hero() {
+  const [consultationForm, setConsultationForm] = useState<FormData>(EMPTY_FORM);
+  const [consultationErrors, setConsultationErrors] = useState<FormErrors>({});
+  const [consultationLoading, setConsultationLoading] = useState(false);
+  const [consultationSuccess, setConsultationSuccess] = useState(false);
+
+  const [brochureOpen, setBrochureOpen] = useState(false);
+  const [brochureForm, setBrochureForm] = useState<FormData>(EMPTY_FORM);
+  const [brochureErrors, setBrochureErrors] = useState<FormErrors>({});
+  const [brochureLoading, setBrochureLoading] = useState(false);
+  const [brochureSuccess, setBrochureSuccess] = useState(false);
+
+  const validate = (data: FormData) => {
+    const newErrors: FormErrors = {};
+    if (!data.name.trim()) newErrors.name = "Name is required";
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!form.email) newErrors.email = "Email is required";
-    else if (!emailRegex.test(form.email)) newErrors.email = "Enter a valid email";
+    if (!data.email) newErrors.email = "Email is required";
+    else if (!emailRegex.test(data.email)) newErrors.email = "Enter a valid email";
 
     const phoneRegex = /^[6-9]\d{9}$/;
-    if (!form.phone) newErrors.phone = "Phone is required";
-    else if (!phoneRegex.test(form.phone)) newErrors.phone = "Enter valid 10-digit number";
+    if (!data.phone) newErrors.phone = "Phone is required";
+    else if (!phoneRegex.test(data.phone)) newErrors.phone = "Enter valid 10-digit number";
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return newErrors;
   };
 
-  const handleChange = (
+  const handleConsultationChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    setErrors((prev) => ({ ...prev, [e.target.name]: "" }));
-    if (success) setSuccess(false);
+    setConsultationForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setConsultationErrors((prev) => ({ ...prev, [e.target.name]: "" }));
+    if (consultationSuccess) setConsultationSuccess(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!validate()) return;
+  const handleBrochureChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setBrochureForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setBrochureErrors((prev) => ({ ...prev, [e.target.name]: "" }));
+    if (brochureSuccess) setBrochureSuccess(false);
+  };
 
-    setLoading(true);
+  const handleConsultationSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const nextErrors = validate(consultationForm);
+    setConsultationErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+
+    setConsultationLoading(true);
     try {
       const res = await fetch("/api/submit-form", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
-          goal: "Submitted via hero consultation form",
+          ...consultationForm,
+          goal: "Consultation requested via hero form",
           source: "consultation",
         }),
       });
@@ -71,14 +88,8 @@ export default function Hero() {
       }
 
       if (data.status === "success") {
-        setSuccess(true);
-        const brochureLink = document.createElement("a");
-        brochureLink.href = "/brochure.pdf";
-        brochureLink.download = "Rise-Infotech-SAP-Brochure.pdf";
-        document.body.appendChild(brochureLink);
-        brochureLink.click();
-        document.body.removeChild(brochureLink);
-        setForm({ name: "", email: "", phone: "", course: "" });
+        setConsultationSuccess(true);
+        setConsultationForm(EMPTY_FORM);
       } else {
         alert("Error: " + (data.message || "Please try again."));
       }
@@ -86,7 +97,53 @@ export default function Hero() {
       console.error(err);
       alert("Submission failed. Please try again.");
     } finally {
-      setLoading(false);
+      setConsultationLoading(false);
+    }
+  };
+
+  const handleBrochureSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const nextErrors = validate(brochureForm);
+    setBrochureErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+
+    setBrochureLoading(true);
+    try {
+      const res = await fetch("/api/submit-form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...brochureForm,
+          goal: "Brochure download requested via hero popup",
+          source: "popup",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to submit form");
+      }
+
+      if (data.status === "success") {
+        setBrochureSuccess(true);
+        const brochureLink = document.createElement("a");
+        brochureLink.href = "/brochure.pdf";
+        brochureLink.download = "Rise-Infotech-SAP-Brochure.pdf";
+        document.body.appendChild(brochureLink);
+        brochureLink.click();
+        document.body.removeChild(brochureLink);
+        setBrochureForm(EMPTY_FORM);
+        setTimeout(() => {
+          setBrochureOpen(false);
+          setBrochureSuccess(false);
+        }, 1000);
+      } else {
+        alert("Error: " + (data.message || "Please try again."));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Submission failed. Please try again.");
+    } finally {
+      setBrochureLoading(false);
     }
   };
 
@@ -128,6 +185,13 @@ export default function Hero() {
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-7">
               <button
+                onClick={() => setBrochureOpen(true)}
+                className="w-full sm:w-auto px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl text-white font-semibold text-sm sm:text-base shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
+              >
+                Download Brochure
+              </button>
+
+              <button
                 onClick={scrollToCourses}
                 className="w-full sm:w-auto px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl border border-slate-300 bg-white/90 text-slate-700 font-semibold text-sm sm:text-base hover:bg-white active:scale-95 transition"
               >
@@ -156,20 +220,20 @@ export default function Hero() {
           <div className="bg-white rounded-3xl shadow-[0_14px_34px_rgba(15,23,42,0.08)] p-5 md:p-6 lg:p-7 border border-slate-200">
             <div className="mb-4">
               <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                Download Brochure
+                Get Free Consultation
               </h2>
               <p className="text-slate-600 mt-1 text-sm">
-                Fill your details to instantly download the course brochure.
+                Talk to SAP experts and get a career roadmap.
               </p>
             </div>
 
-            {success && (
+            {consultationSuccess && (
               <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-center text-sm font-medium">
-                Submitted successfully! Your brochure download has started.
+                Submitted successfully! Our team will contact you shortly.
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-3">
+            <form onSubmit={handleConsultationSubmit} className="grid grid-cols-1 gap-3">
               <div>
                 <label htmlFor="hero-name" className="text-sm font-medium text-gray-600 mb-1 block">
                   Full Name
@@ -177,13 +241,13 @@ export default function Hero() {
                 <input
                   id="hero-name"
                   name="name"
-                  value={form.name}
-                  onChange={handleChange}
+                  value={consultationForm.name}
+                  onChange={handleConsultationChange}
                   placeholder="Enter your name"
                   required
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                 />
-                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                {consultationErrors.name && <p className="text-red-500 text-xs mt-1">{consultationErrors.name}</p>}
               </div>
 
               <div>
@@ -194,13 +258,13 @@ export default function Hero() {
                   id="hero-email"
                   name="email"
                   type="email"
-                  value={form.email}
-                  onChange={handleChange}
+                  value={consultationForm.email}
+                  onChange={handleConsultationChange}
                   placeholder="Enter your email"
                   required
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                 />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                {consultationErrors.email && <p className="text-red-500 text-xs mt-1">{consultationErrors.email}</p>}
               </div>
 
               <div>
@@ -212,13 +276,13 @@ export default function Hero() {
                   name="phone"
                   type="tel"
                   maxLength={10}
-                  value={form.phone}
-                  onChange={handleChange}
+                  value={consultationForm.phone}
+                  onChange={handleConsultationChange}
                   placeholder="Enter your phone"
                   required
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                 />
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                {consultationErrors.phone && <p className="text-red-500 text-xs mt-1">{consultationErrors.phone}</p>}
               </div>
 
               <div>
@@ -228,8 +292,8 @@ export default function Hero() {
                 <select
                   id="hero-course"
                   name="course"
-                  value={form.course}
-                  onChange={handleChange}
+                  value={consultationForm.course}
+                  onChange={handleConsultationChange}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
                 >
                   <option value="">Select Course</option>
@@ -242,15 +306,135 @@ export default function Hero() {
 
               <button
                 type="submit"
-                disabled={loading}
+                disabled={consultationLoading}
                 className="mt-1 w-full py-3.5 rounded-xl text-white font-semibold text-sm shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 active:scale-[0.98] disabled:opacity-60"
               >
-                {loading ? "Submitting..." : "Submit & Download Brochure"}
+                {consultationLoading ? "Submitting..." : "Book Free Consultation"}
               </button>
             </form>
           </div>
         </div>
       </div>
+
+      {brochureOpen && (
+        <div
+          className="fixed inset-0 z-[12000] bg-black/50 backdrop-blur-sm flex items-center justify-center px-4"
+          onClick={() => {
+            if (!brochureLoading) {
+              setBrochureOpen(false);
+            }
+          }}
+        >
+          <div
+            className="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">Download Brochure</h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Submit details to download instantly
+                </p>
+              </div>
+              <button
+                onClick={() => setBrochureOpen(false)}
+                className="h-8 w-8 rounded-full text-slate-500 hover:bg-slate-100 transition"
+                aria-label="Close brochure form"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="p-5">
+              {brochureSuccess && (
+                <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-center text-sm font-medium">
+                  Submitted successfully! Your brochure download has started.
+                </div>
+              )}
+
+              <form onSubmit={handleBrochureSubmit} className="grid grid-cols-1 gap-3">
+                <div>
+                  <label htmlFor="brochure-name" className="text-sm font-medium text-gray-600 mb-1 block">
+                    Full Name
+                  </label>
+                  <input
+                    id="brochure-name"
+                    name="name"
+                    value={brochureForm.name}
+                    onChange={handleBrochureChange}
+                    placeholder="Enter your name"
+                    required
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                  {brochureErrors.name && <p className="text-red-500 text-xs mt-1">{brochureErrors.name}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="brochure-email" className="text-sm font-medium text-gray-600 mb-1 block">
+                    Email Address
+                  </label>
+                  <input
+                    id="brochure-email"
+                    name="email"
+                    type="email"
+                    value={brochureForm.email}
+                    onChange={handleBrochureChange}
+                    placeholder="Enter your email"
+                    required
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                  {brochureErrors.email && <p className="text-red-500 text-xs mt-1">{brochureErrors.email}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="brochure-phone" className="text-sm font-medium text-gray-600 mb-1 block">
+                    Phone Number
+                  </label>
+                  <input
+                    id="brochure-phone"
+                    name="phone"
+                    type="tel"
+                    maxLength={10}
+                    value={brochureForm.phone}
+                    onChange={handleBrochureChange}
+                    placeholder="Enter your phone"
+                    required
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                  {brochureErrors.phone && <p className="text-red-500 text-xs mt-1">{brochureErrors.phone}</p>}
+                </div>
+
+                <div>
+                  <label htmlFor="brochure-course" className="text-sm font-medium text-gray-600 mb-1 block">
+                    Course
+                  </label>
+                  <select
+                    id="brochure-course"
+                    name="course"
+                    value={brochureForm.course}
+                    onChange={handleBrochureChange}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                  >
+                    <option value="">Select Course</option>
+                    <option>SAP MM</option>
+                    <option>SAP FICO</option>
+                    <option>SAP SD</option>
+                    <option>SAP ABAP</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={brochureLoading}
+                  className="mt-1 w-full py-3.5 rounded-xl text-white font-semibold text-sm shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 active:scale-[0.98] disabled:opacity-60"
+                >
+                  {brochureLoading ? "Submitting..." : "Submit & Download Brochure"}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
