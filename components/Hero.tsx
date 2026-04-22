@@ -99,11 +99,11 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-5">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-10 items-start">
-          <div className="text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-10 items-stretch">
+          <div className="text-center lg:text-left bg-white/80 border border-blue-100/70 rounded-3xl p-5 sm:p-7 lg:p-8 shadow-[0_10px_30px_rgba(37,99,235,0.08)]">
             <div className="inline-flex flex-wrap justify-center lg:justify-start items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-5 sm:mb-6">
               <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
-              SAP Training · April 2026 Cohort
+              SAP Training · May 2026 Cohort
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight text-slate-900 leading-tight mb-5 sm:mb-6">
@@ -155,7 +155,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-[0_16px_40px_rgba(15,23,42,0.08)] p-5 md:p-6 border border-blue-100">
+          <div className="bg-white rounded-3xl shadow-[0_16px_40px_rgba(15,23,42,0.08)] p-5 md:p-6 border border-blue-100 h-full">
             <div className="mb-5">
               <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">
                 Get Free Consultation

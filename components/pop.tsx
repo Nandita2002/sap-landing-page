@@ -94,7 +94,7 @@ const Popup = () => {
       <div className="w-full max-w-md bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-200">
         <div className="bg-slate-50 border-b px-6 py-5 flex justify-between">
           <div>
-            <p className="text-xs font-semibold text-blue-600 uppercase mb-1">Admissions Open · April 2026</p>
+            <p className="text-xs font-semibold text-blue-600 uppercase mb-1">Admissions Open · May 2026</p>
             <h2 className="text-[17px] font-semibold">Get 25% off all SAP courses</h2>
           </div>
           <button onClick={() => setOpen(false)}>✕</button>

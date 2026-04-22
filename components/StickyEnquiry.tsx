@@ -132,7 +132,7 @@ const StickyEnquiry: React.FC = () => {
           >
             <div className="bg-blue-600 px-4 py-3 flex justify-between items-center">
               <div>
-                <p className="text-[10px] font-semibold text-blue-200 uppercase tracking-widest mb-0.5">Free demo · April batch</p>
+                <p className="text-[10px] font-semibold text-blue-200 uppercase tracking-widest mb-0.5">Free demo · May batch</p>
                 <p className="text-sm font-semibold text-white">Book your free demo</p>
               </div>
               <button onClick={() => setOpen(false)} className="bg-white/15 hover:bg-white/25 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition">✕</button>
