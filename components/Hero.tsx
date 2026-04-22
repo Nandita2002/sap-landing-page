@@ -72,6 +72,12 @@ export default function Hero() {
 
       if (data.status === "success") {
         setSuccess(true);
+        const brochureLink = document.createElement("a");
+        brochureLink.href = "/brochure.pdf";
+        brochureLink.download = "Rise-Infotech-SAP-Brochure.pdf";
+        document.body.appendChild(brochureLink);
+        brochureLink.click();
+        document.body.removeChild(brochureLink);
         setForm({ name: "", email: "", phone: "", course: "" });
       } else {
         alert("Error: " + (data.message || "Please try again."));
@@ -121,14 +127,6 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-7">
-              <a
-                href="/brochure.pdf"
-                download
-                className="w-full sm:w-auto px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl text-center text-white font-semibold text-sm sm:text-base shadow-[0_16px_32px_rgba(37,99,235,0.25)] bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-800 hover:to-blue-600 active:scale-95 transition-all duration-200"
-              >
-                Download Brochure
-              </a>
-
               <button
                 onClick={scrollToCourses}
                 className="w-full sm:w-auto px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl border border-slate-300 bg-white/90 text-slate-700 font-semibold text-sm sm:text-base hover:bg-white active:scale-95 transition"
@@ -158,16 +156,16 @@ export default function Hero() {
           <div className="bg-white rounded-3xl shadow-[0_14px_34px_rgba(15,23,42,0.08)] p-5 md:p-6 lg:p-7 border border-slate-200">
             <div className="mb-4">
               <h2 className="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                Get Free Consultation
+                Download Brochure
               </h2>
               <p className="text-slate-600 mt-1 text-sm">
-                Talk to SAP experts and get a career roadmap.
+                Fill your details to instantly download the course brochure.
               </p>
             </div>
 
             {success && (
               <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-center text-sm font-medium">
-                Submitted successfully! Our team will contact you shortly.
+                Submitted successfully! Your brochure download has started.
               </div>
             )}
 
@@ -247,7 +245,7 @@ export default function Hero() {
                 disabled={loading}
                 className="mt-1 w-full py-3.5 rounded-xl text-white font-semibold text-sm shadow-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 active:scale-[0.98] disabled:opacity-60"
               >
-                {loading ? "Submitting..." : "Book Free Consultation"}
+                {loading ? "Submitting..." : "Submit & Download Brochure"}
               </button>
             </form>
           </div>
