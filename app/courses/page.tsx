@@ -9,7 +9,8 @@ const courses = [
   {
     title: "SAP MM",
     subtitle: "Materials Management",
-    image: "/sap-image.png",
+    image:
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80",
     duration: "6–8 Weeks",
     level: "Beginner to Advanced",
     desc: "Procurement, inventory & supply chain processes",
@@ -18,7 +19,8 @@ const courses = [
   {
     title: "SAP SD",
     subtitle: "Sales & Distribution",
-    image: "/sap-image.png",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
     duration: "6–8 Weeks",
     level: "Beginner to Advanced",
     desc: "Order-to-cash, sales & billing workflows",
@@ -27,7 +29,8 @@ const courses = [
   {
     title: "SAP FICO",
     subtitle: "Finance & Controlling",
-    image: "/sap-image.png",
+    image:
+      "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=1200&q=80",
     duration: "8–10 Weeks",
     level: "Intermediate to Advanced",
     desc: "Financial accounting & cost management",
@@ -36,7 +39,8 @@ const courses = [
   {
     title: "SAP ABAP",
     subtitle: "Advanced Business Application Programming",
-    image: "/sap-image.png",
+    image:
+      "https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1200&q=80",
     duration: "8–10 Weeks",
     level: "Beginner to Advanced",
     desc: "ABAP coding for reports, interfaces, forms & enhancements",
@@ -84,17 +88,17 @@ export default function CoursesPage() {
                   alt={course.title}
                   fill
                   className="object-cover group-hover:scale-105 transition duration-300"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                 />
               </div>
 
               <div className="p-5 sm:p-6 flex flex-col flex-grow">
                 <h3 className="text-lg sm:text-xl font-bold text-slate-900">{course.title}</h3>
-                <p className="text-sm text-slate-500 mb-2">{course.subtitle}</p>
+                <p className="text-sm text-slate-500 mb-2 min-h-10 line-clamp-2">{course.subtitle}</p>
                 <div className="text-xs text-slate-500 mb-3">
                   ⏱ {course.duration} • 🎯 {course.level}
                 </div>
-                <p className="text-sm text-slate-600 mb-5 min-h-[44px]">{course.desc}</p>
+                <p className="text-sm text-slate-600 mb-5 min-h-[44px] line-clamp-2">{course.desc}</p>
                 <Button
                   variant="gradient"
                   onClick={(e) => {
