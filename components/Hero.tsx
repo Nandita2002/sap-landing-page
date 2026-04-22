@@ -155,7 +155,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-24 bg-white">
+    <section className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24 bg-white">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-200/40 blur-3xl" />
         <div className="absolute -bottom-16 right-0 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl" />
@@ -164,7 +164,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-5">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8 items-start">
           <div className="text-center lg:text-left">
-            <div className="inline-flex flex-wrap justify-center lg:justify-start items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-5 sm:mb-6">
+            <div className="inline-flex flex-wrap justify-center lg:justify-start items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-4 sm:mb-5">
               <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
               SAP Training · May 2026 Cohort
             </div>
