@@ -106,7 +106,7 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-5">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 lg:gap-8 items-start">
-          <div className="text-center lg:text-left bg-white border border-slate-200 rounded-3xl p-5 sm:p-7 lg:p-8 shadow-[0_14px_34px_rgba(15,23,42,0.08)]">
+          <div className="text-center lg:text-left bg-white border border-slate-200 rounded-3xl shadow-[0_14px_34px_rgba(15,23,42,0.08)]">
             <div className="inline-flex flex-wrap justify-center lg:justify-start items-center gap-2 rounded-full border border-blue-200/80 bg-white/90 px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-blue-700 shadow-sm backdrop-blur mb-5 sm:mb-6">
               <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
               SAP Training · May 2026 Cohort
