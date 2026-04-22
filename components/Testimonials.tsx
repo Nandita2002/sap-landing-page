@@ -92,7 +92,7 @@ export default function Testimonials() {
     name.split(" ").map((n) => n[0]).slice(0, 2).join("").toUpperCase();
 
   return (
-    <section className="bg-gradient-to-b from-white to-slate-50 py-16 overflow-hidden">
+    <section className="bg-white py-16 overflow-hidden">
       <div className="text-center max-w-2xl mx-auto px-5">
         <h2 className="text-[clamp(24px,4vw,38px)] font-semibold text-[#0a1628] leading-tight">
           Trusted by <span className="text-blue-600">1000+ students</span>

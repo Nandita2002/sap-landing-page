@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 /* 🔥 ENQUIRY TRIGGER */
 const handleEnquiry = () => {
@@ -106,13 +107,10 @@ const Instructor = () => {
                   href="https://www.linkedin.com/in/kumaresh-bidari074/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Founder LinkedIn"
                   className="w-9 h-9 flex items-center justify-center rounded-md bg-[#0A66C2] hover:scale-110 transition"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                    <rect x="2" y="9" width="4" height="12"/>
-                    <circle cx="4" cy="4" r="2"/>
-                  </svg>
+                  <FaLinkedinIn size={14} color="white" />
                 </a>
 
                 {/* Instagram */}
@@ -120,11 +118,10 @@ const Instructor = () => {
                   href="https://www.instagram.com/kumaresh.bidari/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Founder Instagram"
                   className="w-9 h-9 flex items-center justify-center rounded-md bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 hover:scale-110 transition"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
-                    <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm4.25 5.5A4.75 4.75 0 1 0 16.75 12 4.76 4.76 0 0 0 12 7.5zm0 7.5A2.75 2.75 0 1 1 14.75 12 2.75 2.75 0 0 1 12 15zm5.25-8.75a1 1 0 1 1-1-1 1 1 0 0 1 1 1z"/>
-                  </svg>
+                  <FaInstagram size={16} color="white" />
                 </a>
 
               </div>

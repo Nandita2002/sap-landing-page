@@ -33,7 +33,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-24">
+    <section className="relative overflow-hidden pt-14 pb-16 md:pt-20 md:pb-24 bg-white">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-200/40 blur-3xl" />
         <div className="absolute -bottom-16 right-0 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl" />

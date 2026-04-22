@@ -41,7 +41,7 @@ export default function CoursesPage() {
   return (
     <section
       id="courses"
-      className="relative min-h-screen px-4 py-14 md:py-20 bg-gradient-to-b from-white to-slate-50"
+      className="relative min-h-screen px-4 py-14 md:py-20 bg-white"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
