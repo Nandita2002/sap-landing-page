@@ -9,7 +9,7 @@ const courses = [
   {
     title: "SAP MM",
     subtitle: "Materials Management",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+    image: "/sap-image.png",
     duration: "6–8 Weeks",
     level: "Beginner to Advanced",
     desc: "Procurement, inventory & supply chain processes",
@@ -18,7 +18,7 @@ const courses = [
   {
     title: "SAP SD",
     subtitle: "Sales & Distribution",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+    image: "/sap-image.png",
     duration: "6–8 Weeks",
     level: "Beginner to Advanced",
     desc: "Order-to-cash, sales & billing workflows",
@@ -27,11 +27,20 @@ const courses = [
   {
     title: "SAP FICO",
     subtitle: "Finance & Controlling",
-    image: "https://images.unsplash.com/photo-1554224154-26032ffc0d07",
+    image: "/sap-image.png",
     duration: "8–10 Weeks",
     level: "Intermediate to Advanced",
     desc: "Financial accounting & cost management",
     path: "/courses/sap-fico",
+  },
+  {
+    title: "SAP ABAP",
+    subtitle: "Advanced Business Application Programming",
+    image: "/sap-image.png",
+    duration: "8–10 Weeks",
+    level: "Beginner to Advanced",
+    desc: "ABAP coding for reports, interfaces, forms & enhancements",
+    path: "/courses/sap-abap",
   },
 ];
 
@@ -62,7 +71,7 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-8 items-stretch">
           {courses.map((course, index) => (
             <div
               key={index}
