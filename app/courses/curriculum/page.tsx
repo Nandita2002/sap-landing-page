@@ -183,17 +183,17 @@ const courses: { functional: Course[]; technical: Course[] } = {
   ],
   technical: [
     {
-      title: "SAP ABAP", subtitle: "Advanced Business App Programming", tag: "Technical", icon: <IconCode />,
-      points: ["Reports & forms development", "Data dictionary & structures", "User exits, BADIs & enhancements", "OO ABAP & RAP"],
+      title: "SAP ABAP", subtitle: "Advanced Business Application Programming", tag: "Technical", icon: <IconCode />,
+      points: ["Development environment setup", "Data Dictionary & programming constructs", "Enhancements, forms & outputs", "OOP, DB access, integration, debugging"],
       details: {
-        overview: "SAP ABAP is the primary language for SAP customisation. This course covers classical ABAP through to modern ABAP on HANA, RESTful Application Programming (RAP), and CDS views — preparing you for S/4HANA development roles.",
-        duration: "8–10 Weeks", level: "Intermediate to Advanced",
+        overview: "SAP ABAP (Advanced Business Application Programming) is a high-level programming language created by SAP SE for developing applications on the SAP platform. ABAP is the primary language used for programming the SAP R/3 system, which includes modules such as Financial Accounting (FI), Sales and Distribution (SD), and Materials Management (MM). It allows developers to create custom reports, interfaces, forms, workflows, and enhancements tailored to the specific needs of an organization.",
+        duration: "8–10 Weeks", level: "Beginner to Advanced",
         topics: [
-          { heading: "Core ABAP", items: ["Data types, structures & internal tables", "Modularisation: function modules & includes", "Object-oriented ABAP (classes, interfaces)", "Exception handling & debugging"] },
-          { heading: "Reports & Forms", items: ["Classical & interactive reports", "ALV grid & tree reports", "SmartForms & SAP Script", "Adobe Interactive Forms"] },
-          { heading: "Enhancements & Modern", items: ["User exits, BADIs & enhancement framework", "BAPIs, RFCs & IDocs basics", "CDS Views & AMDP", "RAP (RESTful ABAP Programming Model)"] },
+          { heading: "Course Module Illustration", items: ["Development Environment", "Data Dictionary", "Programming Constructs"] },
+          { heading: "Advanced Development", items: ["Enhancements and Modifications", "Forms and Outputs", "Object-Oriented Programming (OOP)"] },
+          { heading: "System & Integration", items: ["Database Access", "Integration and Communication", "Debugging and Testing"] },
         ],
-        outcomes: ["Write ABAP programs & ALV reports", "Create SmartForms & Adobe Forms", "Implement BADIs & enhancements", "Develop CDS Views on HANA"],
+        outcomes: ["Who can learn: Software Developers", "Who can learn: SAP Consultants", "Who can learn: Business Analysts", "Who can learn: Students and Graduates"],
       },
     },
     {

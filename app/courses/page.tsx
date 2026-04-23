@@ -9,7 +9,8 @@ const courses = [
   {
     title: "SAP MM",
     subtitle: "Materials Management",
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d",
+    image:
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
     duration: "6–8 Weeks",
     level: "Beginner to Advanced",
     desc: "Procurement, inventory & supply chain processes",
@@ -18,7 +19,8 @@ const courses = [
   {
     title: "SAP SD",
     subtitle: "Sales & Distribution",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d",
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80",
     duration: "6–8 Weeks",
     level: "Beginner to Advanced",
     desc: "Order-to-cash, sales & billing workflows",
@@ -27,11 +29,22 @@ const courses = [
   {
     title: "SAP FICO",
     subtitle: "Finance & Controlling",
-    image: "https://images.unsplash.com/photo-1554224154-26032ffc0d07",
+    image:
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80",
     duration: "8–10 Weeks",
     level: "Intermediate to Advanced",
     desc: "Financial accounting & cost management",
     path: "/courses/sap-fico",
+  },
+  {
+    title: "SAP ABAP",
+    subtitle: "Advanced Business Application Programming",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    duration: "8–10 Weeks",
+    level: "Beginner to Advanced",
+    desc: "ABAP coding for reports, interfaces, forms & enhancements",
+    path: "/courses/sap-abap",
   },
 ];
 
@@ -41,7 +54,7 @@ export default function CoursesPage() {
   return (
     <section
       id="courses"
-      className="relative min-h-screen px-4 py-14 md:py-20 bg-gradient-to-b from-white to-slate-50"
+      className="relative min-h-screen px-4 py-14 md:py-20 bg-white"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 left-0 h-48 w-48 rounded-full bg-blue-200/40 blur-3xl" />
@@ -62,30 +75,30 @@ export default function CoursesPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-8 items-stretch">
           {courses.map((course, index) => (
             <div
               key={index}
               onClick={() => router.push(course.path)}
-              className="group cursor-pointer rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200 bg-white/90 shadow-[0_12px_30px_rgba(15,23,42,0.06)] hover:shadow-[0_18px_40px_rgba(37,99,235,0.15)] transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
+              className="group cursor-pointer rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_36px_rgba(37,99,235,0.16)] transition-all duration-300 flex flex-col h-full hover:-translate-y-1"
             >
-              <div className="overflow-hidden relative h-44 sm:h-48">
+              <div className="overflow-hidden relative aspect-[16/9] w-full">
                 <Image
                   src={course.image}
                   alt={course.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-300"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-[1.03] transition duration-300"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                 />
               </div>
 
-              <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900">{course.title}</h3>
-                <p className="text-sm text-slate-500 mb-2">{course.subtitle}</p>
-                <div className="text-xs text-slate-500 mb-3">
-                  ⏱ {course.duration} • 🎯 {course.level}
-                </div>
-                <p className="text-sm text-slate-600 mb-5 min-h-[44px]">{course.desc}</p>
+              <div className="p-5 sm:p-6 flex flex-col flex-grow text-center">
+                <h3 className="text-[1.55rem] font-extrabold text-slate-900 leading-tight">
+                  {course.title}
+                </h3>
+                <p className="text-[1.08rem] font-semibold text-slate-900 mt-2 min-h-[72px]">
+                  ({course.subtitle})
+                </p>
                 <Button
                   variant="gradient"
                   onClick={(e) => {
@@ -94,7 +107,7 @@ export default function CoursesPage() {
                   }}
                   className="mt-auto w-full px-6 py-2.5 text-sm"
                 >
-                  View Full Syllabus
+                  View Details
                 </Button>
               </div>
             </div>

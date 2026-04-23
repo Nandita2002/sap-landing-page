@@ -43,7 +43,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-20 px-4 bg-gradient-to-b from-slate-50 to-white">
+    <section id="faq" className="py-20 px-4 bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="text-center">
           <span className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-1 text-xs font-semibold tracking-wide text-blue-700 uppercase mb-4">
